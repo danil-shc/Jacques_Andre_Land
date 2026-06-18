@@ -30,7 +30,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build project
         run: npm run build
@@ -38,7 +38,7 @@ jobs:
       - name: Upload production artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: './dist' # СТРОГО ПАПКА dist! Браузер должен получать скомпилированный код, а не исходники src
 
       - name: Deploy to GitHub Pages
         id: deployment
