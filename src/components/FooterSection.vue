@@ -4,6 +4,11 @@ import { Instagram, Send } from 'lucide-vue-next'
 
 const email = ref('')
 
+const getImageUrl = (name) => {
+  const imageName = name.includes('.') ? name : `${name}.webp`
+  return new URL(`../assets/images/${imageName}`, import.meta.url).href
+}
+
 const handleSubscribe = () => {
   if (email.value) {
     console.log('Subscribing email:', email.value)
@@ -69,7 +74,7 @@ const handleSubscribe = () => {
 
            <!-- Brand Emblem -->
           <div class="flex items-center space-x-4 pt-6">
-            <img src="@/assets/images/bakery.svg" alt="Jacques-André" class="w-12 h-12" />
+            <img :src="getImageUrl('bakery.svg')" alt="Jacques-André" class="w-12 h-12" />
             <p class="text-[#4B2307]/70 font-sans text-xs tracking-wider uppercase leading-relaxed">
               JACQUES-ANDRÉ — ХРАНИТЕЛЬ РОДОВЫХ ТРАДИЦИЙ И МАСТЕРСТВА.
             </p>
