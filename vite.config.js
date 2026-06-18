@@ -7,6 +7,7 @@ import path from "path";
 export default defineConfig({
   plugins: [vue(), tailwindcss()],
   server: { host: "127.0.0.1" },
+  base: "/Jacques_Andre_Land/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
