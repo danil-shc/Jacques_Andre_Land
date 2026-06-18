@@ -90,7 +90,7 @@ const locations = reactive([
     address: 'Пролетарская ул., 449, Майкоп',
     phone: '+7 (953) 093-88-34',
     hours: 'Ежедневно с 08:00 до 20:00',
-    image: new URL('@/assets/images/proletarskaya.webp', import.meta.url).href,
+    image: new URL('../assets/images/proletarskaya.webp', import.meta.url).href,
     mapLink: 'https://yandex.ru/maps/?text=Майкоп+Пролетарская+449+Жак-Андрэ'
   },
   {
@@ -99,7 +99,7 @@ const locations = reactive([
     address: 'Первомайская ул., 193, Майкоп',
     phone: '+7 (900) 246-20-50',
     hours: 'Ежедневно с 08:00 до 20:00',
-    image: new URL('@/assets/images/pervomaiskaya.webp', import.meta.url).href,
+    image: new URL('../assets/images/pervomaiskaya.webp', import.meta.url).href,
     mapLink: 'https://yandex.ru/maps/?text=Майкоп+Первомайская+193+Жак-Андрэ'
   },
   {
@@ -108,7 +108,7 @@ const locations = reactive([
     address: 'Шоссейная ул., 1В, Майкоп (1 этаж)',
     phone: '+7 (953) 078-45-98',
     hours: 'Ежедневно с 08:00 до 20:00',
-    image: new URL('@/assets/images/schoseinaya.webp', import.meta.url).href,
+    image: new URL('../assets/images/schoseinaya.webp', import.meta.url).href,
     mapLink: 'https://yandex.ru/maps/?text=Майкоп+Шоссейная+1В+Жак-Андрэ'
   }
 ])
