@@ -77,29 +77,33 @@
           <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
             <div class="flex-grow">
               <h3 class="font-sans text-xs tracking-widest uppercase mb-3 text-[#FDFBF7] text-opacity-70">Ваш заказ</h3>
-              <div class="space-y-2 max-h-32 overflow-y-auto">
+              <div class="cart-items-container max-h-32 overflow-y-auto pr-3">
                 <div
                   v-for="item in cartItems"
                   :key="item.id"
-                  class="flex items-center justify-between text-sm"
+                  class="grid grid-cols-[1fr_auto_40px_auto_100px] items-center gap-4 py-2 text-sm"
                 >
-                  <span class="font-serif">{{ item.name }}</span>
-                  <div class="flex items-center space-x-3">
-                    <button
-                      @click="decreaseQuantity(item)"
-                      class="w-6 h-6 rounded-full bg-[#FDFBF7] bg-opacity-20 hover:bg-opacity-30 flex items-center justify-center transition-all duration-200 cursor-pointer"
-                    >
-                      <span class="text-lg leading-none">−</span>
-                    </button>
-                    <span class="font-sans tracking-wide">{{ item.quantity }}</span>
-                    <button
-                      @click="increaseQuantity(item)"
-                      class="w-6 h-6 rounded-full bg-[#FDFBF7] bg-opacity-20 hover:bg-opacity-30 flex items-center justify-center transition-all duration-200 cursor-pointer"
-                    >
-                      <span class="text-lg leading-none">+</span>
-                    </button>
-                    <span class="font-sans tracking-wide ml-2">{{ item.price * item.quantity }} ₽</span>
-                  </div>
+                  <span class="font-serif text-left truncate">{{ item.name }}</span>
+
+                  <button
+                    @click="decreaseQuantity(item)"
+                    class="w-8 h-8 rounded-full bg-[#FAF7F2] text-[#4A2C11] border border-[#4A2C11]/10 hover:bg-[#EFE9DC] hover:text-[#2A1605] hover:scale-105 active:scale-95 flex items-center justify-center leading-none select-none pb-[2px] font-bold transition-all duration-300 ease-out cursor-pointer"
+                    aria-label="Уменьшить количество"
+                  >
+                    −
+                  </button>
+
+                  <span class="font-sans text-center w-10 tracking-wide">{{ item.quantity }}</span>
+
+                  <button
+                    @click="increaseQuantity(item)"
+                    class="w-8 h-8 rounded-full bg-[#FAF7F2] text-[#4A2C11] border border-[#4A2C11]/10 hover:bg-[#EFE9DC] hover:text-[#2A1605] hover:scale-105 active:scale-95 flex items-center justify-center leading-none select-none pb-[2px] font-bold transition-all duration-300 ease-out cursor-pointer"
+                    aria-label="Увеличить количество"
+                  >
+                    +
+                  </button>
+
+                  <span class="font-sans text-right w-[100px] tracking-wide pr-2">{{ item.price * item.quantity }} ₽</span>
                 </div>
               </div>
             </div>
@@ -111,7 +115,7 @@
               </div>
               <button
                 @click="checkout"
-                class="bg-[#FDFBF7] text-[#4B2307] px-6 md:px-8 py-3 md:py-4 font-sans text-xs md:text-sm tracking-widest uppercase hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap cursor-pointer"
+                class="bg-white text-[#4A2C11] border border-transparent hover:bg-[#2C1B11] hover:text-[#FAF7F2] hover:border-white px-6 md:px-8 py-3 md:py-4 font-sans text-xs md:text-sm tracking-widest uppercase transition-all duration-300 ease-in-out whitespace-nowrap cursor-pointer"
               >
                 Оформить заказ
               </button>
@@ -348,5 +352,28 @@ function checkout() {
 
 .slide-up-leave-to {
   transform: translateY(100%);
+}
+
+.cart-items-container {
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(218, 192, 163, 0.3) transparent;
+}
+
+.cart-items-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cart-items-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cart-items-container::-webkit-scrollbar-thumb {
+  background-color: rgba(218, 192, 163, 0.3);
+  border-radius: 9999px;
+}
+
+.cart-items-container::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(218, 192, 163, 0.5);
 }
 </style>
