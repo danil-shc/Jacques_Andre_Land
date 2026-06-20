@@ -27,14 +27,14 @@ const handleButtonClick = () => {
 </script>
 
 <template>
-  <section class="bg-[#FDFBF7] py-16 md:py-24 px-6">
+  <section class="bg-cream py-16 md:py-24 px-6">
     <div class="max-w-7xl mx-auto">
       <!-- Section Header -->
       <div class="text-center mb-12 md:mb-16 space-y-3">
-        <h2 class="text-[#4B2307] font-serif text-3xl md:text-4xl lg:text-5xl tracking-wide">
+        <h2 class="text-chocolate font-serif text-3xl md:text-4xl lg:text-5xl tracking-wide">
           НАША ГОРДОСТЬ
         </h2>
-        <p class="text-[#7E4B30] font-sans text-xs md:text-sm tracking-widest uppercase">
+        <p class="text-caramel font-sans text-xs md:text-sm tracking-widest uppercase">
           Каждый день, с душой — в сердце Адыгеи.
         </p>
       </div>
@@ -44,14 +44,14 @@ const handleButtonClick = () => {
         <div
           v-for="product in displayedMenu"
           :key="product.id"
-          class="bg-[#F5F0E8] group cursor-pointer"
+          class="bg-card group cursor-pointer"
         >
           <!-- Image Container with NEW Badge -->
           <div class="relative overflow-hidden">
             <!-- NEW Badge -->
             <div
               v-if="product.isNew"
-              class="absolute top-3 left-3 bg-[#2C1B11] text-[#FDFBF7] font-sans text-xs tracking-widest uppercase px-3 py-1 z-10"
+              class="absolute top-3 left-3 bg-espresso text-cream font-sans text-xs tracking-widest uppercase px-3 py-1 z-10"
             >
               НОВИНКА
             </div>
@@ -69,17 +69,17 @@ const handleButtonClick = () => {
           <!-- Product Details -->
           <div class="p-6 space-y-3">
             <!-- Title -->
-            <h3 class="text-[#4B2307] font-serif text-lg md:text-xl tracking-wide">
+            <h3 class="text-chocolate font-serif text-lg md:text-xl tracking-wide">
               {{ product.name }}
             </h3>
 
             <!-- Description -->
-            <p class="text-[#4B2307]/70 font-sans text-sm tracking-wide leading-relaxed">
+            <p class="text-chocolate/70 font-sans text-sm tracking-wide leading-relaxed">
               {{ product.description }}
             </p>
 
             <!-- Price -->
-            <p class="text-[#4B2307] font-sans text-base md:text-lg tracking-wider font-semibold">
+            <p class="text-chocolate font-sans text-base md:text-lg tracking-wider font-semibold">
               {{ product.price }} ₽
             </p>
           </div>
@@ -90,7 +90,7 @@ const handleButtonClick = () => {
       <div class="text-center">
         <button
           @click="handleButtonClick"
-          class="bg-transparent text-[#4B2307] font-sans text-sm tracking-widest uppercase px-10 py-4 border border-[#4B2307] hover:bg-[#2C1B11] hover:text-[#FDFBF7] transition-all duration-300 ease-in-out cursor-pointer"
+          class="bg-transparent text-chocolate font-sans text-sm tracking-widest uppercase px-10 py-4 border border-chocolate hover:bg-espresso hover:text-cream transition-all duration-300 ease-in-out cursor-pointer"
         >
           {{ buttonText }}
         </button>

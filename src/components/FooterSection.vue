@@ -27,18 +27,18 @@ const getImageUrl = (name) => {
 </script>
 
 <template>
-  <footer class="bg-[#FDFBF7] border-t border-[#2C1B11]/10">
+  <footer class="bg-cream border-t border-espresso/10">
     <!-- Main Footer Content -->
     <div class="max-w-7xl mx-auto px-6 py-16 md:py-24">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 lg:gap-24">
 
         <!-- Left Column: Loyalty Program -->
         <div class="space-y-6">
-          <h2 class="font-serif text-3xl md:text-4xl text-[#4B2307] tracking-wide">
+          <h2 class="font-serif text-3xl md:text-4xl text-chocolate tracking-wide">
             СТАНЬТЕ ЧАСТЬЮ НАШЕЙ БОЛЬШОЙ СЕМЬИ
           </h2>
 
-          <p class="text-[#4B2307]/70 font-sans text-sm leading-relaxed max-w-md">
+          <p class="text-chocolate/70 font-sans text-sm leading-relaxed max-w-md">
             Присоединяйтесь к нашей программе лояльности в приложении SWiP! Копите баллы, получайте динамические грейды и обменивайте бонусы на любимую французскую выпечку.
           </p>
 
@@ -47,7 +47,7 @@ const getImageUrl = (name) => {
               :href="appStoreUrl"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center justify-center sm:justify-start gap-3 px-6 py-3 border border-[#5c4033] text-[#5c4033] font-sans text-xs tracking-widest uppercase transition-all duration-300 ease-in-out hover:bg-[#2C1B11] hover:text-[#FDFBF7]"
+              class="inline-flex items-center justify-center sm:justify-start gap-3 px-6 py-3 border border-caramel text-caramel font-sans text-xs tracking-widest uppercase transition-all duration-300 ease-in-out hover:bg-espresso hover:text-cream"
             >
               <svg
                 class="h-4 w-4 shrink-0"
@@ -64,7 +64,7 @@ const getImageUrl = (name) => {
               :href="googlePlayUrl"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center justify-center sm:justify-start gap-3 px-6 py-3 border border-[#5c4033] text-[#5c4033] font-sans text-xs tracking-widest uppercase transition-all duration-300 ease-in-out hover:bg-[#2C1B11] hover:text-[#FDFBF7]"
+              class="inline-flex items-center justify-center sm:justify-start gap-3 px-6 py-3 border border-caramel text-caramel font-sans text-xs tracking-widest uppercase transition-all duration-300 ease-in-out hover:bg-espresso hover:text-cream"
             >
               <svg
                 class="h-4 w-4 shrink-0"
@@ -81,11 +81,11 @@ const getImageUrl = (name) => {
 
         <!-- Right Column: OUR CAFE -->
         <div class="space-y-6">
-          <h2 class="font-serif text-3xl md:text-4xl text-[#4B2307] tracking-wide">
+          <h2 class="font-serif text-3xl md:text-4xl text-chocolate tracking-wide">
             НАШЕ КАФЕ
           </h2>
 
-          <p class="text-[#4B2307]/70 font-sans text-sm leading-relaxed">
+          <p class="text-chocolate/70 font-sans text-sm leading-relaxed">
             Приглашаем в нашу ремесленную пекарню и кофейню в сердце Майкопа.
           </p>
 
@@ -93,7 +93,7 @@ const getImageUrl = (name) => {
           <div class="pt-2 space-y-4">
             <router-link
               to="/locations"
-              class="inline-block text-[#7E4B30] font-sans text-xs tracking-widest uppercase font-semibold hover:opacity-70 transition-all duration-300 ease-in-out"
+              class="inline-block text-caramel font-sans text-xs tracking-widest uppercase font-semibold hover:opacity-70 transition-all duration-300 ease-in-out"
             >
               АДРЕС И ЧАСЫ РАБОТЫ
             </router-link>
@@ -102,10 +102,10 @@ const getImageUrl = (name) => {
               <li
                 v-for="(location, index) in cafeLocations"
                 :key="index"
-                class="text-[#4B2307]/60 font-sans text-xs leading-relaxed"
+                class="text-chocolate/60 font-sans text-xs leading-relaxed"
               >
                 {{ location.address }}
-                <span class="text-[#4B2307]/45">({{ location.hours }})</span>
+                <span class="text-chocolate/45">({{ location.hours }})</span>
               </li>
             </ul>
           </div>
@@ -113,7 +113,7 @@ const getImageUrl = (name) => {
           <!-- Brand Emblem -->
           <div class="flex items-center space-x-4 pt-6">
             <img :src="getImageUrl('bakery.svg')" alt="Jacques-André" class="w-12 h-12" />
-            <p class="text-[#4B2307]/70 font-sans text-xs tracking-wider uppercase leading-relaxed">
+            <p class="text-chocolate/70 font-sans text-xs tracking-wider uppercase leading-relaxed">
               JACQUES-ANDRÉ — ХРАНИТЕЛЬ РОДОВЫХ ТРАДИЦИЙ И МАСТЕРСТВА.
             </p>
           </div>
@@ -122,7 +122,7 @@ const getImageUrl = (name) => {
     </div>
 
     <!-- Bottom Sub-Footer Bar -->
-    <div class="border-t border-[#2C1B11]/10">
+    <div class="border-t border-espresso/10">
       <div class="max-w-7xl mx-auto px-6 py-6">
         <div class="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
 
@@ -132,13 +132,13 @@ const getImageUrl = (name) => {
               :href="telegramUrl"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-[#7E4B30]/70 font-sans text-xs tracking-widest uppercase hover:text-[#7E4B30] transition-all duration-300 ease-in-out"
+              class="text-caramel/70 font-sans text-xs tracking-widest uppercase hover:text-caramel transition-all duration-300 ease-in-out"
             >
               СВЯЖИТЕСЬ С НАМИ
             </a>
             <a
               href="#"
-              class="text-[#7E4B30]/70 font-sans text-xs tracking-widest uppercase hover:text-[#7E4B30] transition-all duration-300 ease-in-out"
+              class="text-caramel/70 font-sans text-xs tracking-widest uppercase hover:text-caramel transition-all duration-300 ease-in-out"
             >
               ЧАСТЫЕ ВОПРОСЫ
             </a>
@@ -148,7 +148,7 @@ const getImageUrl = (name) => {
           <div class="flex items-center space-x-6">
             <a
               href="https://www.instagram.com/jacques_andre_/"
-              class="text-[#7E4B30]/70 hover:text-[#7E4B30] transition-all duration-300 ease-in-out"
+              class="text-caramel/70 hover:text-caramel transition-all duration-300 ease-in-out"
               aria-label="Инстаграм"
               target="_blank"
               rel="noopener noreferrer"
@@ -157,7 +157,7 @@ const getImageUrl = (name) => {
             </a>
             <a
               :href="telegramUrl"
-              class="text-[#7E4B30]/70 hover:text-[#7E4B30] transition-all duration-300 ease-in-out"
+              class="text-caramel/70 hover:text-caramel transition-all duration-300 ease-in-out"
               aria-label="Телеграм"
               target="_blank"
               rel="noopener noreferrer"
@@ -167,7 +167,7 @@ const getImageUrl = (name) => {
           </div>
 
           <!-- Right: Copyright -->
-          <p class="text-[#7E4B30]/70 font-sans text-xs tracking-wider uppercase">
+          <p class="text-caramel/70 font-sans text-xs tracking-wider uppercase">
             © JACQUES-ANDRÉ 2026 | СОЗДАНО С ДУШОЙ
           </p>
         </div>

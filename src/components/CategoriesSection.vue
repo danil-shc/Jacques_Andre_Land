@@ -14,7 +14,7 @@ const navigateToMenu = (categoryKey) => {
 </script>
 
 <template>
-  <section class="w-full bg-[#FDFBF7] py-12 md:py-16">
+  <section class="w-full bg-cream py-12 md:py-16">
     <div class="w-full px-0">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div 

@@ -1,11 +1,11 @@
 <template>
-  <section class="bg-[#FDFBF7] pt-16 md:pt-24 pb-12 md:pb-16">
+  <section class="bg-cream pt-16 md:pt-24 pb-12 md:pb-16">
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-16">
-        <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl text-[#4B2307] mb-4">
+        <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl text-chocolate mb-4">
           НАШИ ПЕКАРНИ
         </h1>
-        <p class="font-sans text-xs md:text-sm tracking-widest uppercase text-[#7E4B30]">
+        <p class="font-sans text-xs md:text-sm tracking-widest uppercase text-caramel">
           ЖДЕМ ВАС В ГОСТИ КАЖДЫЙ ДЕНЬ
         </p>
       </div>
@@ -16,7 +16,7 @@
           :key="location.id"
           class="bg-white/40 rounded-sm overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
         >
-          <div class="aspect-[4/3] overflow-hidden bg-[#2C1B11]/5 relative">
+          <div class="aspect-[4/3] overflow-hidden bg-espresso/5 relative">
             <img
               v-if="location.image"
               :src="location.image"
@@ -25,18 +25,18 @@
             />
             <div
               v-else
-              class="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#FDFBF7] to-[#F5EFE6]"
+              class="w-full h-full flex items-center justify-center bg-gradient-to-br from-cream to-card"
             >
-              <span class="font-serif text-6xl text-[#4B2307]/10">JA</span>
+              <span class="font-serif text-6xl text-chocolate/10">JA</span>
             </div>
           </div>
 
           <div class="p-6 space-y-4">
-            <h2 class="font-serif text-xl md:text-2xl text-[#4B2307] leading-tight">
+            <h2 class="font-serif text-xl md:text-2xl text-chocolate leading-tight">
               {{ location.title }}
             </h2>
 
-            <div class="space-y-3 text-[#4B2307]/80 text-sm">
+            <div class="space-y-3 text-chocolate/80 text-sm">
               <div class="flex items-start gap-3">
                 <MapPin :size="20" class="mt-0.5 flex-shrink-0" />
                 <span>{{ location.address }}</span>
@@ -51,7 +51,7 @@
                 <Phone :size="20" class="flex-shrink-0" />
                 <a
                   :href="`tel:${location.phone.replace(/[\s()-]/g, '')}`"
-                  class="hover:text-[#4B2307] transition-colors duration-300"
+                  class="hover:text-chocolate transition-colors duration-300"
                 >
                   {{ location.phone }}
                 </a>
@@ -62,7 +62,7 @@
               :href="location.mapLink"
               target="_blank"
               rel="noopener noreferrer"
-              class="block w-full mt-6 py-3 px-6 text-center border border-[#4B2307] text-[#4B2307] font-sans text-xs tracking-widest uppercase transition-all duration-300 hover:bg-[#2C1B11] hover:text-[#FDFBF7]"
+              class="block w-full mt-6 py-3 px-6 text-center border border-chocolate text-chocolate font-sans text-xs tracking-widest uppercase transition-all duration-300 hover:bg-espresso hover:text-cream"
             >
               ПРОЛОЖИТЬ МАРШРУТ
             </a>

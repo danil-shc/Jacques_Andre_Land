@@ -1,10 +1,10 @@
 <template>
-  <div class="min-h-screen bg-[#FDFBF7]">
+  <div class="min-h-screen bg-cream">
     <div class="max-w-7xl mx-auto px-6 py-8 md:py-12">
       <div class="flex items-center justify-between mb-8">
         <div class="flex items-center space-x-2">
-          <MapPin :size="20" class="text-[#7E4B30]" />
-          <span class="text-sm md:text-base text-[#7E4B30] font-sans tracking-wide">Майкоп, ул. Пролетарская 449</span>
+          <MapPin :size="20" class="text-caramel" />
+          <span class="text-sm md:text-base text-caramel font-sans tracking-wide">Майкоп, ул. Пролетарская 449</span>
         </div>
       </div>
 
@@ -13,11 +13,11 @@
           v-model="searchQuery"
           type="text"
           placeholder="Поиск выпечки и десертов..."
-          class="w-full bg-transparent border-b border-[#4B2307] text-[#4B2307] placeholder-[#4B2307] placeholder-opacity-40 py-3 px-1 text-base md:text-lg font-sans tracking-wider focus:outline-none focus:border-opacity-100 transition-all duration-300"
+          class="w-full bg-transparent border-b border-chocolate text-chocolate placeholder:text-chocolate/40 py-3 px-1 text-base md:text-lg font-sans tracking-wider focus:outline-none focus:border-chocolate transition-all duration-300"
         />
       </div>
 
-      <div class="flex flex-wrap gap-4 md:gap-6 mb-12 border-b border-[#7E4B30] border-opacity-20 pb-2">
+      <div class="flex flex-wrap gap-4 md:gap-6 mb-12 border-b border-caramel/20 pb-2">
         <button
           v-for="category in categories"
           :key="category"
@@ -25,8 +25,8 @@
           :class="[
             'font-sans text-xs md:text-sm tracking-widest uppercase pb-2 border-b-2 transition-all duration-300 ease-in-out cursor-pointer',
             selectedCategory === category
-              ? 'text-[#7E4B30] border-[#7E4B30] font-semibold'
-              : 'text-[#7E4B30] text-opacity-50 border-transparent hover:text-opacity-80'
+              ? 'text-caramel border-caramel font-semibold'
+              : 'text-caramel/50 border-transparent hover:text-caramel/80'
           ]"
         >
           {{ category }}
@@ -39,23 +39,23 @@
           :key="product.id"
           class="group bg-white bg-opacity-40 rounded-sm overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-[1.02] flex flex-col"
         >
-          <div v-if="product.image" class="aspect-square overflow-hidden bg-[#FDFBF7]">
+          <div v-if="product.image" class="aspect-square overflow-hidden bg-cream">
             <img
               :src="getImageUrl(product.image)"
               :alt="product.name"
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
           </div>
-          <div v-else class="aspect-square bg-gradient-to-br from-[#2C1B11] to-[#5D4037] flex items-center justify-center">
-            <Bell :size="64" class="text-[#FDFBF7]" />
+          <div v-else class="aspect-square bg-gradient-to-br from-espresso to-caramel flex items-center justify-center">
+            <Bell :size="64" class="text-cream" />
           </div>
           
           <div class="p-5 flex-grow flex flex-col">
-            <h3 class="font-serif text-lg md:text-xl text-[#4B2307] mb-2">{{ product.name }}</h3>
-            <p class="text-sm text-[#4B2307] text-opacity-70 mb-4 flex-grow leading-relaxed">{{ product.description }}</p>
+            <h3 class="font-serif text-lg md:text-xl text-chocolate mb-2">{{ product.name }}</h3>
+            <p class="text-sm text-chocolate/70 mb-4 flex-grow leading-relaxed">{{ product.description }}</p>
 
             <div v-if="product.variants?.length" class="mb-5">
-              <p class="font-sans text-[10px] tracking-[0.22em] uppercase text-[#7E4B30] text-opacity-60 mb-3">Объём</p>
+              <p class="font-sans text-[10px] tracking-[0.22em] uppercase text-caramel/60 mb-3">Объём</p>
               <div class="flex flex-wrap gap-2">
                 <button
                   v-for="variant in product.variants"
@@ -65,8 +65,8 @@
                   :class="[
                     'group/volume inline-flex flex-col items-center justify-center min-w-[72px] px-3 py-2 rounded-sm border font-sans transition-all duration-300 ease-in-out cursor-pointer',
                     getSelectedVariant(product)?.id === variant.id
-                      ? 'bg-[#2C1B11] border-[#2C1B11] text-[#FDFBF7] shadow-sm'
-                      : 'bg-[#FDFBF7]/80 border-[#7E4B30]/25 text-[#4B2307] hover:bg-[#2C1B11]/8 hover:border-[#7E4B30] hover:text-[#2C1B11]'
+                      ? 'bg-espresso border-espresso text-cream shadow-sm'
+                      : 'bg-cream/80 border-caramel/25 text-chocolate hover:bg-espresso/8 hover:border-caramel hover:text-espresso'
                   ]"
                 >
                   <span class="text-[11px] tracking-[0.18em] uppercase leading-none">{{ variant.volume }}</span>
@@ -74,8 +74,8 @@
                     :class="[
                       'mt-1.5 text-[10px] tracking-wider transition-colors duration-300',
                       getSelectedVariant(product)?.id === variant.id
-                        ? 'text-[#FDFBF7]/75'
-                        : 'text-[#7E4B30]/70 group-hover/volume:text-[#2C1B11]'
+                        ? 'text-cream/75'
+                        : 'text-caramel/70 group-hover/volume:text-espresso'
                     ]"
                   >
                     {{ variant.price }} ₽
@@ -85,10 +85,10 @@
             </div>
 
             <div class="flex items-center justify-between mt-auto">
-              <span class="font-sans text-lg font-semibold text-[#4B2307] tracking-wide">{{ getDisplayPrice(product) }} ₽</span>
+              <span class="font-sans text-lg font-semibold text-chocolate tracking-wide">{{ getDisplayPrice(product) }} ₽</span>
               <button
                 @click="product.variants ? addCoffeeToCart(product) : addToCart(product)"
-                class="w-10 h-10 rounded-full bg-[#2C1B11] text-[#FDFBF7] flex items-center justify-center hover:bg-opacity-80 transition-all duration-300 hover:scale-110 cursor-pointer"
+                class="w-10 h-10 rounded-full bg-espresso text-cream flex items-center justify-center hover:bg-opacity-80 transition-all duration-300 hover:scale-110 cursor-pointer"
               >
                 <Plus :size="20" />
               </button>
@@ -101,10 +101,10 @@
     <transition name="slide-up">
       <div
         v-if="cartItems.length > 0"
-        class="fixed bottom-0 left-0 right-0 bg-[#2C1B11] text-[#FDFBF7] shadow-2xl z-50"
+        class="fixed bottom-0 left-0 right-0 bg-espresso text-cream shadow-2xl z-50"
       >
         <div class="w-full max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
-          <h2 class="text-center font-serif text-lg md:text-xl uppercase tracking-[0.2em] text-[#FDFBF7]/90 mb-6 md:mb-8 lg:mb-10">
+          <h2 class="text-center font-serif text-lg md:text-xl uppercase tracking-[0.2em] text-cream/90 mb-6 md:mb-8 lg:mb-10">
             Ваш заказ
           </h2>
 
@@ -116,7 +116,7 @@
                 class="flex flex-col lg:grid lg:grid-cols-[2fr_120px_100px] lg:items-center gap-3 lg:gap-6 py-4 border-b border-white/10 last:border-b-0 w-full"
               >
                 <div class="w-full flex justify-between items-start">
-                  <span class="font-serif text-[#FDFBF7] text-base md:text-lg lg:text-sm font-medium tracking-wide text-left leading-snug">
+                  <span class="font-serif text-cream text-base md:text-lg lg:text-sm font-medium tracking-wide text-left leading-snug">
                     {{ formatProductLabel(item) }}
                   </span>
                 </div>
@@ -125,24 +125,24 @@
                   <div class="flex items-center space-x-3">
                     <button
                       @click="decreaseQuantity(item)"
-                      class="w-8 h-8 rounded-full bg-[#FAF7F2] text-[#4A2C11] border border-[#4A2C11]/10 flex items-center justify-center font-bold text-base leading-none select-none pb-[2px] transition-all duration-300 ease-out hover:bg-[#EFE9DC] hover:text-[#2A1605] hover:scale-105 active:scale-95 cursor-pointer"
+                      class="w-8 h-8 rounded-full bg-cream text-chocolate border border-chocolate/10 flex items-center justify-center font-bold text-base leading-none select-none pb-[2px] transition-all duration-300 ease-out hover:bg-card hover:text-espresso hover:scale-105 active:scale-95 cursor-pointer"
                       aria-label="Уменьшить количество"
                     >
                       −
                     </button>
 
-                    <span class="text-center min-w-[24px] font-sans font-medium text-[#FDFBF7] text-sm tracking-wide">{{ item.quantity }}</span>
+                    <span class="text-center min-w-[24px] font-sans font-medium text-cream text-sm tracking-wide">{{ item.quantity }}</span>
 
                     <button
                       @click="increaseQuantity(item)"
-                      class="w-8 h-8 rounded-full bg-[#FAF7F2] text-[#4A2C11] border border-[#4A2C11]/10 flex items-center justify-center font-bold text-base leading-none select-none pb-[2px] transition-all duration-300 ease-out hover:bg-[#EFE9DC] hover:text-[#2A1605] hover:scale-105 active:scale-95 cursor-pointer"
+                      class="w-8 h-8 rounded-full bg-cream text-chocolate border border-chocolate/10 flex items-center justify-center font-bold text-base leading-none select-none pb-[2px] transition-all duration-300 ease-out hover:bg-card hover:text-espresso hover:scale-105 active:scale-95 cursor-pointer"
                       aria-label="Увеличить количество"
                     >
                       +
                     </button>
                   </div>
 
-                  <span class="font-serif font-medium text-[#FDFBF7] text-base md:text-lg lg:text-sm text-right lg:w-[100px] whitespace-nowrap">
+                  <span class="font-serif font-medium text-cream text-base md:text-lg lg:text-sm text-right lg:w-[100px] whitespace-nowrap">
                     {{ item.price * item.quantity }} ₽
                   </span>
                 </div>
@@ -151,12 +151,12 @@
 
             <div class="flex flex-col items-center justify-center border-t border-white/10 pt-6 lg:border-t-0 lg:pt-0 lg:border-l lg:border-white/10 lg:pl-12 xl:pl-16 py-2 lg:py-4 w-full">
               <div class="text-center w-full max-w-sm mx-auto">
-                <span class="block font-sans text-xs uppercase tracking-[0.15em] text-[#FDFBF7]/50 mb-2">Итого</span>
-                <span class="block font-serif text-3xl md:text-4xl text-[#FDFBF7] tracking-wide mb-6 whitespace-nowrap">{{ totalPrice }} ₽</span>
+                <span class="block font-sans text-xs uppercase tracking-[0.15em] text-cream/50 mb-2">Итого</span>
+                <span class="block font-serif text-3xl md:text-4xl text-cream tracking-wide mb-6 whitespace-nowrap">{{ totalPrice }} ₽</span>
 
                 <button
                   @click="checkout"
-                  class="w-full bg-white text-[#4A2C11] font-sans font-medium text-xs uppercase tracking-[0.2em] py-4 px-8 hover:bg-[#FAF7F2] active:scale-[0.98] transition-all duration-300 shadow-lg cursor-pointer"
+                  class="w-full bg-white text-chocolate font-sans font-medium text-xs uppercase tracking-[0.2em] py-4 px-8 hover:bg-cream active:scale-[0.98] transition-all duration-300 shadow-lg cursor-pointer"
                 >
                   Оформить заказ
                 </button>
@@ -315,7 +315,7 @@ function checkout() {
 .cart-items-container {
   scrollbar-gutter: stable;
   scrollbar-width: thin;
-  scrollbar-color: rgba(218, 192, 163, 0.3) transparent;
+  scrollbar-color: color-mix(in srgb, var(--color-caramel) 30%, transparent) transparent;
 }
 
 .cart-items-container::-webkit-scrollbar {
@@ -327,11 +327,11 @@ function checkout() {
 }
 
 .cart-items-container::-webkit-scrollbar-thumb {
-  background-color: rgba(218, 192, 163, 0.3);
+  background-color: color-mix(in srgb, var(--color-caramel) 30%, transparent);
   border-radius: 9999px;
 }
 
 .cart-items-container::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(218, 192, 163, 0.5);
+  background-color: color-mix(in srgb, var(--color-caramel) 50%, transparent);
 }
 </style>

@@ -45,19 +45,19 @@ const navigateAndClose = (path) => {
 <template>
   <div>
     <!-- Top Promo Bar -->
-    <div class="bg-[#2C1B11] text-[#FDFBF7] text-center py-3 px-4">
+    <div class="bg-espresso text-cream text-center py-3 px-4">
       <p class="text-xs md:text-sm font-sans tracking-widest uppercase">
         Доставка к вашему дому — бесплатно по Майкопу при заказе от 2500 ₽
       </p>
     </div>
 
     <!-- Luxury Header -->
-    <header class="bg-[#FDFBF7] border-b border-[#2C1B11]/10 relative z-50">
+    <header class="bg-cream border-b border-espresso/10 relative z-50">
       <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <!-- Mobile Hamburger (visible only on mobile) -->
         <button
           @click="toggleMobileMenu"
-          class="md:hidden text-[#4B2307] hover:opacity-70 transition-all duration-300 ease-in-out z-50 cursor-pointer"
+          class="md:hidden text-chocolate hover:opacity-70 transition-all duration-300 ease-in-out z-50 cursor-pointer"
           aria-label="Меню"
         >
           <Menu
@@ -76,14 +76,14 @@ const navigateAndClose = (path) => {
         <nav class="hidden md:flex items-center space-x-8">
           <router-link
             to="/menu"
-            class="text-[#7E4B30] font-sans text-sm tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out"
+            class="text-caramel font-sans text-sm tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out"
           >
             Меню
           </router-link>
 
           <router-link
             to="/locations"
-            class="text-[#7E4B30] font-sans text-sm tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out"
+            class="text-caramel font-sans text-sm tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out"
           >
             Адреса заведений
           </router-link>
@@ -91,7 +91,7 @@ const navigateAndClose = (path) => {
 
         <!-- Centered Logo -->
         <div class="absolute left-1/2 transform -translate-x-1/2">
-          <router-link to="/" class="font-serif text-xl md:text-3xl text-[#4B2307] tracking-wide">
+          <router-link to="/" class="font-serif text-xl md:text-3xl text-chocolate tracking-wide">
             ЖАК-АНДРЭ
           </router-link>
         </div>
@@ -100,7 +100,7 @@ const navigateAndClose = (path) => {
         <div class="flex items-center space-x-4 md:space-x-6">
           <button
             @click="handleSearchClick"
-            class="text-[#4B2307] hover:opacity-70 transition-all duration-300 ease-in-out cursor-pointer"
+            class="text-chocolate hover:opacity-70 transition-all duration-300 ease-in-out cursor-pointer"
             aria-label="Поиск"
           >
             <Search :size="20" />
@@ -108,11 +108,11 @@ const navigateAndClose = (path) => {
 
           <button
             @click="handleCartClick"
-            class="text-[#4B2307] hover:opacity-70 transition-all duration-300 ease-in-out relative cursor-pointer"
+            class="text-chocolate hover:opacity-70 transition-all duration-300 ease-in-out relative cursor-pointer"
             aria-label="Корзина"
           >
             <ShoppingBag :size="20" />
-            <span v-if="totalItems > 0" class="absolute -top-2 -right-2 bg-[#2C1B11] text-[#FDFBF7] text-xs rounded-full h-4 w-4 flex items-center justify-center font-sans font-semibold">{{ totalItems }}</span>
+            <span v-if="totalItems > 0" class="absolute -top-2 -right-2 bg-espresso text-cream text-xs rounded-full h-4 w-4 flex items-center justify-center font-sans font-semibold">{{ totalItems }}</span>
           </button>
         </div>
       </div>
@@ -129,7 +129,7 @@ const navigateAndClose = (path) => {
     >
       <div
         v-if="mobileMenuOpen"
-        class="fixed inset-0 bg-[#2C1B11]/95 backdrop-blur-sm z-40 md:hidden"
+        class="fixed inset-0 bg-espresso/95 backdrop-blur-sm z-40 md:hidden"
         @click="closeMobileMenu"
       >
         <nav
@@ -138,27 +138,27 @@ const navigateAndClose = (path) => {
         >
           <button
             @click="navigateAndClose('/')"
-            class="text-[#FDFBF7] font-serif text-3xl tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out cursor-pointer"
+            class="text-cream font-serif text-3xl tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out cursor-pointer"
           >
             Главная
           </button>
 
           <button
             @click="navigateAndClose('/menu')"
-            class="text-[#FDFBF7] font-serif text-3xl tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out cursor-pointer"
+            class="text-cream font-serif text-3xl tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out cursor-pointer"
           >
             Меню
           </button>
 
           <button
             @click="navigateAndClose('/locations')"
-            class="text-[#FDFBF7] font-serif text-3xl tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out cursor-pointer"
+            class="text-cream font-serif text-3xl tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out cursor-pointer"
           >
             Адреса заведений
           </button>
 
           <div class="absolute bottom-12 text-center">
-            <p class="text-[#FDFBF7]/60 font-sans text-xs tracking-widest uppercase">
+            <p class="text-cream/60 font-sans text-xs tracking-widest uppercase">
               Jacques-André
             </p>
           </div>
