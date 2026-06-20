@@ -1,76 +1,12 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { getFeaturedProducts } from '@/data/products'
 
 const router = useRouter()
 const isExpanded = ref(false)
 
-const products = ref([
-  {
-    id: 1,
-    title: 'Круассан с соусом песто',
-    description: 'Слоёное тесто с ароматным соусом песто и лёгкой ноткой адыгейского сыра.',
-    price: '320 ₽',
-    image: 'croissant_pesto.webp',
-    isNew: true
-  },
-  {
-    id: 2,
-    title: 'Ореховая тарталетка',
-    description: 'Хрустящая тарталетка с нежной ореховой начинкой.',
-    price: '340 ₽',
-    image: 'tartaletka.webp',
-    isNew: false
-  },
-  {
-    id: 3,
-    title: 'Сырники Жак-Андрэ',
-    description: 'Нежные творожные сырники по нашей семейной рецептуре.',
-    price: '280 ₽',
-    image: 'sirnik.webp',
-    isNew: false
-  },
-  {
-    id: 4,
-    title: 'Клаб-сэндвич',
-    description: 'Тёплый клаб с хрустящими овощами и домашним соусом — с душой к гостю.',
-    price: '480 ₽',
-    image: 'club_sandwich.webp',
-    isNew: false
-  },
-  {
-    id: 5,
-    title: 'Круассан с лососем',
-    description: 'Слоёный круассан с копчёным лососем и кремом из адыгейского сыра.',
-    price: '360 ₽',
-    image: 'croissant_losos.webp',
-    isNew: false
-  },
-  {
-    id: 6,
-    title: 'Ачма с курицей',
-    description: 'Традиционная ачма с сочной куриной начинкой — блюдо родовых традиций.',
-    price: '420 ₽',
-    image: 'achma_kurica.webp',
-    isNew: false
-  },
-  {
-    id: 7,
-    title: 'Фирменный торт «Жак Андре»',
-    description: 'Авторский торт от шеф-кондитера с деликатными слоями крема и бисквита.',
-    price: '450 ₽',
-    image: 'tort_zhak_andre.webp',
-    isNew: false
-  },
-  {
-    id: 8,
-    title: 'Карамельный торт',
-    description: 'Насыщенные карамельные слои со сливочным кремом, покрытые нежной крошкой и дополненные хрустящим декором.',
-    price: '420 ₽',
-    image: 'tort_caramel.webp',
-    isNew: false
-  }
-])
+const products = ref(getFeaturedProducts())
 
 const getImageUrl = (name) => {
   const imageName = name.includes('.') ? name : `${name}.webp`
@@ -124,7 +60,7 @@ const handleButtonClick = () => {
             <div class="aspect-square overflow-hidden">
               <img
                 :src="getImageUrl(product.image)"
-                :alt="product.title"
+                :alt="product.name"
                 class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
               />
             </div>
@@ -134,7 +70,7 @@ const handleButtonClick = () => {
           <div class="p-6 space-y-3">
             <!-- Title -->
             <h3 class="text-[#4B2307] font-serif text-lg md:text-xl tracking-wide">
-              {{ product.title }}
+              {{ product.name }}
             </h3>
 
             <!-- Description -->
@@ -144,7 +80,7 @@ const handleButtonClick = () => {
 
             <!-- Price -->
             <p class="text-[#4B2307] font-sans text-base md:text-lg tracking-wider font-semibold">
-              {{ product.price }}
+              {{ product.price }} ₽
             </p>
           </div>
         </div>

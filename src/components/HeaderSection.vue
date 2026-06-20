@@ -24,6 +24,10 @@ const handleSearchClick = () => {
   }, 100)
 }
 
+const handleCartClick = () => {
+  router.push('/menu')
+}
+
 const toggleMobileMenu = () => {
   mobileMenuOpen.value = !mobileMenuOpen.value
 }
@@ -102,7 +106,11 @@ const navigateAndClose = (path) => {
             <Search :size="20" />
           </button>
 
-          <button class="text-[#4B2307] hover:opacity-70 transition-all duration-300 ease-in-out relative cursor-pointer" aria-label="Корзина">
+          <button
+            @click="handleCartClick"
+            class="text-[#4B2307] hover:opacity-70 transition-all duration-300 ease-in-out relative cursor-pointer"
+            aria-label="Корзина"
+          >
             <ShoppingBag :size="20" />
             <span v-if="totalItems > 0" class="absolute -top-2 -right-2 bg-[#2C1B11] text-[#FDFBF7] text-xs rounded-full h-4 w-4 flex items-center justify-center font-sans font-semibold">{{ totalItems }}</span>
           </button>
