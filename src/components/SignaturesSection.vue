@@ -31,10 +31,10 @@ const handleButtonClick = () => {
     <div class="max-w-7xl mx-auto">
       <!-- Section Header -->
       <div class="text-center mb-12 md:mb-16 space-y-3">
-        <h2 class="text-chocolate font-serif text-3xl md:text-4xl lg:text-5xl tracking-wide">
+        <h2 class="text-chocolate font-serif font-normal text-3xl md:text-4xl lg:text-5xl tracking-wide">
           НАША ГОРДОСТЬ
         </h2>
-        <p class="text-caramel font-sans text-xs md:text-sm tracking-widest uppercase">
+        <p class="text-caramel font-sans font-normal text-xs md:text-sm tracking-widest uppercase">
           Каждый день, с душой — в сердце Адыгеи.
         </p>
       </div>
@@ -69,12 +69,12 @@ const handleButtonClick = () => {
           <!-- Product Details -->
           <div class="p-6 space-y-3">
             <!-- Title -->
-            <h3 class="text-chocolate font-serif text-lg md:text-xl tracking-wide">
+            <h3 class="text-chocolate font-serif font-medium text-lg md:text-xl tracking-wide">
               {{ product.name }}
             </h3>
 
             <!-- Description -->
-            <p class="text-chocolate/70 font-sans text-sm tracking-wide leading-relaxed">
+            <p class="text-chocolate/70 font-sans font-medium text-sm tracking-wide leading-relaxed">
               {{ product.description }}
             </p>
 
@@ -90,7 +90,7 @@ const handleButtonClick = () => {
       <div class="text-center">
         <button
           @click="handleButtonClick"
-          class="bg-transparent text-chocolate font-sans text-sm tracking-widest uppercase px-10 py-4 border border-chocolate hover:bg-espresso hover:text-cream transition-all duration-300 ease-in-out cursor-pointer"
+          class="bg-transparent text-chocolate font-sans font-semibold text-sm tracking-widest uppercase px-10 py-4 border border-chocolate hover:bg-espresso hover:text-cream transition-all duration-300 ease-in-out cursor-pointer"
         >
           {{ buttonText }}
         </button>

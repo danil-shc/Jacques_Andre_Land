@@ -29,12 +29,12 @@ const navigateToMenu = (categoryKey) => {
           </div>
 
           <div class="absolute bottom-0 left-0 p-8 md:p-10 z-10">
-            <h2 class="font-serif text-4xl md:text-5xl text-white mb-3 tracking-tight">
+            <h2 class="font-serif font-normal text-4xl md:text-5xl text-white mb-3 tracking-tight">
               ТОРТЫ И ПИРОЖНЫЕ
             </h2>
             <button 
               @click.stop="navigateToMenu('cakes')"
-              class="inline-block font-sans text-xs tracking-widest uppercase text-white border-b border-white/60 pb-1 transition-all duration-300 ease-in-out hover:border-white hover:tracking-[0.25em] cursor-pointer"
+              class="inline-block font-sans font-normal text-xs tracking-widest uppercase text-white border-b border-white/60 pb-1 transition-all duration-300 ease-in-out hover:border-white hover:tracking-[0.25em] cursor-pointer"
             >
               Перейти
             </button>
@@ -53,12 +53,12 @@ const navigateToMenu = (categoryKey) => {
           </div>
 
           <div class="absolute bottom-0 left-0 p-8 md:p-10 z-10">
-            <h2 class="font-serif text-4xl md:text-5xl text-white mb-3 tracking-tight">
+            <h2 class="font-serif font-normal text-4xl md:text-5xl text-white mb-3 tracking-tight">
               ЗАВТРАКИ
             </h2>
             <button 
               @click.stop="navigateToMenu('breakfast')"
-              class="inline-block font-sans text-xs tracking-widest uppercase text-white border-b border-white/60 pb-1 transition-all duration-300 ease-in-out hover:border-white hover:tracking-[0.25em] cursor-pointer"
+              class="inline-block font-sans font-normal text-xs tracking-widest uppercase text-white border-b border-white/60 pb-1 transition-all duration-300 ease-in-out hover:border-white hover:tracking-[0.25em] cursor-pointer"
             >
               Перейти
             </button>
