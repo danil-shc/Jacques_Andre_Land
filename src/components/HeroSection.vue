@@ -26,23 +26,21 @@ const scrollToSignatures = () => {
     </div>
 
     <!-- Hero Content -->
-    <div class="relative z-10 text-center px-6 py-16 md:py-24 space-y-8">
-      <!-- Subtitle -->
-      <p class="text-[#FDFBF7] font-sans text-sm md:text-base tracking-widest uppercase">
+    <div class="relative z-10 flex flex-col items-center text-center justify-center px-6 py-16 md:py-24 space-y-6 md:space-y-8">
+      <span class="text-xs md:text-sm uppercase tracking-[0.2em] text-white/80">
         Ремесленная пекарня и кафе
-      </p>
+      </span>
 
-      <!-- Main Heading -->
-      <h2 class="text-[#FDFBF7] font-serif text-4xl md:text-6xl lg:text-7xl tracking-wide leading-tight max-w-4xl mx-auto">
-        ТРАДИЦИИ СЕМЬИ<br />И ВКУСА
-      </h2>
+      <h1 class="text-[#FDFBF7] font-serif text-4xl md:text-6xl lg:text-7xl tracking-wide leading-tight max-w-3xl uppercase">
+        Традиции семьи<br class="hidden md:block" /> и вкуса
+      </h1>
 
-      <!-- CTA Button -->
-      <div class="pt-4">
-        <button @click="scrollToSignatures" class="bg-[#FDFBF7] text-[#4B2307] font-sans text-sm tracking-widest uppercase px-8 py-4 hover:bg-[#2C1B11] hover:text-[#FDFBF7] transition-all duration-300 ease-in-out cursor-pointer">
-          ПОСМОТРЕТЬ УГОЩЕНИЯ →
-        </button>
-      </div>
+      <button
+        @click="scrollToSignatures"
+        class="bg-[#FDFBF7] text-[#4B2307] font-sans text-sm tracking-widest uppercase px-8 py-4 hover:bg-[#2C1B11] hover:text-[#FDFBF7] transition-all duration-300 ease-in-out cursor-pointer"
+      >
+        ПОСМОТРЕТЬ УГОЩЕНИЯ →
+      </button>
     </div>
 
     <!-- Bouncing Down Arrow -->

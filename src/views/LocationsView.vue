@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-[#FDFBF7] py-16 md:py-24">
+  <section class="bg-[#FDFBF7] pt-16 md:pt-24 pb-12 md:pb-16">
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-16">
         <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl text-[#4B2307] mb-4">
@@ -10,7 +10,7 @@
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <article
           v-for="location in locations"
           :key="location.id"
@@ -69,12 +69,6 @@
           </div>
         </article>
       </div>
-
-      <div class="text-center py-12 border-t border-[#2C1B11]/10">
-        <p class="font-sans text-xs md:text-sm tracking-widest uppercase text-[#7E4B30]">
-          ТРАДИЦИИ КАВКАЗСКОГО ГОСТЕПРИИМСТВА В КАЖДОЙ ДЕТАЛИ ИНТЕРЬЕРА
-        </p>
-      </div>
     </div>
   </section>
 </template>
@@ -113,6 +107,3 @@ const locations = reactive([
   }
 ])
 </script>
-
-<style scoped>
-</style>

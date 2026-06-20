@@ -53,11 +53,41 @@
           <div class="p-5 flex-grow flex flex-col">
             <h3 class="font-serif text-lg md:text-xl text-[#4B2307] mb-2">{{ product.name }}</h3>
             <p class="text-sm text-[#4B2307] text-opacity-70 mb-4 flex-grow leading-relaxed">{{ product.description }}</p>
-            
+
+            <div v-if="product.variants?.length" class="mb-5">
+              <p class="font-sans text-[10px] tracking-[0.22em] uppercase text-[#7E4B30] text-opacity-60 mb-3">Объём</p>
+              <div class="flex flex-wrap gap-2">
+                <button
+                  v-for="variant in product.variants"
+                  :key="variant.id"
+                  type="button"
+                  @click="selectVariant(product.id, variant.id)"
+                  :class="[
+                    'group/volume inline-flex flex-col items-center justify-center min-w-[72px] px-3 py-2 rounded-sm border font-sans transition-all duration-300 ease-in-out cursor-pointer',
+                    getSelectedVariant(product)?.id === variant.id
+                      ? 'bg-[#2C1B11] border-[#2C1B11] text-[#FDFBF7] shadow-sm'
+                      : 'bg-[#FDFBF7]/80 border-[#7E4B30]/25 text-[#4B2307] hover:bg-[#2C1B11]/8 hover:border-[#7E4B30] hover:text-[#2C1B11]'
+                  ]"
+                >
+                  <span class="text-[11px] tracking-[0.18em] uppercase leading-none">{{ variant.volume }}</span>
+                  <span
+                    :class="[
+                      'mt-1.5 text-[10px] tracking-wider transition-colors duration-300',
+                      getSelectedVariant(product)?.id === variant.id
+                        ? 'text-[#FDFBF7]/75'
+                        : 'text-[#7E4B30]/70 group-hover/volume:text-[#2C1B11]'
+                    ]"
+                  >
+                    {{ variant.price }} ₽
+                  </span>
+                </button>
+              </div>
+            </div>
+
             <div class="flex items-center justify-between mt-auto">
-              <span class="font-sans text-lg font-semibold text-[#4B2307] tracking-wide">{{ product.price }} ₽</span>
+              <span class="font-sans text-lg font-semibold text-[#4B2307] tracking-wide">{{ getDisplayPrice(product) }} ₽</span>
               <button
-                @click="addToCart(product)"
+                @click="product.variants ? addCoffeeToCart(product) : addToCart(product)"
                 class="w-10 h-10 rounded-full bg-[#2C1B11] text-[#FDFBF7] flex items-center justify-center hover:bg-opacity-80 transition-all duration-300 hover:scale-110 cursor-pointer"
               >
                 <Plus :size="20" />
@@ -73,52 +103,64 @@
         v-if="cartItems.length > 0"
         class="fixed bottom-0 left-0 right-0 bg-[#2C1B11] text-[#FDFBF7] shadow-2xl z-50"
       >
-        <div class="max-w-7xl mx-auto px-6 py-6">
-          <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
-            <div class="flex-grow">
-              <h3 class="font-sans text-xs tracking-widest uppercase mb-3 text-[#FDFBF7] text-opacity-70">Ваш заказ</h3>
-              <div class="cart-items-container max-h-32 overflow-y-auto pr-3">
-                <div
-                  v-for="item in cartItems"
-                  :key="item.id"
-                  class="grid grid-cols-[1fr_auto_40px_auto_100px] items-center gap-4 py-2 text-sm"
-                >
-                  <span class="font-serif text-left truncate">{{ item.name }}</span>
+        <div class="w-full max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+          <h2 class="text-center font-serif text-lg md:text-xl uppercase tracking-[0.2em] text-[#FDFBF7]/90 mb-6 md:mb-8 lg:mb-10">
+            Ваш заказ
+          </h2>
 
-                  <button
-                    @click="decreaseQuantity(item)"
-                    class="w-8 h-8 rounded-full bg-[#FAF7F2] text-[#4A2C11] border border-[#4A2C11]/10 hover:bg-[#EFE9DC] hover:text-[#2A1605] hover:scale-105 active:scale-95 flex items-center justify-center leading-none select-none pb-[2px] font-bold transition-all duration-300 ease-out cursor-pointer"
-                    aria-label="Уменьшить количество"
-                  >
-                    −
-                  </button>
+          <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-8 lg:gap-12 xl:gap-16 items-center">
+            <div class="cart-items-container min-w-0 space-y-0 max-h-48 md:max-h-64 lg:max-h-72 overflow-y-auto pr-2">
+              <div
+                v-for="item in cartItems"
+                :key="item.id"
+                class="flex flex-col lg:grid lg:grid-cols-[2fr_120px_100px] lg:items-center gap-3 lg:gap-6 py-4 border-b border-white/10 last:border-b-0 w-full"
+              >
+                <div class="w-full flex justify-between items-start">
+                  <span class="font-serif text-[#FDFBF7] text-base md:text-lg lg:text-sm font-medium tracking-wide text-left leading-snug">
+                    {{ formatProductLabel(item) }}
+                  </span>
+                </div>
 
-                  <span class="font-sans text-center w-10 tracking-wide">{{ item.quantity }}</span>
+                <div class="w-full lg:w-auto flex items-center justify-between lg:contents mt-1 lg:mt-0">
+                  <div class="flex items-center space-x-3">
+                    <button
+                      @click="decreaseQuantity(item)"
+                      class="w-8 h-8 rounded-full bg-[#FAF7F2] text-[#4A2C11] border border-[#4A2C11]/10 flex items-center justify-center font-bold text-base leading-none select-none pb-[2px] transition-all duration-300 ease-out hover:bg-[#EFE9DC] hover:text-[#2A1605] hover:scale-105 active:scale-95 cursor-pointer"
+                      aria-label="Уменьшить количество"
+                    >
+                      −
+                    </button>
 
-                  <button
-                    @click="increaseQuantity(item)"
-                    class="w-8 h-8 rounded-full bg-[#FAF7F2] text-[#4A2C11] border border-[#4A2C11]/10 hover:bg-[#EFE9DC] hover:text-[#2A1605] hover:scale-105 active:scale-95 flex items-center justify-center leading-none select-none pb-[2px] font-bold transition-all duration-300 ease-out cursor-pointer"
-                    aria-label="Увеличить количество"
-                  >
-                    +
-                  </button>
+                    <span class="text-center min-w-[24px] font-sans font-medium text-[#FDFBF7] text-sm tracking-wide">{{ item.quantity }}</span>
 
-                  <span class="font-sans text-right w-[100px] tracking-wide pr-2">{{ item.price * item.quantity }} ₽</span>
+                    <button
+                      @click="increaseQuantity(item)"
+                      class="w-8 h-8 rounded-full bg-[#FAF7F2] text-[#4A2C11] border border-[#4A2C11]/10 flex items-center justify-center font-bold text-base leading-none select-none pb-[2px] transition-all duration-300 ease-out hover:bg-[#EFE9DC] hover:text-[#2A1605] hover:scale-105 active:scale-95 cursor-pointer"
+                      aria-label="Увеличить количество"
+                    >
+                      +
+                    </button>
+                  </div>
+
+                  <span class="font-serif font-medium text-[#FDFBF7] text-base md:text-lg lg:text-sm text-right lg:w-[100px] whitespace-nowrap">
+                    {{ item.price * item.quantity }} ₽
+                  </span>
                 </div>
               </div>
             </div>
 
-            <div class="flex items-center space-x-6 md:ml-12">
-              <div class="text-right">
-                <div class="font-sans text-xs tracking-widest uppercase text-[#FDFBF7] text-opacity-70 mb-1">Итого</div>
-                <div class="font-serif text-2xl md:text-3xl">{{ totalPrice }} ₽</div>
+            <div class="flex flex-col items-center justify-center border-t border-white/10 pt-6 lg:border-t-0 lg:pt-0 lg:border-l lg:border-white/10 lg:pl-12 xl:pl-16 py-2 lg:py-4 w-full">
+              <div class="text-center w-full max-w-sm mx-auto">
+                <span class="block font-sans text-xs uppercase tracking-[0.15em] text-[#FDFBF7]/50 mb-2">Итого</span>
+                <span class="block font-serif text-3xl md:text-4xl text-[#FDFBF7] tracking-wide mb-6 whitespace-nowrap">{{ totalPrice }} ₽</span>
+
+                <button
+                  @click="checkout"
+                  class="w-full bg-white text-[#4A2C11] font-sans font-medium text-xs uppercase tracking-[0.2em] py-4 px-8 hover:bg-[#FAF7F2] active:scale-[0.98] transition-all duration-300 shadow-lg cursor-pointer"
+                >
+                  Оформить заказ
+                </button>
               </div>
-              <button
-                @click="checkout"
-                class="bg-white text-[#4A2C11] border border-transparent hover:bg-[#2C1B11] hover:text-[#FAF7F2] hover:border-white px-6 md:px-8 py-3 md:py-4 font-sans text-xs md:text-sm tracking-widest uppercase transition-all duration-300 ease-in-out whitespace-nowrap cursor-pointer"
-              >
-                Оформить заказ
-              </button>
             </div>
           </div>
         </div>
@@ -140,9 +182,17 @@ const addToCart = (product) => {
   addToCartGlobal(product)
 }
 
-const getImageUrl = (name) => {
-  const imageName = name ? (name.includes('.') ? name : `${name}.webp`) : null
-  return imageName ? new URL(`../assets/images/${imageName}`, import.meta.url).href : null
+const getImageUrl = (imageName) => {
+  if (!imageName) return null
+  const fileName = imageName.includes('.') ? imageName : `${imageName}.webp`
+  const path = fileName.includes('_coffee.')
+    ? `../assets/images/coffee/${fileName}`
+    : `../assets/images/${fileName}`
+  return new URL(path, import.meta.url).href
+}
+
+const formatProductLabel = (product) => {
+  return product.volume ? `${product.name} ${product.volume}` : product.name
 }
 
 const categories = [
@@ -252,51 +302,114 @@ const products = [
     price: 380,
     category: 'СЫТНАЯ ВЫПЕЧКА & ЗАВТРАКИ',
     image: 'sirnik'
-  },
-  {
-    id: 13,
-    name: 'Эспрессо',
-    description: 'Классический итальянский эспрессо из премиальной арабики с насыщенным вкусом',
-    price: 180,
-    category: 'ГОРЯЧИЕ НАПИТКИ',
-    image: null
-  },
-  {
-    id: 14,
-    name: 'Капучино',
-    description: 'Бархатистый капучино с нежной молочной пенкой и авторским латте-артом',
-    price: 240,
-    category: 'ГОРЯЧИЕ НАПИТКИ',
-    image: null
-  },
-  {
-    id: 15,
-    name: 'Флэт Уайт',
-    description: 'Сбалансированный кофейный напиток с шелковистой микропенкой на двойном эспрессо',
-    price: 280,
-    category: 'ГОРЯЧИЕ НАПИТКИ',
-    image: null
-  },
-  {
-    id: 16,
-    name: 'Матча Латте',
-    description: 'Церемониальная японская матча с молоком — энергия и польза в каждом глотке',
-    price: 320,
-    category: 'ГОРЯЧИЕ НАПИТКИ',
-    image: null
-  },
-  {
-    id: 17,
-    name: 'Раф кофе',
-    description: 'Нежный сливочный кофе с ванилью — идеальный выбор для ценителей мягкого вкуса',
-    price: 290,
-    category: 'ГОРЯЧИЕ НАПИТКИ',
-    image: null
   }
 ]
 
+const coffeeMenu = [
+  {
+    id: 'coffee-americano',
+    name: 'Американо',
+    category: 'ГОРЯЧИЕ НАПИТКИ',
+    description: 'Классический крепкий кофе на основе эспрессо',
+    image: 'americano_coffee.webp',
+    variants: [
+      { id: 'c1', volume: '250мл', price: 175 },
+      { id: 'c2', volume: '350мл', price: 209 },
+      { id: 'c3', volume: '400мл', price: 225 }
+    ]
+  },
+  {
+    id: 'coffee-cappuccino',
+    name: 'Капучино',
+    category: 'ГОРЯЧИЕ НАПИТКИ',
+    description: 'Классический кофейный напиток с балансом эспрессо и нежной молочной пены',
+    image: 'capuchino_coffee.webp',
+    variants: [
+      { id: 'c4', volume: '250мл', price: 209 },
+      { id: 'c5', volume: '350мл', price: 245 },
+      { id: 'c6', volume: '400мл', price: 275 }
+    ]
+  },
+  {
+    id: 'coffee-latte',
+    name: 'Латте',
+    category: 'ГОРЯЧИЕ НАПИТКИ',
+    description: 'Мягкий кофейный напиток с преобладанием горячего молока и легкой пенкой',
+    image: 'latte_coffee.webp',
+    variants: [
+      { id: 'c7', volume: '250мл', price: 209 },
+      { id: 'c8', volume: '350мл', price: 245 },
+      { id: 'c9', volume: '400мл', price: 275 }
+    ]
+  },
+  {
+    id: 'coffee-flat-white',
+    name: 'Флэт-уайт',
+    category: 'ГОРЯЧИЕ НАПИТКИ',
+    description: 'Насыщенный кофейный вкус с двойной порцией эспрессо и тонким слоем бархатистой пены',
+    image: 'flat_white_coffee.webp',
+    variants: [
+      { id: 'c10', volume: '250мл', price: 239 },
+      { id: 'c11', volume: '350мл', price: 259 }
+    ]
+  },
+  {
+    id: 'coffee-raf',
+    name: 'Раф',
+    category: 'ГОРЯЧИЕ НАПИТКИ',
+    description: 'Нежнейший кофейный десерт на основе эспрессо, сливок и ванильного сахара',
+    image: 'raf_coffee.webp',
+    variants: [
+      { id: 'c12', volume: '250мл', price: 279 }
+    ]
+  },
+  {
+    id: 'coffee-kids-cappuccino',
+    name: 'Детский капучино',
+    category: 'ГОРЯЧИЕ НАПИТКИ',
+    description: 'Нежное взбитое молочко с воздушной пеной без добавления кофе — специально для маленьких гостей',
+    image: 'babychino_coffee.webp',
+    variants: [
+      { id: 'c13', volume: '250мл', price: 99 }
+    ]
+  }
+]
+
+const allProducts = [...products, ...coffeeMenu]
+
+const selectedVariants = ref(
+  Object.fromEntries(coffeeMenu.map(item => [item.id, item.variants[0].id]))
+)
+
+const getSelectedVariant = (product) => {
+  if (!product.variants?.length) return null
+  const variantId = selectedVariants.value[product.id] ?? product.variants[0].id
+  return product.variants.find(variant => variant.id === variantId) ?? product.variants[0]
+}
+
+const selectVariant = (productId, variantId) => {
+  selectedVariants.value[productId] = variantId
+}
+
+const getDisplayPrice = (product) => {
+  return product.variants ? getSelectedVariant(product).price : product.price
+}
+
+const addCoffeeToCart = (product) => {
+  const variant = getSelectedVariant(product)
+  addToCartGlobal({
+    id: variant.id,
+    name: product.name,
+    volume: variant.volume,
+    price: variant.price,
+    description: product.description,
+    category: product.category,
+    image: product.image
+  })
+}
+
 const filteredProducts = computed(() => {
-  let filtered = products
+  let filtered = allProducts
 
   if (selectedCategory.value !== 'ВСЕ') {
     filtered = filtered.filter(p => p.category === selectedCategory.value)
@@ -304,10 +417,18 @@ const filteredProducts = computed(() => {
 
   if (searchQuery.value.trim()) {
     const query = searchQuery.value.toLowerCase()
-    filtered = filtered.filter(p =>
-      p.name.toLowerCase().includes(query) ||
-      p.description.toLowerCase().includes(query)
-    )
+    filtered = filtered.filter(p => {
+      const matchesBase =
+        p.name.toLowerCase().includes(query) ||
+        p.description.toLowerCase().includes(query)
+
+      if (matchesBase) return true
+
+      return p.variants?.some(variant =>
+        variant.volume.toLowerCase().includes(query) ||
+        String(variant.price).includes(query)
+      )
+    })
   }
 
   return filtered
@@ -327,7 +448,7 @@ onMounted(() => {
 
 function checkout() {
   const orderText = cartItems.value
-    .map(item => `- ${item.name} (${item.quantity} шт) — ${item.price * item.quantity} ₽`)
+    .map(item => `- ${formatProductLabel(item)} (${item.quantity} шт) — ${item.price * item.quantity} ₽`)
     .join('\n')
 
   const message = `Салам алейкум! Хочу сделать заказ:\n\n${orderText}\n\nИтого: ${totalPrice.value} ₽\n\nЗаберу с ул. Пролетарская 449, Майкоп.`
