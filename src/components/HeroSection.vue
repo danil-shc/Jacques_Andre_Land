@@ -27,17 +27,17 @@ const scrollToSignatures = () => {
 
     <!-- Hero Content -->
     <div class="relative z-10 flex flex-col items-center text-center justify-center px-6 py-16 md:py-24 space-y-6 md:space-y-8">
-      <span class="text-xs md:text-sm uppercase tracking-[0.2em] text-white/80">
+      <span class="font-serif font-normal text-xs md:text-sm uppercase tracking-[0.2em] text-white/80">
         Ремесленная пекарня и кафе
       </span>
 
-      <h1 class="text-cream font-serif text-4xl md:text-6xl lg:text-7xl tracking-wide leading-tight max-w-3xl uppercase">
+      <h1 class="text-cream font-serif font-normal text-4xl md:text-6xl lg:text-7xl tracking-wide leading-tight max-w-3xl uppercase">
         Традиции семьи<br class="hidden md:block" /> и вкуса
       </h1>
 
       <button
         @click="scrollToSignatures"
-        class="bg-cream text-chocolate font-sans text-sm tracking-widest uppercase px-8 py-4 hover:bg-espresso hover:text-cream transition-all duration-300 ease-in-out cursor-pointer"
+        class="bg-cream text-chocolate font-sans font-semibold text-sm tracking-widest uppercase px-8 py-4 hover:bg-espresso hover:text-cream transition-all duration-300 ease-in-out cursor-pointer"
       >
         ПОСМОТРЕТЬ УГОЩЕНИЯ →
       </button>

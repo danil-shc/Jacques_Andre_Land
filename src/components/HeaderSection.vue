@@ -46,7 +46,7 @@ const navigateAndClose = (path) => {
   <div>
     <!-- Top Promo Bar -->
     <div class="bg-espresso text-cream text-center py-3 px-4">
-      <p class="text-xs md:text-sm font-sans tracking-widest uppercase">
+      <p class="text-xs md:text-sm font-sans font-normal tracking-widest uppercase">
         Доставка к вашему дому — бесплатно по Майкопу при заказе от 2500 ₽
       </p>
     </div>
@@ -76,14 +76,14 @@ const navigateAndClose = (path) => {
         <nav class="hidden md:flex items-center space-x-8">
           <router-link
             to="/menu"
-            class="text-caramel font-sans text-sm tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out"
+            class="text-caramel font-sans font-normal text-sm tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out"
           >
             Меню
           </router-link>
 
           <router-link
             to="/locations"
-            class="text-caramel font-sans text-sm tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out"
+            class="text-caramel font-sans font-normal text-sm tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out"
           >
             Адреса заведений
           </router-link>
@@ -91,7 +91,7 @@ const navigateAndClose = (path) => {
 
         <!-- Centered Logo -->
         <div class="absolute left-1/2 transform -translate-x-1/2">
-          <router-link to="/" class="font-serif text-xl md:text-3xl text-chocolate tracking-wide">
+          <router-link to="/" class="font-serif font-normal text-xl md:text-3xl text-chocolate tracking-wide">
             ЖАК-АНДРЭ
           </router-link>
         </div>
@@ -138,27 +138,27 @@ const navigateAndClose = (path) => {
         >
           <button
             @click="navigateAndClose('/')"
-            class="text-cream font-serif text-3xl tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out cursor-pointer"
+            class="text-cream font-sans font-normal text-3xl tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out cursor-pointer"
           >
             Главная
           </button>
 
           <button
             @click="navigateAndClose('/menu')"
-            class="text-cream font-serif text-3xl tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out cursor-pointer"
+            class="text-cream font-sans font-normal text-3xl tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out cursor-pointer"
           >
             Меню
           </button>
 
           <button
             @click="navigateAndClose('/locations')"
-            class="text-cream font-serif text-3xl tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out cursor-pointer"
+            class="text-cream font-sans font-normal text-3xl tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out cursor-pointer"
           >
             Адреса заведений
           </button>
 
           <div class="absolute bottom-12 text-center">
-            <p class="text-cream/60 font-sans text-xs tracking-widest uppercase">
+            <p class="text-cream/60 font-sans font-normal text-xs tracking-widest uppercase">
               Jacques-André
             </p>
           </div>
