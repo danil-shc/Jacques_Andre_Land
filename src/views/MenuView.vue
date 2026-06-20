@@ -182,13 +182,22 @@ const addToCart = (product) => {
   addToCartGlobal(product)
 }
 
+const menuImages = import.meta.glob(
+  '../assets/images/**/*.{webp,jpg,jpeg,png}',
+  { eager: true, query: '?url', import: 'default' }
+)
+
 const getImageUrl = (imageName) => {
   if (!imageName) return null
   const fileName = imageName.includes('.') ? imageName : `${imageName}.webp`
   const path = fileName.includes('_coffee.')
     ? `../assets/images/coffee/${fileName}`
     : `../assets/images/${fileName}`
-  return new URL(path, import.meta.url).href
+  const resolvedUrl = menuImages[path] ?? null
+  // #region agent log
+  fetch('http://127.0.0.1:7822/ingest/52da591b-afc9-4e43-bd46-cf89e29c0e1c',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'cbf3ed'},body:JSON.stringify({sessionId:'cbf3ed',location:'MenuView.vue:getImageUrl',message:'menu image resolved',data:{imageName,fileName,path,resolvedUrl,mapHit:!!menuImages[path],routePath:route.path,baseUrl:import.meta.env.BASE_URL,hasAssetsImagesSegment:resolvedUrl?.includes('/assets/images/')},timestamp:Date.now(),hypothesisId:'A-B-C',runId:'post-fix'})}).catch(()=>{});
+  // #endregion
+  return resolvedUrl
 }
 
 const formatProductLabel = (product) => {
