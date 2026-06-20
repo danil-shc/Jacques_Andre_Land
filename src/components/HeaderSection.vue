@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCart } from '@/store/cart'
 import { Menu, X, Search, ShoppingBag } from 'lucide-vue-next'
@@ -7,6 +7,14 @@ import { Menu, X, Search, ShoppingBag } from 'lucide-vue-next'
 const router = useRouter()
 const { totalItems } = useCart()
 const mobileMenuOpen = ref(false)
+
+watch(mobileMenuOpen, (isOpen) => {
+  document.body.classList.toggle('overflow-hidden', isOpen)
+})
+
+onUnmounted(() => {
+  document.body.classList.remove('overflow-hidden')
+})
 
 const handleSearchClick = () => {
   router.push('/menu')
