@@ -4,7 +4,7 @@ export const menuProducts = [
     name: 'Круассан с лососем',
     description: 'Премиальный слоёный круассан с норвежским лососем, сливочным сыром и свежей зеленью',
     price: 420,
-    category: 'КРУАССАНЫ',
+    category: 'Выпечка',
     image: 'croissant_losos',
   },
   {
@@ -12,7 +12,7 @@ export const menuProducts = [
     name: 'Круассан с соусом песто',
     description: 'Воздушный круассан с домашним соусом песто, вялеными томатами и моцареллой',
     price: 350,
-    category: 'КРУАССАНЫ',
+    category: 'Выпечка',
     image: 'croissant_pesto',
   },
   {
@@ -76,7 +76,7 @@ export const menuProducts = [
     name: 'Ачма с курицей',
     description: 'Сытная грузинская выпечка со слоями теста, сочной курицей и сыром',
     price: 480,
-    category: 'Сытная выпечка',
+    category: 'Выпечка',
     image: 'achma_kurica',
   },
   {
@@ -84,7 +84,7 @@ export const menuProducts = [
     name: 'Клаб-сэндвич',
     description: 'Трёхслойный сэндвич с курицей гриль, беконом, свежими овощами и фирменным соусом',
     price: 520,
-    category: 'Сытная выпечка',
+    category: 'Выпечка',
     image: 'club_sandwich',
   },
   {
@@ -92,7 +92,7 @@ export const menuProducts = [
     name: 'Сырник',
     description: 'Воздушные сырники из фермерского творога с ванилью, подаются со сметаной и ягодным соусом',
     price: 380,
-    category: 'Сытная выпечка',
+    category: 'Выпечка',
     image: 'sirnik',
   },
 ]
