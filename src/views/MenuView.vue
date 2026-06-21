@@ -205,17 +205,15 @@ const formatProductLabel = (product) => {
 
 const categories = [
   'ВСЕ',
-  'КРУАССАНЫ',
-  'Сытная выпечка',
+  'Выпечка',
   'Десерты',
   'ГОРЯЧИЕ НАПИТКИ'
 ]
 
 const categoryOrder = {
-  'КРУАССАНЫ': 1,
-  'Сытная выпечка': 2,
-  'Десерты': 3,
-  'ГОРЯЧИЕ НАПИТКИ': 4,
+  'Выпечка': 1,
+  'Десерты': 2,
+  'ГОРЯЧИЕ НАПИТКИ': 3,
 }
 
 const bakeryAddresses = [
@@ -300,8 +298,9 @@ const filteredProducts = computed(() => {
 
 const categoryMapping = {
   'cakes': 'Десерты',
-  'hearty': 'Сытная выпечка',
-  'breakfast': 'Сытная выпечка',
+  'baking': 'Выпечка',
+  'hearty': 'Выпечка',
+  'breakfast': 'Выпечка',
 }
 
 onMounted(() => {

@@ -39,7 +39,7 @@ const getImageUrl = (name) => {
           </h2>
 
           <p class="text-chocolate/70 font-sans font-normal text-sm leading-relaxed max-w-md">
-            Присоединяйтесь к нашей программе лояльности в приложении SWiP! Копите баллы, получайте динамические грейды и обменивайте бонусы на любимую французскую выпечку.
+            Присоединяйтесь к нашей программе лояльности в приложении SWiP! Копите баллы и с выгодой обменивайте бонусы на любимую французскую выпечку!
           </p>
 
           <div class="flex flex-col sm:flex-row gap-4 mt-6">
@@ -82,11 +82,11 @@ const getImageUrl = (name) => {
         <!-- Right Column: OUR CAFE -->
         <div class="space-y-6">
           <h2 class="font-serif font-normal text-3xl md:text-4xl text-chocolate tracking-wide">
-            НАШЕ КАФЕ
+            ДОРОГИЕ ГОСТИ
           </h2>
 
           <p class="text-chocolate/70 font-sans font-normal text-sm leading-relaxed">
-            Приглашаем в нашу ремесленную пекарню и кофейню в сердце Майкопа.
+            Приглашаем в наши ремесленные пекарни в сердце Адыгеи.
           </p>
 
           <!-- Address Label -->
