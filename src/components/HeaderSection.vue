@@ -43,17 +43,17 @@ const navigateAndClose = (path) => {
 </script>
 
 <template>
-  <div>
-    <!-- Top Promo Bar -->
-    <div class="bg-espresso text-cream text-center py-3 px-4">
-      <p class="text-xs md:text-sm font-sans font-normal tracking-widest uppercase">
-        Доставка к вашему дому — бесплатно по Майкопу при заказе от 2500 ₽
-      </p>
-    </div>
+  <!-- Top Promo Bar — scrolls away naturally -->
+  <div class="bg-espresso text-cream text-center py-3 px-4">
+    <p class="text-xs md:text-sm font-sans font-normal tracking-widest uppercase">
+      Доставка к вашему дому — бесплатно по Майкопу при заказе от 2500 ₽
+    </p>
+  </div>
 
-    <!-- Luxury Header -->
-    <header class="bg-cream border-b border-espresso/10 relative z-50">
-      <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+  <!-- Main navbar — pinned on scroll (header uses contents so sticky isn't trapped in a short box) -->
+  <header class="contents">
+    <div class="sticky top-0 z-50 bg-cream border-b border-espresso/10">
+      <div class="relative max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <!-- Mobile Hamburger (visible only on mobile) -->
         <button
           @click="toggleMobileMenu"
@@ -116,10 +116,11 @@ const navigateAndClose = (path) => {
           </button>
         </div>
       </div>
-    </header>
+    </div>
+  </header>
 
-    <!-- Mobile Overlay Menu -->
-    <transition
+  <!-- Mobile Overlay Menu -->
+  <transition
       enter-active-class="transition-all duration-300 ease-in-out"
       enter-from-class="opacity-0"
       enter-to-class="opacity-100"
@@ -165,7 +166,6 @@ const navigateAndClose = (path) => {
         </nav>
       </div>
     </transition>
-  </div>
 </template>
 
 <style scoped>

@@ -4,8 +4,8 @@
 @font-face {
   font-family: "Cormorant Garamond";
   src:
-    url("./assets/fonts/CormorantGaramond-Regular.woff2") format("woff2"),
-    url("./assets/fonts/CormorantGaramond-Regular.woff") format("woff");
+    url("./assets/fonts/subset-CormorantGaramond-Regular.woff2") format("woff2"),
+    url("./assets/fonts/subset-CormorantGaramond-Regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -14,8 +14,8 @@
 @font-face {
   font-family: "Cormorant Garamond";
   src:
-    url("./assets/fonts/CormorantGaramond-Medium.woff2") format("woff2"),
-    url("./assets/fonts/CormorantGaramond-Medium.woff") format("woff");
+    url("./assets/fonts/subset-CormorantGaramond-Medium.woff2") format("woff2"),
+    url("./assets/fonts/subset-CormorantGaramond-Medium.woff") format("woff");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -25,8 +25,8 @@
 @font-face {
   font-family: "Jost";
   src:
-    url("./assets/fonts/Jost-Light.woff2") format("woff2"),
-    url("./assets/fonts/Jost-Light.woff") format("woff");
+    url("./assets/fonts/subset-Jost-Light.woff2") format("woff2"),
+    url("./assets/fonts/subset-Jost-Light.woff") format("woff");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -35,8 +35,8 @@
 @font-face {
   font-family: "Jost";
   src:
-    url("./assets/fonts/Jost-Regular.woff2") format("woff2"),
-    url("./assets/fonts/Jost-Regular.woff") format("woff");
+    url("./assets/fonts/subset-Jost-Regular.woff2") format("woff2"),
+    url("./assets/fonts/subset-Jost-Regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -45,8 +45,8 @@
 @font-face {
   font-family: "Jost";
   src:
-    url("./assets/fonts/Jost-Medium.woff2") format("woff2"),
-    url("./assets/fonts/Jost-Medium.woff") format("woff");
+    url("./assets/fonts/subset-Jost-Medium.woff2") format("woff2"),
+    url("./assets/fonts/subset-Jost-Medium.woff") format("woff");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -55,8 +55,8 @@
 @font-face {
   font-family: "Jost";
   src:
-    url("./assets/fonts/Jost-SemiBold.woff2") format("woff2"),
-    url("./assets/fonts/Jost-SemiBold.woff") format("woff");
+    url("./assets/fonts/subset-Jost-SemiBold.woff2") format("woff2"),
+    url("./assets/fonts/subset-Jost-SemiBold.woff") format("woff");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -69,6 +69,6 @@
   --color-caramel: #7E4B30;
   --color-card: #F5F0E8;
 
-  --font-serif: "Cormorant Garamond", serif;
+  --font-serif: "Cormorant Garamond", Georgia, serif;
   --font-sans: "Jost", sans-serif;
 }

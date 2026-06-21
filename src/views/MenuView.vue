@@ -23,9 +23,9 @@
           :key="category"
           @click="selectedCategory = category"
           :class="[
-            'font-sans text-xs md:text-sm tracking-widest uppercase pb-2 border-b-2 transition-all duration-300 ease-in-out cursor-pointer',
+            'font-sans font-normal text-xs md:text-sm tracking-widest uppercase pb-2 border-b-2 transition-colors duration-300 ease-in-out cursor-pointer',
             selectedCategory === category
-              ? 'text-caramel border-caramel font-semibold'
+              ? 'text-caramel border-caramel'
               : 'text-caramel/50 border-transparent hover:text-caramel/80'
           ]"
         >
