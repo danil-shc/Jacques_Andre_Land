@@ -1,5 +1,5 @@
 <script setup>
-import { ChevronDown } from 'lucide-vue-next'
+import { ArrowRight, ChevronDown } from 'lucide-vue-next'
 
 const getImageUrl = (name) => {
   const imageName = name.includes('.') ? name : `${name}.webp`
@@ -37,9 +37,10 @@ const scrollToSignatures = () => {
 
       <button
         @click="scrollToSignatures"
-        class="bg-cream text-chocolate font-sans font-semibold text-sm tracking-widest uppercase px-8 py-4 hover:bg-espresso hover:text-cream transition-all duration-300 ease-in-out cursor-pointer"
+        class="group flex items-center justify-center bg-cream text-chocolate font-sans font-semibold text-sm tracking-widest uppercase px-8 py-4 hover:bg-espresso hover:text-cream transition-all duration-300 ease-in-out cursor-pointer"
       >
-        ПОСМОТРЕТЬ УГОЩЕНИЯ →
+        <span>ПОСМОТРЕТЬ УГОЩЕНИЯ</span>
+        <ArrowRight :size="18" class="ml-2 transition-transform duration-300 ease-in-out group-hover:translate-x-1" />
       </button>
     </div>
 
