@@ -85,7 +85,7 @@ const navigateAndClose = (path) => {
             to="/locations"
             class="text-caramel font-sans font-normal text-sm tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out"
           >
-            Адреса заведений
+            Наши пекарни
           </router-link>
         </nav>
 
@@ -155,7 +155,7 @@ const navigateAndClose = (path) => {
             @click="navigateAndClose('/locations')"
             class="text-cream font-sans font-normal text-3xl tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out cursor-pointer"
           >
-            Адреса заведений
+            Наши пекарни
           </button>
 
           <div class="absolute bottom-12 text-center">

@@ -20,7 +20,7 @@ export const menuProducts = [
     name: 'Торт "Амели"',
     description: 'Изысканный авторский торт с нежным кремом, свежими ягодами и миндальным бисквитом',
     price: 2800,
-    category: 'ТОРТЫ И ПИРОЖНЫЕ',
+    category: 'Десерты',
     image: 'tort_ameli',
   },
   {
@@ -28,7 +28,7 @@ export const menuProducts = [
     name: 'Торт "Карамельный"',
     description: 'Многослойный торт с солёной карамелью, шоколадным муссом и хрустящим пралине',
     price: 3200,
-    category: 'ТОРТЫ И ПИРОЖНЫЕ',
+    category: 'Десерты',
     image: 'tort_caramel',
   },
   {
@@ -36,7 +36,7 @@ export const menuProducts = [
     name: 'Торт "Фрезье"',
     description: 'Классический французский торт с фисташковым кремом, свежей клубникой и лёгким бисквитом',
     price: 3500,
-    category: 'ТОРТЫ И ПИРОЖНЫЕ',
+    category: 'Десерты',
     image: 'tort_frezie',
   },
   {
@@ -44,7 +44,7 @@ export const menuProducts = [
     name: 'Торт "Jacques André"',
     description: 'Наш фирменный торт — воплощение элегантности и вкуса с премиальными ингредиентами',
     price: 4200,
-    category: 'ТОРТЫ И ПИРОЖНЫЕ',
+    category: 'Десерты',
     image: 'tort_zhak_andre',
   },
   {
@@ -52,7 +52,7 @@ export const menuProducts = [
     name: 'Лимонная тарталетка',
     description: 'Хрустящая песочная корзинка с шелковистым лимонным кремом и меренгой',
     price: 280,
-    category: 'ТОРТЫ И ПИРОЖНЫЕ',
+    category: 'Десерты',
     image: 'limon_tartaletka',
   },
   {
@@ -60,7 +60,7 @@ export const menuProducts = [
     name: 'Тарталетка ассорти',
     description: 'Миниатюрные французские тарталетки с различными начинками — набор из 4 штук',
     price: 950,
-    category: 'ТОРТЫ И ПИРОЖНЫЕ',
+    category: 'Десерты',
     image: 'tartaletka',
   },
   {
@@ -68,7 +68,7 @@ export const menuProducts = [
     name: 'Макарон',
     description: 'Классические французские миндальные пирожные с нежными кремовыми начинками — набор из 6 штук',
     price: 720,
-    category: 'ТОРТЫ И ПИРОЖНЫЕ',
+    category: 'Десерты',
     image: 'makaronc',
   },
   {
@@ -76,7 +76,7 @@ export const menuProducts = [
     name: 'Ачма с курицей',
     description: 'Сытная грузинская выпечка со слоями теста, сочной курицей и сыром',
     price: 480,
-    category: 'СЫТНАЯ ВЫПЕЧКА & ЗАВТРАКИ',
+    category: 'Сытная выпечка',
     image: 'achma_kurica',
   },
   {
@@ -84,7 +84,7 @@ export const menuProducts = [
     name: 'Клаб-сэндвич',
     description: 'Трёхслойный сэндвич с курицей гриль, беконом, свежими овощами и фирменным соусом',
     price: 520,
-    category: 'СЫТНАЯ ВЫПЕЧКА & ЗАВТРАКИ',
+    category: 'Сытная выпечка',
     image: 'club_sandwich',
   },
   {
@@ -92,7 +92,7 @@ export const menuProducts = [
     name: 'Сырник',
     description: 'Воздушные сырники из фермерского творога с ванилью, подаются со сметаной и ягодным соусом',
     price: 380,
-    category: 'СЫТНАЯ ВЫПЕЧКА & ЗАВТРАКИ',
+    category: 'Сытная выпечка',
     image: 'sirnik',
   },
 ]
