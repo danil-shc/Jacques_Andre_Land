@@ -2,17 +2,18 @@
   <div class="min-h-screen bg-cream">
     <div class="max-w-7xl mx-auto px-6 py-8 md:py-12">
       <div class="flex items-center justify-between mb-8">
-        <div class="flex items-center space-x-2">
-          <MapPin :size="20" class="text-caramel" />
-          <span class="text-sm md:text-base text-caramel font-sans tracking-wide">Майкоп, ул. Пролетарская 449</span>
-        </div>
+        <AddressDropdown
+          v-model="selectedAddress"
+          :addresses="bakeryAddresses"
+          class="min-w-0 max-w-full sm:max-w-md"
+        />
       </div>
 
       <div class="mb-10">
         <input
           v-model="searchQuery"
           type="text"
-          placeholder="Поиск выпечки и десертов..."
+          placeholder="Поиск выпечки и десертов"
           class="w-full bg-transparent border-b border-chocolate text-chocolate placeholder:text-chocolate/40 py-3 px-1 text-base md:text-lg font-sans tracking-wider focus:outline-none focus:border-chocolate transition-all duration-300"
         />
       </div>
@@ -174,7 +175,8 @@ import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useCart } from '@/store/cart'
 import { coffeeMenu, allMenuProducts } from '@/data/products'
-import { MapPin, Bell, Plus } from 'lucide-vue-next'
+import { Bell, Plus } from 'lucide-vue-next'
+import AddressDropdown from '@/components/AddressDropdown.vue'
 
 const route = useRoute()
 const { cartItems, totalPrice, addToCart: addToCartGlobal, increaseQuantity, decreaseQuantity, clearCart } = useCart()
@@ -204,11 +206,25 @@ const formatProductLabel = (product) => {
 const categories = [
   'ВСЕ',
   'КРУАССАНЫ',
-  'ТОРТЫ И ПИРОЖНЫЕ',
-  'СЫТНАЯ ВЫПЕЧКА & ЗАВТРАКИ',
+  'Сытная выпечка',
+  'Десерты',
   'ГОРЯЧИЕ НАПИТКИ'
 ]
 
+const categoryOrder = {
+  'КРУАССАНЫ': 1,
+  'Сытная выпечка': 2,
+  'Десерты': 3,
+  'ГОРЯЧИЕ НАПИТКИ': 4,
+}
+
+const bakeryAddresses = [
+  'Майкоп, ул. Пролетарская, 449',
+  'Майкоп, ул. Первомайская, 193',
+  'Майкоп, Шоссейная ул., 18 (1 этаж)'
+]
+
+const selectedAddress = ref(bakeryAddresses[0])
 const selectedCategory = ref('ВСЕ')
 const searchQuery = ref('')
 
@@ -268,12 +284,24 @@ const filteredProducts = computed(() => {
     })
   }
 
+  if (selectedCategory.value === 'ВСЕ') {
+    filtered = [...filtered].sort((a, b) => {
+      const orderA = categoryOrder[a.category] ?? 99
+      const orderB = categoryOrder[b.category] ?? 99
+
+      if (orderA !== orderB) return orderA - orderB
+
+      return allProducts.indexOf(a) - allProducts.indexOf(b)
+    })
+  }
+
   return filtered
 })
 
 const categoryMapping = {
-  'cakes': 'ТОРТЫ И ПИРОЖНЫЕ',
-  'breakfast': 'СЫТНАЯ ВЫПЕЧКА & ЗАВТРАКИ'
+  'cakes': 'Десерты',
+  'hearty': 'Сытная выпечка',
+  'breakfast': 'Сытная выпечка',
 }
 
 onMounted(() => {
@@ -288,7 +316,7 @@ function checkout() {
     .map(item => `- ${formatProductLabel(item)} (${item.quantity} шт) — ${item.price * item.quantity} ₽`)
     .join('\n')
 
-  const message = `Салам алейкум! Хочу сделать заказ:\n\n${orderText}\n\nИтого: ${totalPrice.value} ₽\n\nЗаберу с ул. Пролетарская 449, Майкоп.`
+  const message = `Салам алейкум! Хочу сделать заказ:\n\n${orderText}\n\nИтого: ${totalPrice.value} ₽\n\nЗаберу с ${selectedAddress.value}.`
 
   const phoneNumber = '79002620036'
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`

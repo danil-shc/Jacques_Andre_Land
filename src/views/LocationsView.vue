@@ -10,13 +10,13 @@
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
         <article
           v-for="location in locations"
           :key="location.id"
-          class="bg-white/40 rounded-sm overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+          class="flex flex-col h-full bg-white/40 rounded-sm overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
         >
-          <div class="aspect-[4/3] overflow-hidden bg-espresso/5 relative">
+          <div class="aspect-[4/3] overflow-hidden bg-espresso/5 relative shrink-0">
             <img
               v-if="location.image"
               :src="location.image"
@@ -31,30 +31,32 @@
             </div>
           </div>
 
-          <div class="p-6 space-y-4">
-            <h2 class="font-serif text-xl md:text-2xl text-chocolate leading-tight">
-              {{ location.title }}
-            </h2>
+          <div class="flex flex-col flex-1 justify-between p-6">
+            <div class="space-y-4">
+              <h2 class="font-serif text-xl md:text-2xl text-chocolate leading-tight">
+                {{ location.title }}
+              </h2>
 
-            <div class="space-y-3 text-chocolate/80 text-sm">
-              <div class="flex items-start gap-3">
-                <MapPin :size="20" class="mt-0.5 flex-shrink-0" />
-                <span>{{ location.address }}</span>
-              </div>
+              <div class="space-y-3 text-chocolate/80 text-sm">
+                <div class="flex items-start gap-3">
+                  <MapPin :size="20" class="mt-0.5 flex-shrink-0" />
+                  <span>{{ location.address }}</span>
+                </div>
 
-              <div class="flex items-center gap-3">
-                <Clock :size="20" class="flex-shrink-0" />
-                <span>{{ location.hours }}</span>
-              </div>
+                <div class="flex items-center gap-3">
+                  <Clock :size="20" class="flex-shrink-0" />
+                  <span>{{ location.hours }}</span>
+                </div>
 
-              <div class="flex items-center gap-3">
-                <Phone :size="20" class="flex-shrink-0" />
-                <a
-                  :href="`tel:${location.phone.replace(/[\s()-]/g, '')}`"
-                  class="hover:text-chocolate transition-colors duration-300"
-                >
-                  {{ location.phone }}
-                </a>
+                <div class="flex items-center gap-3">
+                  <Phone :size="20" class="flex-shrink-0" />
+                  <a
+                    :href="`tel:${location.phone.replace(/[\s()-]/g, '')}`"
+                    class="hover:text-chocolate transition-colors duration-300"
+                  >
+                    {{ location.phone }}
+                  </a>
+                </div>
               </div>
             </div>
 
@@ -89,7 +91,7 @@ const locations = reactive([
   },
   {
     id: 2,
-    title: 'Кондитерский Магазин Жак-Андрэ',
+    title: 'Пекарня & Кофейня Жак-Андрэ',
     address: 'Первомайская ул., 193, Майкоп',
     phone: '+7 (900) 246-20-50',
     hours: 'Ежедневно с 08:00 до 20:00',
