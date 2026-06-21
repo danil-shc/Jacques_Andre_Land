@@ -46,7 +46,7 @@ const navigateAndClose = (path) => {
   <!-- Top Promo Bar — scrolls away naturally -->
   <div class="bg-espresso text-cream text-center py-3 px-4">
     <p class="text-xs md:text-sm font-sans font-normal tracking-widest uppercase">
-      Доставка к вашему дому — бесплатно по Майкопу при заказе от 2500 ₽
+      Доставка к вашему дому — бесплатно по Майкопу при заказе от 1500 ₽
     </p>
   </div>
 
@@ -92,7 +92,7 @@ const navigateAndClose = (path) => {
         <!-- Centered Logo -->
         <div class="absolute left-1/2 transform -translate-x-1/2">
           <router-link to="/" class="font-serif font-normal text-xl md:text-3xl text-chocolate tracking-wide">
-            ЖАК-АНДРЭ
+            ЖАК~АНДРЭ
           </router-link>
         </div>
 

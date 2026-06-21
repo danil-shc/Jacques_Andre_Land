@@ -92,7 +92,7 @@ const getImageUrl = (name) => {
           <!-- Address Label -->
           <div class="pt-2 space-y-4">
             <p class="inline-block text-caramel font-sans font-semibold text-xs tracking-widest uppercase">
-              АДРЕС И ЧАСЫ РАБОТЫ
+              АДРЕСА И ЧАСЫ РАБОТЫ
             </p>
 
             <ul class="space-y-2">

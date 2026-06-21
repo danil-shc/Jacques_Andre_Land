@@ -13,7 +13,7 @@
         <input
           v-model="searchQuery"
           type="text"
-          placeholder="Поиск выпечки и десертов"
+          placeholder="Поиск выпечки, десертов и напитков"
           class="w-full bg-transparent border-b border-chocolate text-chocolate placeholder:text-chocolate/40 py-3 px-1 text-base md:text-lg font-sans tracking-wider focus:outline-none focus:border-chocolate transition-all duration-300"
         />
       </div>
