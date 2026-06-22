@@ -28,30 +28,20 @@ const getImageUrl = (name) => {
           <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-espresso/20 lg:hidden"></div>
         </div>
 
-        <!-- Right: Dark Chocolate Box with Enhanced Tablet and Mobile Spacing -->
-        <div class="bg-espresso min-h-[450px] md:min-h-[500px] lg:h-[500px] flex flex-col justify-center px-6 py-12 md:px-12 md:py-16 lg:px-16 lg:py-12 space-y-6 md:space-y-8">
-          <!-- Title -->
-          <h3 class="font-serif font-normal text-2xl md:text-3xl lg:text-4xl text-cream tracking-wide leading-tight">
-            В СЕРДЦЕ АДЫГЕИ
-          </h3>
+        <!-- Right: Dark Chocolate Box -->
+        <div class="bg-espresso min-h-[450px] md:min-h-[500px] lg:h-[500px] flex flex-col justify-center px-6 py-16 md:px-12 md:py-20 lg:px-16 lg:py-16">
+          <div class="space-y-6 md:space-y-8 max-w-xl">
+            <h3 class="font-serif font-normal text-2xl md:text-3xl lg:text-4xl text-cream tracking-wide leading-tight">
+              В СЕРДЦЕ АДЫГЕИ
+            </h3>
 
-          <!-- Paragraph 1 -->
-          <p class="font-sans font-light text-sm md:text-base lg:text-base text-cream/90 leading-relaxed">
-            В «Жак Андре» мы верим в бескомпромиссное стремление к вкусу. Наша пекарня — дань французскому кулинарному наследию, укорененному в богатых почвах нашего региона. Каждый круассан слоится с точностью, каждый кусочек наполнен смыслом.
-          </p>
+            <p class="font-sans font-light text-sm md:text-base text-cream/90 leading-relaxed">
+              В «Жак Андре» мы верим в бескомпромиссное стремление к вкусу. Наша пекарня — дань французскому кулинарному наследию, укорененному в богатых почвах нашего региона. Каждый круассан слоится с точностью, каждый кусочек наполнен смыслом.
+            </p>
 
-          <!-- Paragraph 2 -->
-          <p class="font-sans font-light text-sm md:text-base lg:text-base text-cream/90 leading-relaxed">
-            Мы тщательно отбираем ингредиенты: местные адыгейские молочные продукты легко сочетаются с шоколадом и экологичной мукой. Это повседневная роскошь, созданная вручную.
-          </p>
-
-          <!-- CTA Button -->
-          <div class="pt-4">
-            <button 
-              class="border border-cream text-cream font-sans font-semibold text-xs tracking-widest uppercase px-6 py-3 hover:bg-cream hover:text-chocolate transition-all duration-300 ease-in-out cursor-pointer"
-            >
-              УЗНАТЬ ИСТОРИЮ
-            </button>
+            <p class="font-sans font-light text-sm md:text-base text-cream/90 leading-relaxed">
+              Мы тщательно отбираем ингредиенты: местные адыгейские молочные продукты легко сочетаются с шоколадом и экологичной мукой. Это повседневная роскошь, созданная вручную.
+            </p>
           </div>
         </div>
       </div>
