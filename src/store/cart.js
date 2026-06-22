@@ -1,8 +1,34 @@
-import { reactive, computed } from "vue";
+import { reactive, computed, watch } from "vue";
+
+const CART_STORAGE_KEY = "jacques_andre_cart";
+
+function loadCartFromStorage() {
+  try {
+    const stored = localStorage.getItem(CART_STORAGE_KEY);
+    if (!stored) return [];
+
+    const parsed = JSON.parse(stored);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
 
 const state = reactive({
-  items: [],
+  items: loadCartFromStorage(),
 });
+
+watch(
+  () => state.items,
+  (items) => {
+    try {
+      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
+    } catch {
+      // Ignore quota errors or unavailable storage
+    }
+  },
+  { deep: true },
+);
 
 export function useCart() {
   const cartItems = computed(() => state.items);
