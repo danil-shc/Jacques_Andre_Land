@@ -7,9 +7,7 @@ const state = reactive({
 export function useCart() {
   const cartItems = computed(() => state.items);
 
-  const totalItems = computed(() => {
-    return state.items.reduce((sum, item) => sum + item.quantity, 0);
-  });
+  const totalItems = computed(() => state.items.length);
 
   const totalPrice = computed(() => {
     return state.items.reduce(
@@ -43,6 +41,10 @@ export function useCart() {
     }
   }
 
+  function removeFromCart(item) {
+    state.items = state.items.filter((i) => i.id !== item.id);
+  }
+
   function clearCart() {
     state.items = [];
   }
@@ -54,6 +56,7 @@ export function useCart() {
     addToCart,
     increaseQuantity,
     decreaseQuantity,
+    removeFromCart,
     clearCart,
   };
 }

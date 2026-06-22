@@ -1,14 +1,6 @@
 <template>
   <div class="min-h-screen bg-cream">
     <div class="max-w-7xl mx-auto px-6 py-8 md:py-12">
-      <div class="flex items-center justify-between mb-8">
-        <AddressDropdown
-          v-model="selectedAddress"
-          :addresses="bakeryAddresses"
-          class="min-w-0 max-w-full sm:max-w-md"
-        />
-      </div>
-
       <div class="mb-10">
         <input
           v-model="searchQuery"
@@ -98,75 +90,6 @@
         </div>
       </div>
     </div>
-
-    <transition name="slide-up">
-      <div
-        v-if="cartItems.length > 0"
-        class="fixed bottom-0 left-0 right-0 bg-espresso text-cream shadow-2xl z-50"
-      >
-        <div class="w-full max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
-          <h2 class="text-center font-serif text-lg md:text-xl uppercase tracking-[0.2em] text-cream/90 mb-6 md:mb-8 lg:mb-10">
-            Ваш заказ
-          </h2>
-
-          <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-8 lg:gap-12 xl:gap-16 items-center">
-            <div class="cart-items-container min-w-0 space-y-0 max-h-48 md:max-h-64 lg:max-h-72 overflow-y-auto pr-2">
-              <div
-                v-for="item in cartItems"
-                :key="item.id"
-                class="flex flex-col lg:grid lg:grid-cols-[2fr_120px_100px] lg:items-center gap-3 lg:gap-6 py-4 border-b border-white/10 last:border-b-0 w-full"
-              >
-                <div class="w-full flex justify-between items-start">
-                  <span class="font-serif text-cream text-base md:text-lg lg:text-sm font-medium tracking-wide text-left leading-snug">
-                    {{ formatProductLabel(item) }}
-                  </span>
-                </div>
-
-                <div class="w-full lg:w-auto flex items-center justify-between lg:contents mt-1 lg:mt-0">
-                  <div class="flex items-center space-x-3">
-                    <button
-                      @click="decreaseQuantity(item)"
-                      class="w-8 h-8 rounded-full bg-cream text-chocolate border border-chocolate/10 flex items-center justify-center font-bold text-base leading-none select-none pb-[2px] transition-all duration-300 ease-out hover:bg-card hover:text-espresso hover:scale-105 active:scale-95 cursor-pointer"
-                      aria-label="Уменьшить количество"
-                    >
-                      −
-                    </button>
-
-                    <span class="text-center min-w-[24px] font-sans font-medium text-cream text-sm tracking-wide">{{ item.quantity }}</span>
-
-                    <button
-                      @click="increaseQuantity(item)"
-                      class="w-8 h-8 rounded-full bg-cream text-chocolate border border-chocolate/10 flex items-center justify-center font-bold text-base leading-none select-none pb-[2px] transition-all duration-300 ease-out hover:bg-card hover:text-espresso hover:scale-105 active:scale-95 cursor-pointer"
-                      aria-label="Увеличить количество"
-                    >
-                      +
-                    </button>
-                  </div>
-
-                  <span class="font-serif font-medium text-cream text-base md:text-lg lg:text-sm text-right lg:w-[100px] whitespace-nowrap">
-                    {{ item.price * item.quantity }} ₽
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div class="flex flex-col items-center justify-center border-t border-white/10 pt-6 lg:border-t-0 lg:pt-0 lg:border-l lg:border-white/10 lg:pl-12 xl:pl-16 py-2 lg:py-4 w-full">
-              <div class="text-center w-full max-w-sm mx-auto">
-                <span class="block font-sans text-xs uppercase tracking-[0.15em] text-cream/50 mb-2">Итого</span>
-                <span class="block font-serif text-3xl md:text-4xl text-cream tracking-wide mb-6 whitespace-nowrap">{{ totalPrice }} ₽</span>
-
-                <button
-                  @click="checkout"
-                  class="w-full bg-white text-chocolate font-sans font-medium text-xs uppercase tracking-[0.2em] py-4 px-8 hover:bg-cream active:scale-[0.98] transition-all duration-300 shadow-lg cursor-pointer"
-                >
-                  Оформить заказ
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </transition>
   </div>
 </template>
 
@@ -176,10 +99,9 @@ import { useRoute } from 'vue-router'
 import { useCart } from '@/store/cart'
 import { coffeeMenu, allMenuProducts } from '@/data/products'
 import { Bell, Plus } from 'lucide-vue-next'
-import AddressDropdown from '@/components/AddressDropdown.vue'
 
 const route = useRoute()
-const { cartItems, totalPrice, addToCart: addToCartGlobal, increaseQuantity, decreaseQuantity, clearCart } = useCart()
+const { addToCart: addToCartGlobal } = useCart()
 
 const addToCart = (product) => {
   addToCartGlobal(product)
@@ -199,10 +121,6 @@ const getImageUrl = (imageName) => {
   return menuImages[path] ?? null
 }
 
-const formatProductLabel = (product) => {
-  return product.volume ? `${product.name} ${product.volume}` : product.name
-}
-
 const categories = [
   'ВСЕ',
   'Выпечка',
@@ -216,13 +134,6 @@ const categoryOrder = {
   'ГОРЯЧИЕ НАПИТКИ': 3,
 }
 
-const bakeryAddresses = [
-  'Майкоп, ул. Пролетарская, 449',
-  'Майкоп, ул. Первомайская, 193',
-  'Майкоп, Шоссейная ул., 18 (1 этаж)'
-]
-
-const selectedAddress = ref(bakeryAddresses[0])
 const selectedCategory = ref('ВСЕ')
 const searchQuery = ref('')
 
@@ -309,56 +220,7 @@ onMounted(() => {
     selectedCategory.value = categoryMapping[categoryQuery]
   }
 })
-
-function checkout() {
-  const orderText = cartItems.value
-    .map(item => `- ${formatProductLabel(item)} (${item.quantity} шт) — ${item.price * item.quantity} ₽`)
-    .join('\n')
-
-  const message = `Салам алейкум! Хочу сделать заказ:\n\n${orderText}\n\nИтого: ${totalPrice.value} ₽\n\nЗаберу с ${selectedAddress.value}.`
-
-  const phoneNumber = '79002620036'
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
-
-  window.open(whatsappUrl, '_blank')
-  clearCart()
-}
 </script>
 
 <style scoped>
-.slide-up-enter-active,
-.slide-up-leave-active {
-  transition: transform 0.3s ease-out;
-}
-
-.slide-up-enter-from {
-  transform: translateY(100%);
-}
-
-.slide-up-leave-to {
-  transform: translateY(100%);
-}
-
-.cart-items-container {
-  scrollbar-gutter: stable;
-  scrollbar-width: thin;
-  scrollbar-color: color-mix(in srgb, var(--color-caramel) 30%, transparent) transparent;
-}
-
-.cart-items-container::-webkit-scrollbar {
-  width: 6px;
-}
-
-.cart-items-container::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.cart-items-container::-webkit-scrollbar-thumb {
-  background-color: color-mix(in srgb, var(--color-caramel) 30%, transparent);
-  border-radius: 9999px;
-}
-
-.cart-items-container::-webkit-scrollbar-thumb:hover {
-  background-color: color-mix(in srgb, var(--color-caramel) 50%, transparent);
-}
 </style>

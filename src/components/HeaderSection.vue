@@ -5,8 +5,19 @@ import { useCart } from '@/store/cart'
 import { Menu, X, Search, ShoppingBag } from 'lucide-vue-next'
 
 const router = useRouter()
-const { totalItems } = useCart()
+const cartStore = useCart()
+const { totalItems } = cartStore
 const mobileMenuOpen = ref(false)
+const isPulsing = ref(false)
+
+watch(cartStore.totalPrice, (newPrice, oldPrice) => {
+  if (newPrice > oldPrice) {
+    isPulsing.value = true
+    setTimeout(() => {
+      isPulsing.value = false
+    }, 300)
+  }
+})
 
 watch(mobileMenuOpen, (isOpen) => {
   document.body.classList.toggle('overflow-hidden', isOpen)
@@ -24,10 +35,6 @@ const handleSearchClick = () => {
   }, 100)
 }
 
-const handleCartClick = () => {
-  router.push('/menu')
-}
-
 const toggleMobileMenu = () => {
   mobileMenuOpen.value = !mobileMenuOpen.value
 }
@@ -40,6 +47,7 @@ const navigateAndClose = (path) => {
   router.push(path)
   closeMobileMenu()
 }
+
 </script>
 
 <template>
@@ -106,14 +114,23 @@ const navigateAndClose = (path) => {
             <Search :size="20" />
           </button>
 
-          <button
-            @click="handleCartClick"
-            class="text-chocolate hover:opacity-70 transition-all duration-300 ease-in-out relative cursor-pointer"
+          <router-link
+            to="/cart"
+            class="hover:opacity-70 relative cursor-pointer inline-flex"
             aria-label="Корзина"
+            :class="[
+              'transition-transform ease-out duration-300',
+              isPulsing ? 'scale-115 text-caramel' : 'scale-100 text-chocolate'
+            ]"
           >
             <ShoppingBag :size="20" />
-            <span v-if="totalItems > 0" class="absolute -top-2 -right-2 bg-espresso text-cream text-xs rounded-full h-4 w-4 flex items-center justify-center font-sans font-semibold">{{ totalItems }}</span>
-          </button>
+            <span
+              v-if="totalItems > 0"
+              class="absolute -top-2 -right-2 bg-espresso text-cream text-xs rounded-full h-4 w-4 flex items-center justify-center font-sans font-semibold"
+            >
+              {{ totalItems }}
+            </span>
+          </router-link>
         </div>
       </div>
     </div>
@@ -167,6 +184,3 @@ const navigateAndClose = (path) => {
       </div>
     </transition>
 </template>
-
-<style scoped>
-</style>

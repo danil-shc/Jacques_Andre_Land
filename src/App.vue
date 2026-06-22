@@ -5,9 +5,11 @@ import FooterSection from '@/components/FooterSection.vue'
 </script>
 
 <template>
-  <HeaderSection />
-  <main class="flex-grow">
-    <RouterView />
-  </main>
-  <FooterSection />
+  <div class="min-h-screen flex flex-col">
+    <HeaderSection />
+    <main class="flex-1">
+      <RouterView />
+    </main>
+    <FooterSection />
+  </div>
 </template>
