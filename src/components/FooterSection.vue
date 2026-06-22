@@ -1,24 +1,15 @@
 <script setup>
 import { Instagram, Send } from 'lucide-vue-next'
+import { bakeryLocations } from '@/data/locations'
 
 const telegramUrl = 'https://t.me/jacques_andre'
 const appStoreUrl = 'https://apps.apple.com/ru/app/swip/id1261276105'
 const googlePlayUrl = 'https://play.google.com/store/apps/details?id=com.it.swip'
 
-const cafeLocations = [
-  {
-    address: 'Пролетарская ул., 449, Майкоп',
-    hours: 'Пн-Вс: 08:00 — 20:00',
-  },
-  {
-    address: 'Первомайская ул., 193, Майкоп',
-    hours: 'Пн-Вс: 08:00 — 20:00',
-  },
-  {
-    address: 'Шоссейная ул., 1В, Майкоп (1 этаж)',
-    hours: 'Пн-Вс: 08:00 — 20:00',
-  },
-]
+const cafeLocations = bakeryLocations.map(({ address, hoursFooter }) => ({
+  address,
+  hours: hoursFooter,
+}))
 
 const getImageUrl = (name) => {
   const imageName = name.includes('.') ? name : `${name}.webp`

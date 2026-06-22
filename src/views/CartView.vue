@@ -151,6 +151,18 @@
                 </span>
               </div>
 
+              <div
+                v-if="discountPercent > 0"
+                class="flex justify-between items-center"
+              >
+                <span class="font-sans text-xs sm:text-sm text-chocolate/70 tracking-wider uppercase">
+                  Скидка по промокоду: -{{ discountPercent }}%
+                </span>
+                <span class="font-sans text-sm sm:text-base text-caramel tracking-wide">
+                  −{{ discountAmount }} ₽
+                </span>
+              </div>
+
               <div class="flex justify-between items-center">
                 <span class="font-sans text-xs sm:text-sm text-chocolate/70 tracking-wider uppercase">
                   Доставка
@@ -173,12 +185,28 @@
 
             <!-- Promo Code -->
             <div class="mb-6 sm:mb-8">
-              <input
-                v-model="promoCode"
-                type="text"
-                placeholder="Промокод"
-                class="w-full bg-cream/50 border border-caramel/20 text-chocolate placeholder:text-chocolate/40 py-2.5 sm:py-3 px-3 sm:px-4 text-sm font-sans tracking-wider focus:outline-none focus:border-caramel transition-all duration-300 rounded-sm"
-              />
+              <div class="flex gap-2">
+                <input
+                  v-model="promoCode"
+                  type="text"
+                  placeholder="Промокод"
+                  class="flex-1 min-w-0 bg-cream/50 border border-caramel/20 text-chocolate placeholder:text-chocolate/40 py-2.5 sm:py-3 px-3 sm:px-4 text-sm font-sans tracking-wider focus:outline-none focus:border-caramel transition-all duration-300 rounded-sm"
+                  @keyup.enter="applyPromoCode"
+                />
+                <button
+                  type="button"
+                  @click="applyPromoCode"
+                  class="shrink-0 bg-espresso/90 text-cream font-sans font-medium text-[10px] sm:text-xs uppercase tracking-[0.15em] py-2.5 sm:py-3 px-4 sm:px-5 hover:bg-espresso transition-all duration-300 rounded-sm cursor-pointer"
+                >
+                  Применить
+                </button>
+              </div>
+              <p
+                v-if="promoError"
+                class="mt-2 font-sans text-xs text-caramel/80 tracking-wide"
+              >
+                {{ promoError }}
+              </p>
             </div>
 
             <!-- Checkout Button -->
@@ -196,6 +224,78 @@
         </div>
       </div>
     </div>
+
+    <!-- Checkout Confirmation Modal -->
+    <Teleport to="body">
+      <Transition
+        enter-active-class="transition-all duration-300 ease-in-out"
+        enter-from-class="opacity-0"
+        enter-to-class="opacity-100"
+        leave-active-class="transition-all duration-300 ease-in-out"
+        leave-from-class="opacity-100"
+        leave-to-class="opacity-0"
+      >
+        <div
+          v-if="showCheckoutModal"
+          class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="checkout-modal-title"
+        >
+          <div
+            class="absolute inset-0 bg-espresso/40 backdrop-blur-sm"
+            @click="closeCheckoutModal"
+          />
+
+          <Transition
+            appear
+            enter-active-class="transition-all duration-300 ease-in-out"
+            enter-from-class="opacity-0 scale-95 translate-y-2"
+            enter-to-class="opacity-100 scale-100 translate-y-0"
+            leave-active-class="transition-all duration-300 ease-in-out"
+            leave-from-class="opacity-100 scale-100 translate-y-0"
+            leave-to-class="opacity-0 scale-95 translate-y-2"
+          >
+            <div
+              v-if="showCheckoutModal"
+              class="relative w-full max-w-md bg-cream border border-caramel/20 rounded-sm shadow-2xl px-6 py-8 sm:px-10 sm:py-10"
+              @click.stop
+            >
+              <div class="h-px w-16 bg-caramel/30 mx-auto mb-6" />
+
+              <h2
+                id="checkout-modal-title"
+                class="font-serif text-2xl sm:text-3xl text-chocolate text-center tracking-wide mb-4"
+              >
+                Заказ сформирован
+              </h2>
+
+              <p class="font-sans text-sm sm:text-base text-chocolate/70 leading-relaxed text-center mb-8 sm:mb-10">
+                Мы перенаправили вас в WhatsApp для подтверждения состава заказа и деталей доставки. Если окно не открылось автоматически, пожалуйста, нажмите на кнопку повторно.
+              </p>
+
+              <div class="space-y-4">
+                <button
+                  type="button"
+                  @click="confirmCheckout"
+                  class="w-full bg-espresso text-cream font-sans font-medium text-[10px] sm:text-xs uppercase tracking-[0.15em] py-3.5 sm:py-4 px-6 hover:bg-espresso/90 active:scale-[0.98] transition-all duration-300 ease-in-out cursor-pointer"
+                >
+                  Я отправил сообщение (Очистить корзину)
+                </button>
+
+                <button
+                  type="button"
+                  @click="closeCheckoutModal"
+                  class="w-full font-sans text-xs sm:text-sm text-chocolate/60 uppercase tracking-widest py-2 hover:text-chocolate transition-colors duration-300 ease-in-out cursor-pointer"
+                >
+                  Вернуться к редактированию
+                </button>
+              </div>
+            </div>
+          </Transition>
+        </div>
+      </Transition>
+    </Teleport>
   </div>
 </template>
 
@@ -205,19 +305,19 @@ import { useRouter } from 'vue-router'
 import { useCart } from '@/store/cart'
 import { ShoppingBag, X, Minus, Plus } from 'lucide-vue-next'
 import AddressDropdown from '@/components/AddressDropdown.vue'
+import { cartAddressOptions } from '@/data/locations'
 
 const router = useRouter()
 const { cartItems, totalPrice, increaseQuantity, decreaseQuantity, removeFromCart, clearCart } = useCart()
 
 const promoCode = ref('')
+const discountPercent = ref(0)
+const promoError = ref('')
+const showCheckoutModal = ref(false)
 
-const bakeryAddresses = [
-  'Майкоп, ул. Пролетарская, 449',
-  'Майкоп, ул. Первомайская, 193',
-  'Майкоп, Шоссейная ул., 18 (1 этаж)'
-]
+const bakeryAddresses = cartAddressOptions
 
-const selectedAddress = ref(bakeryAddresses[0])
+const selectedAddress = ref(cartAddressOptions[0])
 
 const menuImages = import.meta.glob(
   '../assets/images/**/*.{webp,jpg,jpeg,png}',
@@ -239,31 +339,67 @@ const formatProductLabel = (product) => {
 
 const subtotal = computed(() => totalPrice.value)
 
+const discountAmount = computed(() => {
+  if (discountPercent.value <= 0) return 0
+  return Math.round(subtotal.value * discountPercent.value / 100)
+})
+
+const discountedSubtotal = computed(() => {
+  return subtotal.value - discountAmount.value
+})
+
 const deliveryFee = computed(() => {
   return subtotal.value >= 1500 ? 0 : 150
 })
 
 const totalWithDelivery = computed(() => {
-  return subtotal.value + deliveryFee.value
+  return discountedSubtotal.value + deliveryFee.value
 })
 
-function checkout() {
+function applyPromoCode() {
+  const code = promoCode.value.trim().toUpperCase()
+
+  if (code === 'JACQUES') {
+    discountPercent.value = 10
+    promoError.value = ''
+    return
+  }
+
+  discountPercent.value = 0
+  promoError.value = 'Промокод не найден'
+}
+
+function buildWhatsAppUrl() {
   const orderText = cartItems.value
     .map(item => `- ${formatProductLabel(item)} (${item.quantity} шт) — ${item.price * item.quantity} ₽`)
     .join('\n')
 
-  const deliveryText = deliveryFee.value > 0 
-    ? `Доставка: ${deliveryFee.value} ₽\n` 
+  const deliveryText = deliveryFee.value > 0
+    ? `Доставка: ${deliveryFee.value} ₽\n`
     : 'Доставка: бесплатно\n'
 
-  const message = `Салам алейкум! Хочу сделать заказ:\n\n${orderText}\n\n${deliveryText}Итого: ${totalWithDelivery.value} ₽\n\nАдрес: ${selectedAddress.value}.`
+  const discountText = discountPercent.value > 0
+    ? `Скидка по промокоду (${discountPercent.value}%): −${discountAmount.value} ₽\n`
+    : ''
+
+  const message = `Салам алейкум! Хочу сделать заказ:\n\n${orderText}\n\n${discountText}${deliveryText}Итого: ${totalWithDelivery.value} ₽\n\nАдрес: ${selectedAddress.value}.`
 
   const phoneNumber = '79002620036'
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
+  return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
+}
 
-  window.open(whatsappUrl, '_blank')
+function checkout() {
+  window.open(buildWhatsAppUrl(), '_blank')
+  showCheckoutModal.value = true
+}
+
+function closeCheckoutModal() {
+  showCheckoutModal.value = false
+}
+
+function confirmCheckout() {
   clearCart()
-  
+  showCheckoutModal.value = false
   router.push('/menu')
 }
 </script>

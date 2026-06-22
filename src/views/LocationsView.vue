@@ -76,36 +76,16 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
 import { MapPin, Clock, Phone } from 'lucide-vue-next'
+import { bakeryLocations } from '@/data/locations'
 
-const locations = reactive([
-  {
-    id: 1,
-    title: 'Пекарня & Кофейня Жак-Андрэ',
-    address: 'Пролетарская ул., 449, Майкоп',
-    phone: '+7 (953) 093-88-34',
-    hours: 'Ежедневно с 08:00 до 20:00',
-    image: new URL('../assets/images/proletarskaya.webp', import.meta.url).href,
-    mapLink: 'https://yandex.ru/maps/?text=Майкоп+Пролетарская+449+Жак-Андрэ'
-  },
-  {
-    id: 2,
-    title: 'Пекарня & Кофейня Жак-Андрэ',
-    address: 'Первомайская ул., 193, Майкоп',
-    phone: '+7 (900) 246-20-50',
-    hours: 'Ежедневно с 08:00 до 20:00',
-    image: new URL('../assets/images/pervomaiskaya.webp', import.meta.url).href,
-    mapLink: 'https://yandex.ru/maps/?text=Майкоп+Первомайская+193+Жак-Андрэ'
-  },
-  {
-    id: 3,
-    title: 'Пекарня & Кофейня Жак-Андрэ',
-    address: 'Шоссейная ул., 1В, Майкоп (1 этаж)',
-    phone: '+7 (953) 078-45-98',
-    hours: 'Ежедневно с 08:00 до 20:00',
-    image: new URL('../assets/images/schoseinaya.webp', import.meta.url).href,
-    mapLink: 'https://yandex.ru/maps/?text=Майкоп+Шоссейная+1В+Жак-Андрэ'
-  }
-])
+const locations = bakeryLocations.map(({ id, title, address, phone, hoursDetailed, image, mapLink }) => ({
+  id,
+  title,
+  address,
+  phone,
+  hours: hoursDetailed,
+  image,
+  mapLink,
+}))
 </script>
