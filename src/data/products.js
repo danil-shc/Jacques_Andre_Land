@@ -143,6 +143,7 @@ export const coffeeMenu = [
     variants: [
       { id: 'c10', volume: '250мл', price: 239 },
       { id: 'c11', volume: '350мл', price: 259 },
+      { id: 'c14', volume: '400мл', price: 279 },
     ],
   },
   {
