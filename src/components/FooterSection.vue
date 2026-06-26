@@ -124,12 +124,12 @@ const getImageUrl = (name) => {
             >
               СВЯЖИТЕСЬ С НАМИ
             </a>
-            <a
-              href="#"
+            <router-link
+              to="/faq"
               class="text-caramel/70 font-sans font-normal text-[10px] tracking-widest uppercase hover:text-caramel transition-all duration-300 ease-in-out"
             >
               ЧАСТЫЕ ВОПРОСЫ
-            </a>
+            </router-link>
           </nav>
 
           <!-- Center: Social Media Icons -->
