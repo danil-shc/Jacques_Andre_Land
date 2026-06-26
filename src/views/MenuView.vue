@@ -30,13 +30,13 @@
         <div
           v-for="product in filteredProducts"
           :key="product.id"
-          class="group bg-white bg-opacity-40 rounded-sm overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-[1.02] flex flex-col"
+          class="bg-white bg-opacity-40 rounded-sm overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col"
         >
           <div v-if="product.image" class="aspect-square overflow-hidden bg-cream">
             <img
               :src="getImageUrl(product.image)"
               :alt="product.name"
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              class="w-full h-full object-cover"
             />
           </div>
           <div v-else class="aspect-square bg-gradient-to-br from-espresso to-caramel flex items-center justify-center">
@@ -79,12 +79,45 @@
 
             <div class="flex items-center justify-between mt-auto">
               <span class="font-sans text-lg font-semibold text-chocolate tracking-wide">{{ getDisplayPrice(product) }} ₽</span>
-              <button
-                @click="product.variants ? addCoffeeToCart(product) : addToCart(product)"
-                class="w-10 h-10 rounded-full bg-espresso text-cream flex items-center justify-center hover:bg-opacity-80 transition-all duration-300 hover:scale-110 cursor-pointer"
-              >
-                <Plus :size="20" />
-              </button>
+              <div class="shrink-0 h-10 flex items-center justify-end min-w-10">
+                <Transition name="fade" mode="out-in">
+                  <button
+                    v-if="getCartQuantity(product) === 0"
+                    key="add"
+                    type="button"
+                    @click="product.variants ? addCoffeeToCart(product) : addToCart(product)"
+                    class="w-10 h-10 rounded-full bg-espresso text-cream flex items-center justify-center hover:bg-espresso/90 transition-colors duration-300 cursor-pointer"
+                    aria-label="Добавить в корзину"
+                  >
+                    <Plus :size="20" />
+                  </button>
+                  <div
+                    v-else
+                    key="quantity"
+                    class="flex items-center h-10 border border-caramel/30 rounded-full bg-cream/80 overflow-hidden shadow-sm"
+                  >
+                    <button
+                      type="button"
+                      @click="decrementProduct(product)"
+                      class="w-9 h-10 flex items-center justify-center text-chocolate hover:bg-espresso/8 active:bg-espresso/12 transition-all duration-300 ease-in-out cursor-pointer"
+                      aria-label="Уменьшить количество"
+                    >
+                      <Minus :size="16" :stroke-width="1.75" />
+                    </button>
+                    <span class="min-w-[1.75rem] px-0.5 text-center font-sans text-sm font-semibold text-chocolate tracking-wider tabular-nums select-none">
+                      {{ getCartQuantity(product) }}
+                    </span>
+                    <button
+                      type="button"
+                      @click="incrementProduct(product)"
+                      class="w-9 h-10 flex items-center justify-center text-chocolate hover:bg-espresso/8 active:bg-espresso/12 transition-all duration-300 ease-in-out cursor-pointer"
+                      aria-label="Увеличить количество"
+                    >
+                      <Plus :size="16" :stroke-width="1.75" />
+                    </button>
+                  </div>
+                </Transition>
+              </div>
             </div>
           </div>
         </div>
@@ -98,10 +131,15 @@ import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useCart } from '@/store/cart'
 import { coffeeMenu, allMenuProducts } from '@/data/products'
-import { Bell, Plus } from 'lucide-vue-next'
+import { Bell, Minus, Plus } from 'lucide-vue-next'
 
 const route = useRoute()
-const { addToCart: addToCartGlobal } = useCart()
+const {
+  addToCart: addToCartGlobal,
+  cartItems,
+  increaseQuantity,
+  decreaseQuantity,
+} = useCart()
 
 const addToCart = (product) => {
   addToCartGlobal(product)
@@ -170,6 +208,41 @@ const addCoffeeToCart = (product) => {
   })
 }
 
+const getCartLineId = (product) => {
+  if (product.variants?.length) {
+    return getSelectedVariant(product).id
+  }
+  return product.id
+}
+
+const getCartItem = (product) => {
+  const lineId = getCartLineId(product)
+  return cartItems.value.find((item) => item.id === lineId) ?? null
+}
+
+const getCartQuantity = (product) => getCartItem(product)?.quantity ?? 0
+
+const incrementProduct = (product) => {
+  const cartItem = getCartItem(product)
+  if (cartItem) {
+    increaseQuantity(cartItem)
+    return
+  }
+
+  if (product.variants) {
+    addCoffeeToCart(product)
+  } else {
+    addToCart(product)
+  }
+}
+
+const decrementProduct = (product) => {
+  const cartItem = getCartItem(product)
+  if (cartItem) {
+    decreaseQuantity(cartItem)
+  }
+}
+
 const filteredProducts = computed(() => {
   let filtered = allProducts
 
@@ -223,4 +296,14 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: scale(0.92);
+}
 </style>
