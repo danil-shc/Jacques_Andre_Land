@@ -1,8 +1,31 @@
 <script setup>
+import { Truck, Cake, Store } from 'lucide-vue-next'
+
 const getImageUrl = (name) => {
   const imageName = name.includes('.') ? name : `${name}.webp`
   return new URL(`../assets/images/${imageName}`, import.meta.url).href
 }
+
+const serviceFeatures = [
+  {
+    icon: Truck,
+    title: 'ДОСТАВКА',
+    description:
+      'Свежая выпечка с почтением доставляется по всему Майкопу. Бесплатная доставка при заказе от 1500 ₽.',
+  },
+  {
+    icon: Cake,
+    title: 'ПРЕДЗАКАЗ',
+    description:
+      'Забронируйте премиальные торты и коллекции кондитерских изделий заранее — требуется уведомление за 24 часа.',
+  },
+  {
+    icon: Store,
+    title: 'ЗАБРАТЬ САМОМУ',
+    description:
+      'Закажите онлайн и заберите прямо из нашей пекарни на Пролетарской, Первомайской или Шоссейной улице — с заботой и быстро.',
+  },
+]
 </script>
 
 <template>
@@ -24,7 +47,6 @@ const getImageUrl = (name) => {
             alt="Jacques André Interior"
             class="absolute inset-0 w-full h-full object-cover"
           />
-          <!-- Gradient overlay for better text readability if needed on mobile -->
           <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-espresso/20 lg:hidden"></div>
         </div>
 
@@ -45,47 +67,36 @@ const getImageUrl = (name) => {
           </div>
         </div>
       </div>
-
     </div>
 
-    <!-- Bottom Service Features: Full-Width Top Border with Centered Content -->
-    <div class="w-full border-t border-espresso/10 mt-16 md:mt-24 pt-16">
-      <div class="max-w-[1600px] mx-auto px-4 md:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
-          <!-- Column 1: ДОСТАВКА -->
-          <div class="text-center space-y-3 px-4">
-            <h4 class="font-sans font-semibold text-xs tracking-widest uppercase text-caramel">
-              ДОСТАВКА
-            </h4>
-            <p class="font-sans font-normal text-sm text-chocolate/80 leading-relaxed">
-              Свежая выпечка с почтением доставляется по всему Майкопу. Бесплатная доставка при заказе от 1500 ₽.
-            </p>
-          </div>
+    <!-- Service Features: 3-Column Manifesto Grid -->
+    <div class="w-full border-t border-espresso/10 mt-16 md:mt-24 pt-16 md:pt-20 lg:pt-24">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-14 md:gap-10 lg:gap-16">
+          <article
+            v-for="feature in serviceFeatures"
+            :key="feature.title"
+            class="flex flex-col items-center text-center px-2 md:px-4 lg:px-6"
+          >
+            <div class="mb-5 md:mb-6 flex items-center justify-center">
+              <component
+                :is="feature.icon"
+                :stroke-width="1"
+                class="w-9 h-9 md:w-10 md:h-10 text-caramel"
+                aria-hidden="true"
+              />
+            </div>
 
-          <!-- Column 2: ПРЕДЗАКАЗ -->
-          <div class="text-center space-y-3 px-4">
-            <h4 class="font-sans font-semibold text-xs tracking-widest uppercase text-caramel">
-              ПРЕДЗАКАЗ
+            <h4 class="font-sans font-semibold text-[11px] md:text-xs tracking-[0.25em] uppercase text-caramel mb-4 md:mb-5">
+              {{ feature.title }}
             </h4>
-            <p class="font-sans font-normal text-sm text-chocolate/80 leading-relaxed">
-              Забронируйте премиальные торты и коллекции кондитерских изделий заранее — требуется уведомление за 24 часа.
-            </p>
-          </div>
 
-          <!-- Column 3: ЗАБРАТЬ САМОМУ -->
-          <div class="text-center space-y-3 px-4">
-            <h4 class="font-sans font-semibold text-xs tracking-widest uppercase text-caramel">
-              ЗАБРАТЬ САМОМУ
-            </h4>
-            <p class="font-sans font-normal text-sm text-chocolate/80 leading-relaxed">
-              Закажите онлайн и заберите прямо из нашей пекарни на Пролетарской, Первомайской или Шоссейной улице — с заботой и быстро.
+            <p class="font-sans font-light text-sm md:text-[15px] text-[#1C1A17]/75 leading-relaxed md:leading-[1.75] max-w-[320px]">
+              {{ feature.description }}
             </p>
-          </div>
+          </article>
         </div>
       </div>
     </div>
   </section>
 </template>
-
-<style scoped>
-</style>
