@@ -45,6 +45,8 @@ const serviceFeatures = [
           <img
             :src="getImageUrl('vibe_2')"
             alt="Jacques André Interior"
+            loading="lazy"
+            decoding="async"
             class="absolute inset-0 w-full h-full object-cover"
           />
           <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-espresso/20 lg:hidden"></div>

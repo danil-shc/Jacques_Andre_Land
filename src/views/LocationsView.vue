@@ -21,6 +21,8 @@
               v-if="location.image"
               :src="location.image"
               :alt="location.title"
+              loading="lazy"
+              decoding="async"
               class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
             />
             <div
