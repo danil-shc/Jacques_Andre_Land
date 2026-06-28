@@ -1,10 +1,6 @@
 <script setup>
 import { ArrowRight, ChevronDown } from 'lucide-vue-next'
-
-const getImageUrl = (name) => {
-  const imageName = name.includes('.') ? name : `${name}.webp`
-  return new URL(`../assets/images/${imageName}`, import.meta.url).href
-}
+import heroImage from '@/assets/images/entry_to_cafe.webp'
 
 const scrollToSignatures = () => {
   const element = document.getElementById('signatures')
@@ -18,10 +14,15 @@ const scrollToSignatures = () => {
   <!-- Hero Banner only -->
   <section class="relative flex items-center justify-center min-h-[60vh]">
     <!-- Background Image with Dark Overlay -->
-    <div
-      class="absolute inset-0 bg-cover bg-[center_top_60%]"
-      :style="{ backgroundImage: `url(${getImageUrl('entry_to_cafe')})` }"
-    >
+    <div class="absolute inset-0">
+      <img
+        :src="heroImage"
+        alt=""
+        fetchpriority="high"
+        loading="eager"
+        decoding="async"
+        class="absolute inset-0 w-full h-full object-cover object-[center_top_60%]"
+      />
       <div class="absolute inset-0 bg-espresso/75"></div>
     </div>
 

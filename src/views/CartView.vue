@@ -64,6 +64,8 @@
                 <img
                   :src="getImageUrl(item.image)"
                   :alt="item.name"
+                  loading="lazy"
+                  decoding="async"
                   class="w-full h-full object-cover"
                 />
               </div>
@@ -320,7 +322,7 @@ const bakeryAddresses = cartAddressOptions
 const selectedAddress = ref(cartAddressOptions[0])
 
 const menuImages = import.meta.glob(
-  '../assets/images/**/*.{webp,jpg,jpeg,png}',
+  '../assets/images/**/*.webp',
   { eager: true, query: '?url', import: 'default' }
 )
 

@@ -36,6 +36,8 @@
             <img
               :src="getImageUrl(product.image)"
               :alt="product.name"
+              loading="lazy"
+              decoding="async"
               class="w-full h-full object-cover"
             />
           </div>
@@ -146,7 +148,7 @@ const addToCart = (product) => {
 }
 
 const menuImages = import.meta.glob(
-  '../assets/images/**/*.{webp,jpg,jpeg,png}',
+  '../assets/images/**/*.webp',
   { eager: true, query: '?url', import: 'default' }
 )
 
