@@ -14,12 +14,12 @@ const navigateToMenu = (categoryKey) => {
 </script>
 
 <template>
-  <section class="w-full bg-cream py-12 md:py-16">
+  <section class="w-full bg-cream py-4 md:py-16">
     <div class="w-full px-0">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
         <div 
           @click="navigateToMenu('cakes')"
-          class="group relative h-[400px] md:h-[500px] overflow-hidden cursor-pointer"
+          class="group relative h-[240px] md:h-[500px] overflow-hidden cursor-pointer"
         >
           <div 
             class="absolute inset-0 bg-cover bg-top transition-transform duration-700 ease-out group-hover:scale-105"
@@ -28,8 +28,8 @@ const navigateToMenu = (categoryKey) => {
             <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
           </div>
 
-          <div class="absolute bottom-0 left-0 p-8 md:p-10 z-10">
-            <h2 class="font-serif font-normal text-4xl md:text-5xl text-white mb-3 tracking-tight">
+          <div class="absolute bottom-0 left-0 p-5 md:p-10 z-10">
+            <h2 class="font-serif font-normal text-3xl md:text-5xl text-white mb-2 md:mb-3 tracking-tight">
               Десерты
             </h2>
             <button 
@@ -43,7 +43,7 @@ const navigateToMenu = (categoryKey) => {
 
         <div 
           @click="navigateToMenu('baking')"
-          class="group relative h-[400px] md:h-[500px] overflow-hidden cursor-pointer"
+          class="group relative h-[240px] md:h-[500px] overflow-hidden cursor-pointer"
         >
           <div 
             class="absolute inset-0 bg-cover bg-top transition-transform duration-700 ease-out group-hover:scale-105"
@@ -52,8 +52,8 @@ const navigateToMenu = (categoryKey) => {
             <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
           </div>
 
-          <div class="absolute bottom-0 left-0 p-8 md:p-10 z-10">
-            <h2 class="font-serif font-normal text-4xl md:text-5xl text-white mb-3 tracking-tight">
+          <div class="absolute bottom-0 left-0 p-5 md:p-10 z-10">
+            <h2 class="font-serif font-normal text-3xl md:text-5xl text-white mb-2 md:mb-3 tracking-tight">
               Выпечка
             </h2>
             <button 

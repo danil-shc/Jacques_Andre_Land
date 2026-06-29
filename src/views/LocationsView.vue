@@ -1,8 +1,8 @@
 <template>
-  <section class="bg-cream pt-16 md:pt-24 pb-12 md:pb-16">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center mb-16">
-        <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl text-chocolate mb-4">
+  <section class="bg-cream pt-8 md:pt-24 pb-8 md:pb-16">
+    <div class="max-w-7xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8 md:mb-16">
+        <h1 class="font-serif text-3xl md:text-5xl lg:text-6xl text-chocolate mb-3 md:mb-4">
           НАШИ ПЕКАРНИ
         </h1>
         <p class="font-sans text-xs md:text-sm tracking-widest uppercase text-caramel">
@@ -10,7 +10,7 @@
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 items-stretch">
         <article
           v-for="location in locations"
           :key="location.id"
@@ -33,13 +33,13 @@
             </div>
           </div>
 
-          <div class="flex flex-col flex-1 justify-between p-6">
-            <div class="space-y-4">
-              <h2 class="font-serif text-xl md:text-2xl text-chocolate leading-tight">
+          <div class="flex flex-col flex-1 justify-between p-4 md:p-6">
+            <div class="space-y-3 md:space-y-4">
+              <h2 class="font-serif text-lg md:text-2xl text-chocolate leading-tight">
                 {{ location.title }}
               </h2>
 
-              <div class="space-y-3 text-chocolate/80 text-sm">
+              <div class="space-y-2 md:space-y-3 text-chocolate/80 text-sm">
                 <div class="flex items-start gap-3">
                   <MapPin :size="20" class="mt-0.5 flex-shrink-0" />
                   <span>{{ location.address }}</span>
@@ -66,7 +66,7 @@
               :href="location.mapLink"
               target="_blank"
               rel="noopener noreferrer"
-              class="block w-full mt-6 py-3 px-6 text-center border border-chocolate text-chocolate font-sans text-xs tracking-widest uppercase transition-all duration-300 hover:bg-espresso hover:text-cream"
+              class="block w-full mt-4 md:mt-6 py-2.5 md:py-3 px-4 md:px-6 text-center border border-chocolate text-chocolate font-sans text-xs tracking-widest uppercase transition-all duration-300 hover:bg-espresso hover:text-cream"
             >
               ПРОЛОЖИТЬ МАРШРУТ
             </a>

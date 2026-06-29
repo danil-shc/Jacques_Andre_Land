@@ -35,13 +35,13 @@ const onLeave = (el) => {
 </script>
 
 <template>
-  <section class="bg-cream py-16 md:py-24">
-    <div class="max-w-3xl mx-auto px-6">
-      <header class="text-center mb-12 md:mb-16 space-y-4">
+  <section class="bg-cream py-8 md:py-24">
+    <div class="max-w-3xl mx-auto px-5 md:px-6">
+      <header class="text-center mb-7 md:mb-16 space-y-2 md:space-y-4">
         <p class="font-sans font-semibold text-xs tracking-[0.25em] uppercase text-caramel">
           Поддержка гостей
         </p>
-        <h1 class="font-serif font-normal text-4xl md:text-5xl text-chocolate tracking-wide">
+        <h1 class="font-serif font-normal text-3xl md:text-5xl text-chocolate tracking-wide">
           Частые вопросы
         </h1>
         <p class="font-sans font-light text-sm md:text-base text-chocolate/70 leading-relaxed max-w-xl mx-auto">
@@ -60,7 +60,7 @@ const onLeave = (el) => {
             :id="`faq-trigger-${item.id}`"
             :aria-expanded="isOpen(index)"
             :aria-controls="`faq-panel-${item.id}`"
-            class="group flex w-full items-center justify-between gap-6 py-6 md:py-7 text-left transition-colors duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-caramel/40 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+            class="group flex w-full items-center justify-between gap-4 py-4 md:py-7 text-left transition-colors duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-caramel/40 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
             @click="toggleItem(index)"
           >
             <span
@@ -92,7 +92,7 @@ const onLeave = (el) => {
               :aria-labelledby="`faq-trigger-${item.id}`"
               class="overflow-hidden"
             >
-              <p class="pb-6 md:pb-7 font-sans font-light text-sm md:text-base text-chocolate/70 leading-relaxed pr-14">
+              <p class="pb-4 md:pb-7 font-sans font-light text-sm md:text-base text-chocolate/70 leading-relaxed pr-10 md:pr-14">
                 {{ item.answer }}
               </p>
             </div>
