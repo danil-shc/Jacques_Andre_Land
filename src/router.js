@@ -1,16 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "@/views/HomeView.vue";
-import MenuView from "@/views/MenuView.vue";
-import LocationsView from "@/views/LocationsView.vue";
-import CartView from "@/views/CartView.vue";
-import FaqView from "@/views/FaqView.vue";
+import HomeView from "@/views/HomeView.vue"; // landing
 
 const routes = [
   { path: "/", name: "Home", component: HomeView },
-  { path: "/menu", name: "Menu", component: MenuView },
-  { path: "/locations", name: "Locations", component: LocationsView },
-  { path: "/cart", name: "Cart", component: CartView },
-  { path: "/faq", name: "Faq", component: FaqView },
+  { path: "/menu", name: "Menu", component: () => import("@/views/MenuView.vue") },
+  { path: "/locations", name: "Locations", component: () => import("@/views/LocationsView.vue") },
+  { path: "/cart", name: "Cart", component: () => import("@/views/CartView.vue") },
+  { path: "/faq", name: "Faq", component: () => import("@/views/FaqView.vue") },
 ];
 
 const router = createRouter({
