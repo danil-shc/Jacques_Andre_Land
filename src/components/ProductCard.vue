@@ -1,6 +1,6 @@
 <script setup>
 import { ref, inject } from 'vue'
-import { Bell, Minus, Plus, ArrowLeft, Info } from 'lucide-vue-next'
+import { Bell, Minus, Plus, Info } from 'lucide-vue-next'
 import ProductCardImage from '@/components/ProductCardImage.vue'
 import { useCart } from '@/store/cart'
 
@@ -246,8 +246,8 @@ const flipToFront = () => {
             class="inline-flex items-center gap-1.5 md:gap-2 py-2 md:py-2.5 px-2 md:px-3 -ml-2 md:-ml-3 font-sans text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-caramel/70 hover:text-caramel transition-colors duration-300 ease-in-out cursor-pointer"
             aria-label="Вернуться к карточке"
           >
-            <ArrowLeft :size="12" :stroke-width="1.5" />
-            Назад
+            <span>←</span>
+            <span>НАЗАД</span>
           </button>
         </div>
 
