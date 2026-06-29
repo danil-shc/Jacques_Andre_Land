@@ -127,10 +127,10 @@ const flipToFront = () => {
             v-if="product.description"
             type="button"
             @click.stop="flipToBack"
-            class="product-card__info-trigger absolute top-2 right-2 md:top-3 md:right-3 z-10 flex items-center justify-center w-7 h-7 md:w-8 md:h-8 rounded-full border border-chocolate/20 bg-cream/55 text-chocolate backdrop-blur-md shadow-[0_1px_8px_rgba(44,27,17,0.12)] hover:bg-cream/80 hover:border-chocolate/35 hover:shadow-[0_2px_12px_rgba(44,27,17,0.18)] transition-all duration-300 ease-in-out cursor-pointer"
+            class="product-card__info-trigger absolute top-2 right-2 md:top-3 md:right-3 z-10 flex items-center justify-center w-7 h-7 md:w-10 md:h-10 rounded-full border border-chocolate/20 md:border-chocolate/25 bg-cream/55 text-chocolate backdrop-blur-md shadow-[0_1px_8px_rgba(44,27,17,0.12)] hover:bg-cream/80 hover:border-chocolate/35 hover:shadow-[0_2px_12px_rgba(44,27,17,0.18)] transition-all duration-300 ease-in-out cursor-pointer"
             aria-label="Посмотреть состав"
           >
-            <Info :size="15" :stroke-width="1.5" />
+            <Info class="w-3.5 h-3.5 md:w-5 md:h-5 shrink-0" :stroke-width="1.5" />
           </button>
 
           <ProductCardImage
@@ -243,16 +243,28 @@ const flipToFront = () => {
           <button
             type="button"
             @click.stop="flipToFront"
-            class="inline-flex items-center gap-1.5 md:gap-2 py-2 md:py-2.5 px-2 md:px-3 -ml-2 md:-ml-3 font-sans text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-caramel/70 hover:text-caramel transition-colors duration-300 ease-in-out cursor-pointer"
+            class="inline-flex items-center gap-1.5 md:gap-2.5 py-2 md:py-2.5 px-2 md:px-3 -ml-2 md:-ml-3 font-sans text-[9px] md:text-sm tracking-[0.2em] uppercase text-caramel/70 hover:text-caramel transition-colors duration-300 ease-in-out cursor-pointer"
             aria-label="Вернуться к карточке"
           >
-            <span>←</span>
-            <span>НАЗАД</span>
+            <svg
+              class="w-3 h-3 md:w-[18px] md:h-[18px] shrink-0"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M19 12H5" />
+              <path d="M12 19l-7-7 7-7" />
+            </svg>
+            <span class="leading-none">НАЗАД</span>
           </button>
         </div>
 
         <div class="flex-1 min-h-0 flex items-center justify-center px-4 pb-4 md:px-6 md:pb-6 overflow-y-auto">
-          <p class="font-sans text-[11px] md:text-sm text-chocolate/75 leading-relaxed md:leading-loose text-center tracking-wide">
+          <p class="font-sans text-[11px] md:text-[15px] text-chocolate/75 leading-relaxed md:leading-relaxed text-center tracking-wide">
             {{ product.description }}
           </p>
         </div>
