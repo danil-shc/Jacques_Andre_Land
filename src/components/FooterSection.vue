@@ -20,12 +20,12 @@ const getImageUrl = (name) => {
 <template>
   <footer class="bg-cream border-t border-espresso/10">
     <!-- Main Footer Content -->
-    <div class="max-w-7xl mx-auto px-6 py-16 md:py-24">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 lg:gap-24">
+    <div class="max-w-7xl mx-auto px-5 md:px-6 py-8 md:py-24">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 lg:gap-24">
 
         <!-- Left Column: Loyalty Program -->
         <div class="space-y-6">
-          <h2 class="font-serif font-normal text-3xl md:text-4xl text-chocolate tracking-wide">
+          <h2 class="font-serif font-normal text-2xl md:text-4xl text-chocolate tracking-wide">
             СТАНЬТЕ ЧАСТЬЮ НАШЕЙ БОЛЬШОЙ СЕМЬИ
           </h2>
 
@@ -33,7 +33,7 @@ const getImageUrl = (name) => {
             Присоединяйтесь к нашей программе лояльности в приложении SWiP! Копите баллы и с выгодой обменивайте бонусы на любимую французскую выпечку!
           </p>
 
-          <div class="flex flex-col xl:flex-row gap-4 items-start w-full mt-6">
+          <div class="flex flex-row xl:flex-row gap-3 items-start w-full mt-4 md:mt-6 flex-wrap">
             <a
               :href="appStoreUrl"
               target="_blank"
@@ -72,7 +72,7 @@ const getImageUrl = (name) => {
 
         <!-- Right Column: OUR CAFE -->
         <div class="space-y-6">
-          <h2 class="font-serif font-normal text-3xl md:text-4xl text-chocolate tracking-wide">
+          <h2 class="font-serif font-normal text-2xl md:text-4xl text-chocolate tracking-wide">
             ДОРОГИЕ ГОСТИ
           </h2>
 

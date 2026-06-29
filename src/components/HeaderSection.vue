@@ -151,26 +151,26 @@ const navigateAndClose = (path) => {
         @click="closeMobileMenu"
       >
         <nav
-          class="flex flex-col items-center justify-center h-full space-y-12 px-6"
+          class="flex flex-col items-center justify-center h-full gap-6 px-6"
           @click.stop
         >
           <button
             @click="navigateAndClose('/')"
-            class="text-cream font-sans font-normal text-3xl tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out cursor-pointer"
+            class="text-cream font-sans font-normal text-[1.375rem] tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out cursor-pointer"
           >
             Главная
           </button>
 
           <button
             @click="navigateAndClose('/menu')"
-            class="text-cream font-sans font-normal text-3xl tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out cursor-pointer"
+            class="text-cream font-sans font-normal text-[1.375rem] tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out cursor-pointer"
           >
             Меню
           </button>
 
           <button
             @click="navigateAndClose('/locations')"
-            class="text-cream font-sans font-normal text-3xl tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out cursor-pointer"
+            class="text-cream font-sans font-normal text-[1.375rem] tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out cursor-pointer"
           >
             Наши пекарни
           </button>

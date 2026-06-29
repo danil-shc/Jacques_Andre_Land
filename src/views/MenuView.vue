@@ -1,311 +1,347 @@
 <template>
+
   <div class="min-h-screen bg-cream">
-    <div class="max-w-7xl mx-auto px-6 py-8 md:py-12">
-      <div class="mb-10">
+
+    <div class="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-12">
+
+      <div class="mb-5 md:mb-10">
+
         <input
+
           v-model="searchQuery"
+
           type="text"
+
           placeholder="Поиск выпечки, десертов и напитков"
-          class="w-full bg-transparent border-b border-chocolate text-chocolate placeholder:text-chocolate/40 py-3 px-1 text-base md:text-lg font-sans tracking-wider focus:outline-none focus:border-chocolate transition-all duration-300"
+
+          class="w-full bg-transparent border-b border-chocolate text-chocolate placeholder:text-chocolate/40 py-2.5 md:py-3 px-1 text-sm md:text-lg font-sans tracking-wider focus:outline-none focus:border-chocolate transition-all duration-300"
+
         />
+
       </div>
 
-      <div class="flex flex-wrap gap-4 md:gap-6 mb-12 border-b border-caramel/20 pb-2">
+
+
+      <div class="flex flex-wrap gap-3 md:gap-6 mb-6 md:mb-12 border-b border-caramel/20 pb-2">
+
         <button
+
           v-for="category in categories"
+
           :key="category"
+
           @click="selectedCategory = category"
+
           :class="[
-            'font-sans font-normal text-xs md:text-sm tracking-widest uppercase pb-2 border-b-2 transition-colors duration-300 ease-in-out cursor-pointer',
+
+            'font-sans font-normal text-[10px] md:text-sm tracking-widest uppercase pb-2 border-b-2 transition-colors duration-300 ease-in-out cursor-pointer',
+
             selectedCategory === category
+
               ? 'text-caramel border-caramel'
+
               : 'text-caramel/50 border-transparent hover:text-caramel/80'
+
           ]"
+
         >
+
           {{ category }}
+
         </button>
+
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-24">
-        <div
+
+
+      <div class="menu-products grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8 mb-10 md:mb-24">
+
+        <ProductCard
+
           v-for="product in filteredProducts"
+
           :key="product.id"
-          class="bg-white bg-opacity-40 rounded-sm overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col"
-        >
-          <div v-if="product.image" class="aspect-square overflow-hidden bg-cream">
-            <img
-              :src="getImageUrl(product.image)"
-              :alt="product.name"
-              loading="lazy"
-              decoding="async"
-              class="w-full h-full object-cover"
-            />
-          </div>
-          <div v-else class="aspect-square bg-gradient-to-br from-espresso to-caramel flex items-center justify-center">
-            <Bell :size="64" class="text-cream" />
-          </div>
-          
-          <div class="p-5 flex-grow flex flex-col">
-            <h3 class="font-serif text-lg md:text-xl text-chocolate mb-2">{{ product.name }}</h3>
-            <p class="text-sm text-chocolate/70 mb-4 flex-grow leading-relaxed">{{ product.description }}</p>
 
-            <div v-if="product.variants?.length" class="mb-5">
-              <p class="font-sans text-[10px] tracking-[0.22em] uppercase text-caramel/60 mb-3">Объём</p>
-              <div class="flex flex-wrap gap-2">
-                <button
-                  v-for="variant in product.variants"
-                  :key="variant.id"
-                  type="button"
-                  @click="selectVariant(product.id, variant.id)"
-                  :class="[
-                    'group/volume inline-flex flex-col items-center justify-center min-w-[72px] px-3 py-2 rounded-sm border font-sans transition-all duration-300 ease-in-out cursor-pointer',
-                    getSelectedVariant(product)?.id === variant.id
-                      ? 'bg-espresso border-espresso text-cream shadow-sm'
-                      : 'bg-cream/80 border-caramel/25 text-chocolate hover:bg-espresso/8 hover:border-caramel hover:text-espresso'
-                  ]"
-                >
-                  <span class="text-[11px] tracking-[0.18em] uppercase leading-none">{{ variant.volume }}</span>
-                  <span
-                    :class="[
-                      'mt-1.5 text-[10px] tracking-wider transition-colors duration-300',
-                      getSelectedVariant(product)?.id === variant.id
-                        ? 'text-cream/75'
-                        : 'text-caramel/70 group-hover/volume:text-espresso'
-                    ]"
-                  >
-                    {{ variant.price }} ₽
-                  </span>
-                </button>
-              </div>
-            </div>
+          :product="product"
 
-            <div class="flex items-center justify-between mt-auto">
-              <span class="font-sans text-lg font-semibold text-chocolate tracking-wide">{{ getDisplayPrice(product) }} ₽</span>
-              <div class="shrink-0 h-10 flex items-center justify-end min-w-10">
-                <Transition name="fade" mode="out-in">
-                  <button
-                    v-if="getCartQuantity(product) === 0"
-                    key="add"
-                    type="button"
-                    @click="product.variants ? addCoffeeToCart(product) : addToCart(product)"
-                    class="w-10 h-10 rounded-full bg-espresso text-cream flex items-center justify-center hover:bg-espresso/90 transition-colors duration-300 cursor-pointer"
-                    aria-label="Добавить в корзину"
-                  >
-                    <Plus :size="20" />
-                  </button>
-                  <div
-                    v-else
-                    key="quantity"
-                    class="flex items-center h-10 border border-caramel/30 rounded-full bg-cream/80 overflow-hidden shadow-sm"
-                  >
-                    <button
-                      type="button"
-                      @click="decrementProduct(product)"
-                      class="w-9 h-10 flex items-center justify-center text-chocolate hover:bg-espresso/8 active:bg-espresso/12 transition-all duration-300 ease-in-out cursor-pointer"
-                      aria-label="Уменьшить количество"
-                    >
-                      <Minus :size="16" :stroke-width="1.75" />
-                    </button>
-                    <span class="min-w-[1.75rem] px-0.5 text-center font-sans text-sm font-semibold text-chocolate tracking-wider tabular-nums select-none">
-                      {{ getCartQuantity(product) }}
-                    </span>
-                    <button
-                      type="button"
-                      @click="incrementProduct(product)"
-                      class="w-9 h-10 flex items-center justify-center text-chocolate hover:bg-espresso/8 active:bg-espresso/12 transition-all duration-300 ease-in-out cursor-pointer"
-                      aria-label="Увеличить количество"
-                    >
-                      <Plus :size="16" :stroke-width="1.75" />
-                    </button>
-                  </div>
-                </Transition>
-              </div>
-            </div>
-          </div>
-        </div>
+          :image-url="product.image ? getImageUrl(product.image) : null"
+
+        />
+
       </div>
+
     </div>
+
   </div>
+
 </template>
 
+
+
 <script setup>
+
 import { ref, computed, onMounted } from 'vue'
+
 import { useRoute } from 'vue-router'
-import { useCart } from '@/store/cart'
-import { coffeeMenu, allMenuProducts } from '@/data/products'
-import { Bell, Minus, Plus } from 'lucide-vue-next'
+
+import { allMenuProducts } from '@/data/products'
+
+import ProductCard from '@/components/ProductCard.vue'
+
+
 
 const route = useRoute()
-const {
-  addToCart: addToCartGlobal,
-  cartItems,
-  increaseQuantity,
-  decreaseQuantity,
-} = useCart()
 
-const addToCart = (product) => {
-  addToCartGlobal(product)
-}
+
 
 const menuImages = import.meta.glob(
+
   '../assets/images/**/*.webp',
+
   { eager: true, query: '?url', import: 'default' }
+
 )
 
+
+
 const getImageUrl = (imageName) => {
+
   if (!imageName) return null
+
   const fileName = imageName.includes('.') ? imageName : `${imageName}.webp`
+
   const path = fileName.includes('_coffee.')
+
     ? `../assets/images/coffee/${fileName}`
+
     : `../assets/images/${fileName}`
+
   return menuImages[path] ?? null
+
 }
+
+
 
 const categories = [
+
   'ВСЕ',
+
   'Выпечка',
+
   'Десерты',
+
   'ГОРЯЧИЕ НАПИТКИ'
+
 ]
 
+
+
 const categoryOrder = {
+
   'Выпечка': 1,
+
   'Десерты': 2,
+
   'ГОРЯЧИЕ НАПИТКИ': 3,
+
 }
 
+
+
 const selectedCategory = ref('ВСЕ')
+
 const searchQuery = ref('')
+
+
 
 const allProducts = allMenuProducts
 
-const selectedVariants = ref(
-  Object.fromEntries(coffeeMenu.map(item => [item.id, item.variants[0].id]))
-)
 
-const getSelectedVariant = (product) => {
-  if (!product.variants?.length) return null
-  const variantId = selectedVariants.value[product.id] ?? product.variants[0].id
-  return product.variants.find(variant => variant.id === variantId) ?? product.variants[0]
-}
-
-const selectVariant = (productId, variantId) => {
-  selectedVariants.value[productId] = variantId
-}
-
-const getDisplayPrice = (product) => {
-  return product.variants ? getSelectedVariant(product).price : product.price
-}
-
-const addCoffeeToCart = (product) => {
-  const variant = getSelectedVariant(product)
-  addToCartGlobal({
-    id: variant.id,
-    name: product.name,
-    volume: variant.volume,
-    price: variant.price,
-    description: product.description,
-    category: product.category,
-    image: product.image
-  })
-}
-
-const getCartLineId = (product) => {
-  if (product.variants?.length) {
-    return getSelectedVariant(product).id
-  }
-  return product.id
-}
-
-const getCartItem = (product) => {
-  const lineId = getCartLineId(product)
-  return cartItems.value.find((item) => item.id === lineId) ?? null
-}
-
-const getCartQuantity = (product) => getCartItem(product)?.quantity ?? 0
-
-const incrementProduct = (product) => {
-  const cartItem = getCartItem(product)
-  if (cartItem) {
-    increaseQuantity(cartItem)
-    return
-  }
-
-  if (product.variants) {
-    addCoffeeToCart(product)
-  } else {
-    addToCart(product)
-  }
-}
-
-const decrementProduct = (product) => {
-  const cartItem = getCartItem(product)
-  if (cartItem) {
-    decreaseQuantity(cartItem)
-  }
-}
 
 const filteredProducts = computed(() => {
+
   let filtered = allProducts
 
+
+
   if (selectedCategory.value !== 'ВСЕ') {
+
     filtered = filtered.filter(p => p.category === selectedCategory.value)
+
   }
 
+
+
   if (searchQuery.value.trim()) {
+
     const query = searchQuery.value.toLowerCase()
+
     filtered = filtered.filter(p => {
+
       const matchesBase =
+
         p.name.toLowerCase().includes(query) ||
+
         p.description.toLowerCase().includes(query)
+
+
 
       if (matchesBase) return true
 
+
+
       return p.variants?.some(variant =>
+
         variant.volume.toLowerCase().includes(query) ||
+
         String(variant.price).includes(query)
+
       )
+
     })
+
   }
 
+
+
   if (selectedCategory.value === 'ВСЕ') {
+
     filtered = [...filtered].sort((a, b) => {
+
       const orderA = categoryOrder[a.category] ?? 99
+
       const orderB = categoryOrder[b.category] ?? 99
+
+
 
       if (orderA !== orderB) return orderA - orderB
 
+
+
       return allProducts.indexOf(a) - allProducts.indexOf(b)
+
     })
+
   }
+
+
 
   return filtered
+
 })
+
+
 
 const categoryMapping = {
+
   'cakes': 'Десерты',
+
   'baking': 'Выпечка',
+
   'hearty': 'Выпечка',
+
   'breakfast': 'Выпечка',
+
 }
+
+
 
 onMounted(() => {
+
   const categoryQuery = route.query.category
+
   if (categoryQuery && categoryMapping[categoryQuery]) {
+
     selectedCategory.value = categoryMapping[categoryQuery]
+
   }
+
 })
+
 </script>
 
+
+
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.25s ease, transform 0.25s ease;
+
+@media (max-width: 767px) {
+
+  .menu-products :deep(.product-card__stepper-slot) {
+
+    height: 1.75rem;
+
+    min-width: 1.75rem;
+
+  }
+
+
+
+  .menu-products :deep(.product-card__add-btn) {
+
+    width: 1.75rem;
+
+    height: 1.75rem;
+
+  }
+
+
+
+  .menu-products :deep(.product-card__add-btn svg) {
+
+    width: 0.875rem !important;
+
+    height: 0.875rem !important;
+
+  }
+
+
+
+  .menu-products :deep(.product-card__stepper) {
+
+    height: 1.75rem;
+
+    box-shadow: 0 1px 4px rgba(44, 27, 17, 0.06);
+
+  }
+
+
+
+  .menu-products :deep(.product-card__stepper-btn) {
+
+    width: 1.375rem;
+
+    height: 1.75rem;
+
+  }
+
+
+
+  .menu-products :deep(.product-card__stepper-btn svg) {
+
+    width: 0.75rem !important;
+
+    height: 0.75rem !important;
+
+  }
+
+
+
+  .menu-products :deep(.product-card__stepper-count) {
+
+    min-width: 1rem;
+
+    padding-inline: 0;
+
+    font-size: 0.75rem;
+
+    line-height: 1;
+
+    letter-spacing: 0.04em;
+
+  }
+
 }
 
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-  transform: scale(0.92);
-}
 </style>
+
+
