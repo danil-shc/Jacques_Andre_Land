@@ -29,44 +29,44 @@ const serviceFeatures = [
 </script>
 
 <template>
-  <section class="w-full bg-cream py-8 md:py-24">
-    <div class="max-w-[1920px] mx-auto px-4 md:px-8 space-y-8 md:space-y-16">
-      <!-- Section Header -->
+  <section class="w-full bg-cream py-8 md:py-24 md:w-screen md:relative md:left-1/2 md:right-1/2 md:-ml-[50vw] md:-mr-[50vw]">
+    <!-- Section Header -->
+    <div class="max-w-[1920px] mx-auto px-4 md:px-8">
       <div class="text-center">
         <h2 class="font-serif font-normal text-2xl md:text-4xl lg:text-5xl text-chocolate tracking-widest uppercase">
           НАШИ ОБЫЧАИ
         </h2>
       </div>
+    </div>
 
-      <!-- Split Content Block: Image + Dark Box -->
-      <div class="flex flex-col lg:grid lg:grid-cols-2 gap-0">
-        <!-- Left: Premium Image with Gradient Overlay on Mobile -->
-        <div class="relative h-[200px] md:h-[450px] lg:h-[500px] overflow-hidden">
-          <img
-            :src="getImageUrl('vibe_2')"
-            alt="Jacques André Interior"
-            loading="lazy"
-            decoding="async"
-            class="absolute inset-0 w-full h-full object-cover"
-          />
-          <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-espresso/20 lg:hidden"></div>
-        </div>
+    <!-- Split Content Block: Image + Dark Box -->
+    <div class="mt-8 md:mt-16 flex flex-col lg:grid lg:grid-cols-2 gap-0">
+      <!-- Left: Premium Image with Gradient Overlay on Mobile -->
+      <div class="relative h-[200px] md:h-[450px] lg:h-[500px] overflow-hidden">
+        <img
+          :src="getImageUrl('vibe_2')"
+          alt="Jacques André Interior"
+          loading="lazy"
+          decoding="async"
+          class="absolute inset-0 w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-espresso/20 lg:hidden"></div>
+      </div>
 
-        <!-- Right: Dark Chocolate Box -->
-        <div class="bg-espresso lg:h-[500px] flex flex-col justify-center px-5 py-8 md:px-12 md:py-20 lg:px-16 lg:py-16">
-          <div class="space-y-4 md:space-y-8 max-w-xl">
-            <h3 class="font-serif font-normal text-xl md:text-3xl lg:text-4xl text-cream tracking-wide leading-tight">
-              В СЕРДЦЕ АДЫГЕИ
-            </h3>
+      <!-- Right: Dark Chocolate Box -->
+      <div class="bg-espresso lg:h-[500px] flex flex-col justify-center px-5 py-8 md:px-12 md:py-20 lg:px-16 lg:py-16">
+        <div class="space-y-4 md:space-y-8 max-w-xl">
+          <h3 class="font-serif font-normal text-xl md:text-3xl lg:text-4xl text-cream tracking-wide leading-tight">
+            В СЕРДЦЕ АДЫГЕИ
+          </h3>
 
-            <p class="font-sans font-light text-sm md:text-base text-cream/90 leading-relaxed">
-              В «Жак Андре» мы верим в бескомпромиссное стремление к вкусу. Наша пекарня — дань французскому кулинарному наследию, укорененному в богатых почвах нашего региона. Каждый круассан слоится с точностью, каждый кусочек наполнен смыслом.
-            </p>
+          <p class="font-sans font-light text-sm md:text-base text-cream/90 leading-relaxed">
+            В «Жак Андре» мы верим в бескомпромиссное стремление к вкусу. Наша пекарня — дань французскому кулинарному наследию, укорененному в богатых почвах нашего региона. Каждый круассан слоится с точностью, каждый кусочек наполнен смыслом.
+          </p>
 
-            <p class="font-sans font-light text-sm md:text-base text-cream/90 leading-relaxed hidden md:block">
-              Мы тщательно отбираем ингредиенты: местные адыгейские молочные продукты легко сочетаются с шоколадом и экологичной мукой. Это повседневная роскошь, созданная вручную.
-            </p>
-          </div>
+          <p class="font-sans font-light text-sm md:text-base text-cream/90 leading-relaxed">
+            Мы тщательно отбираем ингредиенты: местные адыгейские молочные продукты легко сочетаются с шоколадом и экологичной мукой. Это повседневная роскошь, созданная вручную.
+          </p>
         </div>
       </div>
     </div>
