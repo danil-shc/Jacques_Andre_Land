@@ -264,32 +264,42 @@ const flipToFront = () => {
 <style scoped>
 .product-card__perspective {
   perspective: 1000px;
+  -webkit-perspective: 1000px;
   border-radius: 20px;
-  overflow: hidden;
 }
 
 .product-card__flip-inner {
   position: relative;
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
   transition: transform 0.6s ease-in-out;
   border-radius: 20px;
 }
 
 .product-card__flip-inner.is-flipped {
   transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
 }
 
 .product-card__face {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
   border-radius: 20px;
   overflow: hidden;
+}
+
+.product-card__face--front {
+  transform: rotateY(0deg) translateZ(1px);
+  -webkit-transform: rotateY(0deg) translateZ(1px);
 }
 
 .product-card__face--back {
   position: absolute;
   inset: 0;
-  transform: rotateY(180deg);
+  transform: rotateY(180deg) translateZ(1px);
+  -webkit-transform: rotateY(180deg) translateZ(1px);
 }
 
 .fade-enter-active,
