@@ -29,7 +29,7 @@ const serviceFeatures = [
 </script>
 
 <template>
-  <section class="w-full bg-cream py-8 md:py-24 md:w-screen md:relative md:left-1/2 md:right-1/2 md:-ml-[50vw] md:-mr-[50vw]">
+  <section class="w-full bg-cream py-8 md:py-24">
     <!-- Section Header -->
     <div class="max-w-[1920px] mx-auto px-4 md:px-8">
       <div class="text-center">
