@@ -44,9 +44,8 @@ const serviceFeatures = [
       <!-- Left: Premium Image with Gradient Overlay on Mobile -->
       <div class="relative h-[200px] md:h-[450px] lg:h-[500px] overflow-hidden">
         <img
-          :src="getImageUrl('vibe_2')"
+          v-lazy="getImageUrl('vibe_2')"
           alt="Jacques André Interior"
-          loading="lazy"
           decoding="async"
           class="absolute inset-0 w-full h-full object-cover"
         />

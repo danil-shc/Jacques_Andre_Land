@@ -22,9 +22,8 @@ defineProps({
 <template>
   <div :class="['overflow-hidden bg-cream', aspectClass]">
     <img
-      :src="src"
+      v-lazy="src"
       :alt="alt"
-      loading="lazy"
       decoding="async"
       :class="[
         'w-full h-full object-cover object-[center_35%]',

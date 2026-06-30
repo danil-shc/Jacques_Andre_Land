@@ -21,9 +21,10 @@ const navigateToMenu = (categoryKey) => {
           @click="navigateToMenu('cakes')"
           class="group relative h-[240px] md:h-[500px] overflow-hidden cursor-pointer"
         >
-          <div 
+          <div
             class="absolute inset-0 bg-cover bg-top transition-transform duration-700 ease-out group-hover:scale-105"
-            :style="{ backgroundImage: `url(${getImageUrl('tort_zhak')})`, backgroundPosition: 'center 40%' }"
+            v-lazy:background-image="getImageUrl('tort_zhak')"
+            :style="{ backgroundPosition: 'center 40%' }"
           >
             <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
           </div>
@@ -45,9 +46,10 @@ const navigateToMenu = (categoryKey) => {
           @click="navigateToMenu('baking')"
           class="group relative h-[240px] md:h-[500px] overflow-hidden cursor-pointer"
         >
-          <div 
+          <div
             class="absolute inset-0 bg-cover bg-top transition-transform duration-700 ease-out group-hover:scale-105"
-            :style="{ backgroundImage: `url(${getImageUrl('vibe')})`, backgroundPosition: 'center 20%' }"
+            v-lazy:background-image="getImageUrl('vibe')"
+            :style="{ backgroundPosition: 'center 20%' }"
           >
             <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
           </div>
