@@ -34,19 +34,27 @@
 
           :class="[
 
-            'font-sans font-normal text-[10px] md:text-sm tracking-widest uppercase pb-2 border-b-2 transition-colors duration-300 ease-in-out cursor-pointer',
+            'group relative font-sans font-normal text-[10px] md:text-sm tracking-widest uppercase pb-2 transition-colors duration-300 ease-in-out cursor-pointer',
 
             selectedCategory === category
 
-              ? 'text-caramel border-caramel'
+              ? 'text-caramel'
 
-              : 'text-caramel/50 border-transparent hover:text-caramel/80'
+              : 'text-caramel/50 hover:text-[#3D2314]'
 
           ]"
 
         >
 
           {{ category }}
+
+          <span 
+
+            class="absolute bottom-0 left-0 h-[1.5px] bg-[#3D2314] transition-all duration-300 ease-in-out"
+
+            :class="selectedCategory === category ? 'w-full !bg-caramel' : 'w-0 group-hover:w-full'"
+
+          ></span>
 
         </button>
 
