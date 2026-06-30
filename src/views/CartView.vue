@@ -62,9 +62,8 @@
                 class="w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-sm overflow-hidden bg-stone-50"
               >
                 <img
-                  :src="getImageUrl(item.image)"
+                  v-lazy="getImageUrl(item.image)"
                   :alt="item.name"
-                  loading="lazy"
                   decoding="async"
                   class="w-full h-full object-cover"
                 />

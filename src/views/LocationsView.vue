@@ -19,9 +19,8 @@
           <div class="aspect-[4/3] overflow-hidden bg-espresso/5 relative shrink-0">
             <img
               v-if="location.image"
-              :src="location.image"
+              v-lazy="location.image"
               :alt="location.title"
-              loading="lazy"
               decoding="async"
               class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
             />
