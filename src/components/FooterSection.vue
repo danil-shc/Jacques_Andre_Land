@@ -124,15 +124,21 @@ const getImageUrl = (name) => {
               :href="telegramUrl"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-caramel/70 font-sans font-normal text-[10px] tracking-widest uppercase hover:text-caramel transition-all duration-300 ease-in-out"
+              class="group relative text-caramel/70 font-sans font-normal text-[10px] tracking-widest uppercase hover:text-[#3D2314] transition-colors duration-300 ease-in-out"
             >
               СВЯЖИТЕСЬ С НАМИ
+              <span class="absolute bottom-0 left-0 h-[1.5px] w-0 bg-[#3D2314] transition-all duration-300 ease-in-out group-hover:w-full"></span>
             </a>
             <router-link
               to="/faq"
-              class="text-caramel/70 font-sans font-normal text-[10px] tracking-widest uppercase hover:text-caramel transition-all duration-300 ease-in-out"
+              class="group relative font-sans font-normal text-[10px] tracking-widest uppercase transition-colors duration-300 ease-in-out"
+              :class="$route.path === '/faq' ? 'text-caramel' : 'text-caramel/70 hover:text-[#3D2314]'"
             >
               ЧАСТЫЕ ВОПРОСЫ
+              <span 
+                class="absolute bottom-0 left-0 h-[1.5px] bg-[#3D2314] transition-all duration-300 ease-in-out"
+                :class="$route.path === '/faq' ? 'w-full !bg-caramel' : 'w-0 group-hover:w-full'"
+              ></span>
             </router-link>
           </nav>
 

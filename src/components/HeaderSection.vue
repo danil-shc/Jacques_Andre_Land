@@ -84,16 +84,38 @@ const navigateAndClose = (path) => {
         <nav class="hidden md:flex items-center space-x-8">
           <router-link
             to="/menu"
-            class="text-caramel font-sans font-normal text-sm tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out"
+            class="group relative inline-block text-caramel font-sans font-normal text-sm tracking-widest uppercase transition-colors duration-300 ease-in-out hover:text-[#3D2314]"
+            :class="{ '!text-caramel': $route.path === '/menu' }"
           >
-            Меню
+            <span class="relative inline-block pb-0.5">
+              Меню
+              <span 
+                class="absolute bottom-0 left-0 h-[1.5px] transition-all duration-300 ease-in-out"
+                :class="[
+                  $route.path === '/menu' 
+                    ? 'w-full bg-caramel' 
+                    : 'w-0 bg-[#3D2314] group-hover:w-full'
+                ]"
+              ></span>
+            </span>
           </router-link>
 
           <router-link
             to="/locations"
-            class="text-caramel font-sans font-normal text-sm tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out"
+            class="group relative inline-block text-caramel font-sans font-normal text-sm tracking-widest uppercase transition-colors duration-300 ease-in-out hover:text-[#3D2314]"
+            :class="{ '!text-caramel': $route.path === '/locations' }"
           >
-            Наши пекарни
+            <span class="relative inline-block pb-0.5">
+              Наши пекарни
+              <span 
+                class="absolute bottom-0 left-0 h-[1.5px] transition-all duration-300 ease-in-out"
+                :class="[
+                  $route.path === '/locations' 
+                    ? 'w-full bg-caramel' 
+                    : 'w-0 bg-[#3D2314] group-hover:w-full'
+                ]"
+              ></span>
+            </span>
           </router-link>
         </nav>
 
@@ -156,23 +178,26 @@ const navigateAndClose = (path) => {
         >
           <button
             @click="navigateAndClose('/')"
-            class="text-cream font-sans font-normal text-[1.375rem] tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out cursor-pointer"
+            class="group relative text-cream font-sans font-normal text-[1.375rem] tracking-widest uppercase transition-colors duration-300 ease-in-out cursor-pointer hover:text-cream/80"
           >
             Главная
+            <span class="absolute bottom-0 left-0 h-[1.5px] w-0 bg-cream transition-all duration-300 ease-in-out group-hover:w-full"></span>
           </button>
 
           <button
             @click="navigateAndClose('/menu')"
-            class="text-cream font-sans font-normal text-[1.375rem] tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out cursor-pointer"
+            class="group relative text-cream font-sans font-normal text-[1.375rem] tracking-widest uppercase transition-colors duration-300 ease-in-out cursor-pointer hover:text-cream/80"
           >
             Меню
+            <span class="absolute bottom-0 left-0 h-[1.5px] w-0 bg-cream transition-all duration-300 ease-in-out group-hover:w-full"></span>
           </button>
 
           <button
             @click="navigateAndClose('/locations')"
-            class="text-cream font-sans font-normal text-[1.375rem] tracking-widest uppercase hover:opacity-70 transition-all duration-300 ease-in-out cursor-pointer"
+            class="group relative text-cream font-sans font-normal text-[1.375rem] tracking-widest uppercase transition-colors duration-300 ease-in-out cursor-pointer hover:text-cream/80"
           >
             Наши пекарни
+            <span class="absolute bottom-0 left-0 h-[1.5px] w-0 bg-cream transition-all duration-300 ease-in-out group-hover:w-full"></span>
           </button>
 
           <div class="absolute bottom-12 text-center">
