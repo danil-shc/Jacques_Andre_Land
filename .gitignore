@@ -32,3 +32,4 @@ dist-ssr
 *.sln
 *.sw?
 .cursorrules
+ai_docs/
