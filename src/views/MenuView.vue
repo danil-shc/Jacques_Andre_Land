@@ -19,10 +19,8 @@
         />
 
       </div>
-
-
-
-      <div class="flex flex-wrap gap-3 md:gap-6 mb-6 md:mb-12 border-b border-caramel/20 pb-2">
+      
+      <div class="flex flex-wrap gap-3 md:gap-6 mb-6 md:mb-12 pb-2">
 
         <button
 
