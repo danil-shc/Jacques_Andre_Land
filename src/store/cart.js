@@ -33,7 +33,9 @@ watch(
 export function useCart() {
   const cartItems = computed(() => state.items);
 
-  const totalItems = computed(() => state.items.length);
+  const totalItems = computed(() =>
+    state.items.reduce((total, item) => total + item.quantity, 0),
+  );
 
   const totalPrice = computed(() => {
     return state.items.reduce(
