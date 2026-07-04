@@ -1,10 +1,8 @@
 <script setup>
-import { ref, inject } from 'vue'
+import { ref } from 'vue'
 import { Bell, Minus, Plus, Info } from 'lucide-vue-next'
 import ProductCardImage from '@/components/ProductCardImage.vue'
 import { useCart } from '@/store/cart'
-
-const showcase = inject('productCardShowcase', false)
 
 const props = defineProps({
   product: {
@@ -181,19 +179,11 @@ const flipToFront = () => {
             </div>
           </div>
 
-          <div
-            :class="[
-              'mt-auto',
-              showcase ? '' : 'flex items-center justify-between gap-2',
-            ]"
-          >
+          <div class="mt-auto flex items-center justify-between gap-2">
             <span class="font-sans text-sm md:text-lg font-semibold text-chocolate tracking-wide leading-none">
               {{ getDisplayPrice() }} ₽
             </span>
-            <div
-              v-if="!showcase"
-              class="product-card__stepper-slot shrink-0 h-9 md:h-10 flex items-center justify-end min-w-9 md:min-w-10"
-            >
+            <div class="product-card__stepper-slot shrink-0 h-9 md:h-10 flex items-center justify-end min-w-9 md:min-w-10">
               <Transition name="fade" mode="out-in">
                 <button
                   v-if="getCartQuantity() === 0"

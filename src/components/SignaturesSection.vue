@@ -9,9 +9,20 @@ const isExpanded = ref(false)
 
 const products = ref(getFeaturedProducts())
 
-const getImageUrl = (name) => {
-  const imageName = name.includes('.') ? name : `${name}.webp`
-  return new URL(`../assets/images/${imageName}`, import.meta.url).href
+const menuImages = import.meta.glob(
+  '../assets/images/**/*.webp',
+  { eager: true, query: '?url', import: 'default' }
+)
+
+const getImageUrl = (imageName) => {
+  if (!imageName) return null
+
+  const fileName = imageName.includes('.') ? imageName : `${imageName}.webp`
+  const path = fileName.includes('_coffee.')
+    ? `../assets/images/coffee/${fileName}`
+    : `../assets/images/${fileName}`
+
+  return menuImages[path] ?? null
 }
 
 const displayedMenu = computed(() => (isExpanded.value ? products.value : products.value.slice(0, 4)))
@@ -39,12 +50,12 @@ const handleButtonClick = () => {
         </p>
       </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8 mb-6 md:mb-16">
+      <div class="signatures-products grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8 mb-6 md:mb-16">
         <ProductCard
           v-for="product in displayedMenu"
           :key="product.id"
           :product="product"
-          :image-url="getImageUrl(product.image)"
+          :image-url="product.image ? getImageUrl(product.image) : null"
         />
       </div>
 
@@ -59,3 +70,45 @@ const handleButtonClick = () => {
     </div>
   </section>
 </template>
+
+<style scoped>
+@media (max-width: 767px) {
+  .signatures-products :deep(.product-card__stepper-slot) {
+    height: 1.75rem;
+    min-width: 1.75rem;
+  }
+
+  .signatures-products :deep(.product-card__add-btn) {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  .signatures-products :deep(.product-card__add-btn svg) {
+    width: 0.875rem !important;
+    height: 0.875rem !important;
+  }
+
+  .signatures-products :deep(.product-card__stepper) {
+    height: 1.75rem;
+    box-shadow: 0 1px 4px rgba(44, 27, 17, 0.06);
+  }
+
+  .signatures-products :deep(.product-card__stepper-btn) {
+    width: 1.375rem;
+    height: 1.75rem;
+  }
+
+  .signatures-products :deep(.product-card__stepper-btn svg) {
+    width: 0.75rem !important;
+    height: 0.75rem !important;
+  }
+
+  .signatures-products :deep(.product-card__stepper-count) {
+    min-width: 1rem;
+    padding-inline: 0;
+    font-size: 0.75rem;
+    line-height: 1;
+    letter-spacing: 0.04em;
+  }
+}
+</style>
