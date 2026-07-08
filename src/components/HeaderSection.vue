@@ -1,33 +1,55 @@
 <script setup>
-import { ref, watch, onUnmounted, nextTick } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useCart } from '@/store/cart'
+import { useFlyToCart } from '@/store/flyToCart'
 import { Menu, X, Search, ShoppingBag } from 'lucide-vue-next'
 
 const router = useRouter()
 const route = useRoute()
 
 const FOCUS_MENU_SEARCH_EVENT = 'jacques:focus-menu-search'
-const cartStore = useCart()
-const { totalItems } = cartStore
-const mobileMenuOpen = ref(false)
-const isPulsing = ref(false)
+const { totalItems } = useCart()
+const { pendingCount, registerCartIcon } = useFlyToCart()
 
-watch(cartStore.totalPrice, (newPrice, oldPrice) => {
-  if (newPrice > oldPrice) {
-    isPulsing.value = true
-    setTimeout(() => {
-      isPulsing.value = false
-    }, 300)
-  }
-})
+const cartIconRef = ref(null)
+const cartBadgeRef = ref(null)
+const mobileMenuOpen = ref(false)
+
+// The badge trails the real total by the number of items still mid-flight, so
+// its count only "ticks up" at the moment a flying clone lands in the cart.
+const displayedItems = computed(() => Math.max(0, totalItems.value - pendingCount.value))
+
+// Re-fire the springy badge pop each time the visible count grows.
+watch(
+  displayedItems,
+  (next, prev) => {
+    if (next <= prev || !cartBadgeRef.value) return
+    cartBadgeRef.value.classList.remove('badge-pop')
+    void cartBadgeRef.value.offsetWidth
+    cartBadgeRef.value.classList.add('badge-pop')
+  },
+  { flush: 'post' },
+)
 
 watch(mobileMenuOpen, (isOpen) => {
   document.body.classList.toggle('overflow-hidden', isOpen)
 })
 
+onMounted(() => {
+  // <router-link> renders an <a>; its component instance exposes it as `$el`.
+  const instance = cartIconRef.value
+  const el = instance?.$el instanceof Element
+    ? instance.$el
+    : instance instanceof Element
+      ? instance
+      : null
+  registerCartIcon(el)
+})
+
 onUnmounted(() => {
   document.body.classList.remove('overflow-hidden')
+  registerCartIcon(null)
 })
 
 const requestMenuSearchFocus = () => {
@@ -148,20 +170,18 @@ const navigateAndClose = (path) => {
           </button>
 
           <router-link
+            ref="cartIconRef"
             to="/cart"
-            class="relative cursor-pointer inline-flex text-chocolate hover:text-espresso active:text-espresso transition-colors duration-300 ease-in-out"
+            class="cart-icon relative cursor-pointer inline-flex text-chocolate hover:text-espresso active:text-espresso transition-colors duration-300 ease-in-out"
             aria-label="Корзина"
-            :class="[
-              'transition-transform ease-out duration-300',
-              isPulsing ? 'scale-115 text-espresso' : 'scale-100'
-            ]"
           >
             <ShoppingBag :size="20" />
             <span
-              v-if="totalItems > 0"
+              v-if="displayedItems > 0"
+              ref="cartBadgeRef"
               class="absolute -top-2 -right-2 bg-espresso text-cream text-xs rounded-full h-4 w-4 flex items-center justify-center font-sans font-semibold"
             >
-              {{ totalItems }}
+              {{ displayedItems }}
             </span>
           </router-link>
         </div>
