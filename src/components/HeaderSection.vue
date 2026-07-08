@@ -1,10 +1,13 @@
 <script setup>
-import { ref, watch, onUnmounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, watch, onUnmounted, nextTick } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { useCart } from '@/store/cart'
 import { Menu, X, Search, ShoppingBag } from 'lucide-vue-next'
 
 const router = useRouter()
+const route = useRoute()
+
+const FOCUS_MENU_SEARCH_EVENT = 'jacques:focus-menu-search'
 const cartStore = useCart()
 const { totalItems } = cartStore
 const mobileMenuOpen = ref(false)
@@ -27,12 +30,17 @@ onUnmounted(() => {
   document.body.classList.remove('overflow-hidden')
 })
 
-const handleSearchClick = () => {
-  router.push('/menu')
-  setTimeout(() => {
-    const searchInput = document.querySelector('input[placeholder*="Поиск"]')
-    if (searchInput) searchInput.focus()
-  }, 100)
+const requestMenuSearchFocus = () => {
+  window.dispatchEvent(new CustomEvent(FOCUS_MENU_SEARCH_EVENT))
+}
+
+const handleSearchClick = async () => {
+  if (route.path !== '/menu') {
+    await router.push('/menu')
+    await nextTick()
+  }
+
+  requestMenuSearchFocus()
 }
 
 const toggleMobileMenu = () => {
@@ -65,18 +73,18 @@ const navigateAndClose = (path) => {
         <!-- Mobile Hamburger (visible only on mobile) -->
         <button
           @click="toggleMobileMenu"
-          class="md:hidden text-chocolate hover:opacity-70 transition-all duration-300 ease-in-out z-50 cursor-pointer"
+          class="md:hidden text-chocolate hover:text-espresso active:text-espresso transition-colors duration-300 ease-in-out z-50 cursor-pointer"
           aria-label="Меню"
         >
           <Menu
             v-if="!mobileMenuOpen"
             :size="24"
-            class="transition-transform duration-300"
+            class="transition-colors duration-300 ease-in-out"
           />
           <X
             v-else
             :size="24"
-            class="transition-transform duration-300"
+            class="transition-colors duration-300 ease-in-out"
           />
         </button>
 
@@ -84,17 +92,17 @@ const navigateAndClose = (path) => {
         <nav class="hidden md:flex items-center space-x-8">
           <router-link
             to="/menu"
-            class="group relative inline-block text-caramel font-sans font-normal text-sm tracking-widest uppercase transition-colors duration-300 ease-in-out hover:text-[#3D2314]"
-            :class="{ '!text-caramel': $route.path === '/menu' }"
+            class="group relative inline-block text-chocolate font-sans font-normal text-sm tracking-widest uppercase transition-colors duration-300 ease-in-out hover:text-espresso active:text-espresso"
+            :class="{ '!text-espresso': $route.path === '/menu' }"
           >
             <span class="relative inline-block pb-0.5">
               Меню
-              <span 
+              <span
                 class="absolute bottom-0 left-0 h-[1.5px] transition-all duration-300 ease-in-out"
                 :class="[
-                  $route.path === '/menu' 
-                    ? 'w-full bg-caramel' 
-                    : 'w-0 bg-[#3D2314] group-hover:w-full'
+                  $route.path === '/menu'
+                    ? 'w-full bg-espresso'
+                    : 'w-0 bg-espresso group-hover:w-full'
                 ]"
               ></span>
             </span>
@@ -102,17 +110,17 @@ const navigateAndClose = (path) => {
 
           <router-link
             to="/locations"
-            class="group relative inline-block text-caramel font-sans font-normal text-sm tracking-widest uppercase transition-colors duration-300 ease-in-out hover:text-[#3D2314]"
-            :class="{ '!text-caramel': $route.path === '/locations' }"
+            class="group relative inline-block text-chocolate font-sans font-normal text-sm tracking-widest uppercase transition-colors duration-300 ease-in-out hover:text-espresso active:text-espresso"
+            :class="{ '!text-espresso': $route.path === '/locations' }"
           >
             <span class="relative inline-block pb-0.5">
               Наши пекарни
-              <span 
+              <span
                 class="absolute bottom-0 left-0 h-[1.5px] transition-all duration-300 ease-in-out"
                 :class="[
-                  $route.path === '/locations' 
-                    ? 'w-full bg-caramel' 
-                    : 'w-0 bg-[#3D2314] group-hover:w-full'
+                  $route.path === '/locations'
+                    ? 'w-full bg-espresso'
+                    : 'w-0 bg-espresso group-hover:w-full'
                 ]"
               ></span>
             </span>
@@ -121,7 +129,10 @@ const navigateAndClose = (path) => {
 
         <!-- Centered Logo -->
         <div class="absolute left-1/2 transform -translate-x-1/2">
-          <router-link to="/" class="font-serif font-normal text-xl md:text-3xl text-chocolate tracking-wide">
+          <router-link
+            to="/"
+            class="font-serif font-normal text-xl md:text-3xl text-chocolate hover:text-espresso active:text-espresso tracking-wide transition-colors duration-300 ease-in-out"
+          >
             ЖАК~АНДРЭ
           </router-link>
         </div>
@@ -130,7 +141,7 @@ const navigateAndClose = (path) => {
         <div class="flex items-center space-x-4 md:space-x-6">
           <button
             @click="handleSearchClick"
-            class="text-chocolate hover:opacity-70 transition-all duration-300 ease-in-out cursor-pointer"
+            class="text-chocolate hover:text-espresso active:text-espresso transition-colors duration-300 ease-in-out cursor-pointer"
             aria-label="Поиск"
           >
             <Search :size="20" />
@@ -138,11 +149,11 @@ const navigateAndClose = (path) => {
 
           <router-link
             to="/cart"
-            class="hover:opacity-70 relative cursor-pointer inline-flex"
+            class="relative cursor-pointer inline-flex text-chocolate hover:text-espresso active:text-espresso transition-colors duration-300 ease-in-out"
             aria-label="Корзина"
             :class="[
               'transition-transform ease-out duration-300',
-              isPulsing ? 'scale-115 text-caramel' : 'scale-100 text-chocolate'
+              isPulsing ? 'scale-115 text-espresso' : 'scale-100'
             ]"
           >
             <ShoppingBag :size="20" />

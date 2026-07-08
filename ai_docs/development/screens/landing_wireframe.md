@@ -62,7 +62,7 @@
 ### `/menu` (MenuView)
 
 ```
-[Search input — full width border-b]
+[🔍 Search input — inline lucide icon + border-b, id=menu-search-input]
 [Category tabs: ВСЕ | Выпечка | Десерты | ГОРЯЧИЕ НАПИТКИ]
 [Product grid 2 col → 4 col lg]
   └── ProductCard WITH stepper + flip
@@ -94,7 +94,7 @@
 | Category «Десерты» | `/menu?category=cakes` → filter «Десерты» |
 | Category «Выпечка» | `/menu?category=baking` → filter «Выпечка» |
 | Header «Меню» | `/menu` |
-| Header search icon | `/menu` + focus search input |
+| Header search icon | `/menu` + focus `#menu-search-input` (on `/menu` — focus only, no overlay) |
 
 ## Mapping query → category (MenuView)
 

@@ -4,19 +4,43 @@
 
     <div class="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-12">
 
-      <div class="mb-5 md:mb-10">
+      <div class="mb-5 md:mb-10 group/menu-search">
 
-        <input
+        <label for="menu-search-input" class="sr-only">Поиск по меню</label>
 
-          v-model="searchQuery"
+        <div class="relative">
 
-          type="text"
+          <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center">
 
-          placeholder="Поиск выпечки, десертов и напитков"
+            <Search
 
-          class="w-full bg-transparent border-b border-chocolate text-chocolate placeholder:text-chocolate/40 py-2.5 md:py-3 px-1 text-sm md:text-lg font-sans tracking-wider focus:outline-none focus:border-chocolate transition-all duration-300"
+              :size="18"
 
-        />
+              class="text-chocolate transition-colors duration-300 ease-in-out group-focus-within/menu-search:text-espresso"
+
+              aria-hidden="true"
+
+            />
+
+          </div>
+
+          <input
+
+            id="menu-search-input"
+
+            ref="menuSearchInput"
+
+            v-model="searchQuery"
+
+            type="search"
+
+            placeholder="Поиск выпечки, десертов и напитков"
+
+            class="w-full bg-transparent border-b border-chocolate/50 text-chocolate placeholder:text-chocolate/40 py-2.5 md:py-3 pl-8 pr-1 text-sm md:text-lg font-sans tracking-wider focus:outline-none focus:border-espresso transition-all duration-300 ease-in-out"
+
+          />
+
+        </div>
 
       </div>
       
@@ -86,13 +110,19 @@
 
 <script setup>
 
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 import { useRoute } from 'vue-router'
+
+import { Search } from 'lucide-vue-next'
 
 import { allMenuProducts } from '@/data/products'
 
 import ProductCard from '@/components/ProductCard.vue'
+
+
+
+const FOCUS_MENU_SEARCH_EVENT = 'jacques:focus-menu-search'
 
 
 
@@ -157,6 +187,16 @@ const categoryOrder = {
 const selectedCategory = ref('ВСЕ')
 
 const searchQuery = ref('')
+
+const menuSearchInput = ref(null)
+
+
+
+const focusMenuSearch = () => {
+
+  menuSearchInput.value?.focus()
+
+}
 
 
 
@@ -261,6 +301,18 @@ onMounted(() => {
     selectedCategory.value = categoryMapping[categoryQuery]
 
   }
+
+
+
+  window.addEventListener(FOCUS_MENU_SEARCH_EVENT, focusMenuSearch)
+
+})
+
+
+
+onUnmounted(() => {
+
+  window.removeEventListener(FOCUS_MENU_SEARCH_EVENT, focusMenuSearch)
 
 })
 

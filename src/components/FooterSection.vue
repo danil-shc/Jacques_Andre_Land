@@ -124,20 +124,20 @@ const getImageUrl = (name) => {
               :href="telegramUrl"
               target="_blank"
               rel="noopener noreferrer"
-              class="group relative text-caramel/70 font-sans font-normal text-[10px] tracking-widest uppercase hover:text-[#3D2314] transition-colors duration-300 ease-in-out"
+              class="group relative text-chocolate font-sans font-normal text-[10px] tracking-widest uppercase hover:text-espresso active:text-espresso transition-colors duration-300 ease-in-out"
             >
               СВЯЖИТЕСЬ С НАМИ
-              <span class="absolute bottom-0 left-0 h-[1.5px] w-0 bg-[#3D2314] transition-all duration-300 ease-in-out group-hover:w-full"></span>
+              <span class="absolute bottom-0 left-0 h-[1.5px] w-0 bg-espresso transition-all duration-300 ease-in-out group-hover:w-full"></span>
             </a>
             <router-link
               to="/faq"
               class="group relative font-sans font-normal text-[10px] tracking-widest uppercase transition-colors duration-300 ease-in-out"
-              :class="$route.path === '/faq' ? 'text-caramel' : 'text-caramel/70 hover:text-[#3D2314]'"
+              :class="$route.path === '/faq' ? 'text-espresso' : 'text-chocolate hover:text-espresso active:text-espresso'"
             >
               ЧАСТЫЕ ВОПРОСЫ
-              <span 
-                class="absolute bottom-0 left-0 h-[1.5px] bg-[#3D2314] transition-all duration-300 ease-in-out"
-                :class="$route.path === '/faq' ? 'w-full !bg-caramel' : 'w-0 group-hover:w-full'"
+              <span
+                class="absolute bottom-0 left-0 h-[1.5px] bg-espresso transition-all duration-300 ease-in-out"
+                :class="$route.path === '/faq' ? 'w-full' : 'w-0 group-hover:w-full'"
               ></span>
             </router-link>
           </nav>
@@ -146,7 +146,7 @@ const getImageUrl = (name) => {
           <div class="flex items-center space-x-6">
             <a
               href="https://www.instagram.com/jacques_andre_/"
-              class="text-caramel/70 hover:text-caramel transition-all duration-300 ease-in-out"
+              class="text-chocolate hover:text-espresso active:text-espresso transition-colors duration-300 ease-in-out"
               aria-label="Инстаграм"
               target="_blank"
               rel="noopener noreferrer"
@@ -155,7 +155,7 @@ const getImageUrl = (name) => {
             </a>
             <a
               :href="telegramUrl"
-              class="text-caramel/70 hover:text-caramel transition-all duration-300 ease-in-out"
+              class="text-chocolate hover:text-espresso active:text-espresso transition-colors duration-300 ease-in-out"
               aria-label="Телеграм"
               target="_blank"
               rel="noopener noreferrer"
@@ -165,7 +165,7 @@ const getImageUrl = (name) => {
           </div>
 
           <!-- Right: Copyright -->
-          <p class="text-caramel/70 font-sans font-normal text-[10px] tracking-wider uppercase">
+          <p class="text-chocolate font-sans font-normal text-[10px] tracking-wider uppercase">
             © JACQUES-ANDRÉ 2026 | СОЗДАНО С ДУШОЙ
           </p>
         </div>

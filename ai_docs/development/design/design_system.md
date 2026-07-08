@@ -8,8 +8,8 @@
 |------------------|-----|------------|
 | `cream` | `#FDFBF7` | Основной фон страницы, hero CTA |
 | `espresso` | `#2C1B11` | Promo bar, primary buttons, dark blocks, badges |
-| `chocolate` | `#4B2307` | Заголовки, основной текст, logo |
-| `caramel` | `#7E4B30` | Акценты, nav links, secondary labels |
+| `chocolate` | `#4B2307` | Заголовки, основной текст, logo, nav links |
+| `caramel` | `#7E4B30` | Акценты, secondary labels |
 | `card` | `#F5F0E8` | Фон product cards |
 
 ### Дополнительные hex (inline, не в @theme)
@@ -112,3 +112,28 @@
 - `placeholder-error.svg`
 
 Registered in `main.js` via vue3-lazyload.
+
+## UX/UI Guidelines
+
+### Search Behavior
+
+Чтобы избежать когнитивного конфликта между глобальной иконкой поиска в шапке и локальным полем на странице меню, действует единая модель **одного поля ввода**:
+
+| Контекст | Поведение |
+|----------|-----------|
+| Любая страница, кроме `/menu` | Клик по 🔍 в `HeaderSection` → переход на `/menu` → фокус на `#menu-search-input` |
+| Уже на `/menu` | Клик по 🔍 **не** открывает overlay и **не** дублирует UI — только программный фокус на локальное поле |
+
+**Визуальные сигналы (`MenuView.vue`):**
+
+- Inline SVG-лупа (`lucide-vue-next` `Search`) слева от placeholder, цвет `text-chocolate`; при `:focus-within` группы — `text-espresso`
+- Нижняя граница: `border-chocolate/50` → `focus:border-espresso` с `transition-all duration-300 ease-in-out`
+- Уникальный якорь: `id="menu-search-input"`
+
+**Связь компонентов:**
+
+- `HeaderSection` диспатчит глобальное событие `jacques:focus-menu-search` (без overlay)
+- `MenuView` слушает это событие в `onMounted` и вызывает `menuSearchInput.focus()`
+- Placeholder-селекторы в DOM не используются — только стабильный `#menu-search-input`
+
+См. также wireframe: [screens/landing_wireframe.md](../screens/landing_wireframe.md) → «Header search icon».
