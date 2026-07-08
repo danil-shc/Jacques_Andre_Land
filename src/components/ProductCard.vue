@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { Bell, Minus, Plus, Info } from 'lucide-vue-next'
 import ProductCardImage from '@/components/ProductCardImage.vue'
 import { useCart } from '@/store/cart'
+import { useFlyToCart } from '@/store/flyToCart'
 
 const props = defineProps({
   product: {
@@ -21,6 +22,8 @@ const {
   increaseQuantity,
   decreaseQuantity,
 } = useCart()
+
+const { flyToCart } = useFlyToCart()
 
 const selectedVariantId = ref(props.product.variants?.[0]?.id ?? null)
 const isFlipped = ref(false)
@@ -72,18 +75,19 @@ const addToCart = () => {
   addToCartGlobal(props.product)
 }
 
-const incrementProduct = () => {
+const incrementProduct = (event) => {
   const cartItem = getCartItem()
   if (cartItem) {
     increaseQuantity(cartItem)
-    return
-  }
-
-  if (props.product.variants) {
+  } else if (props.product.variants) {
     addCoffeeToCart()
   } else {
     addToCart()
   }
+
+  // Launch the "flies to cart" flourish from the clicked "+" button.
+  // The cart was just mutated above; the header badge waits for the landing.
+  flyToCart({ originEl: event?.currentTarget ?? null, imageUrl: props.imageUrl })
 }
 
 const decrementProduct = () => {
